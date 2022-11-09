@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,4 +39,25 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, FormGame.class);
         startActivityForResult(i, reqCode);
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == reqCode) { // // if it is the request that I did
+            if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
+
+
+                // gets the Bundle of the response intent
+                Bundle b = data.getExtras();
+
+
+
+
+
+            }
+        }
+    }
+
+
 }
