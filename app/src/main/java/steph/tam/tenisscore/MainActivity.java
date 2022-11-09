@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     //List<Game> games;
     //ListView gamesListView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
