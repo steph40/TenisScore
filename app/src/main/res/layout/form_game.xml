@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/squash_rackets" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/tourName"
         android:layout_width="295dp"
         android:layout_height="36dp"
         android:layout_marginTop="20dp"
@@ -32,21 +32,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"></EditText>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="218dp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+    <EditText
+        android:id="@+id/tourDate"
+        android:layout_width="295dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableStart="@drawable/winner_champion_trophy"
+        android:hint="Data do Torneio"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourName"></EditText>
+
+    <EditText
+        android:id="@+id/playerName1"
+        android:layout_width="295dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableStart="@drawable/winner_champion_trophy"
+        android:hint="Nome do Jogador 1"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourDate"></EditText>
+
+    <EditText
+        android:id="@+id/playerName2"
+        android:layout_width="295dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableStart="@drawable/winner_champion_trophy"
+        android:hint="Nome do Jogador 2"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerName1"></EditText>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
