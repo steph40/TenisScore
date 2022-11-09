@@ -21,9 +21,9 @@ public class FormGame extends AppCompatActivity {
         Intent i = new Intent();//create new intent
 
         EditText eTournamentName = (EditText) findViewById(R.id.tourName);
-        EditText eDate = (EditText) findViewById(R.id.tourDate);
-        EditText eNameP1 = (EditText) findViewById(R.id.playerName1);
-        EditText eNameP2 = (EditText) findViewById(R.id.playerName2);
+        //EditText eDate = (EditText) findViewById(R.id.tourDate);
+        //EditText eNameP1 = (EditText) findViewById(R.id.playerName1);
+        //EditText eNameP2 = (EditText) findViewById(R.id.playerName2);
 
         String tournamentName = eTournamentName.getText().toString();
 
