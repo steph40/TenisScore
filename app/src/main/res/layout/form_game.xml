@@ -51,7 +51,7 @@
         android:id="@+id/playerName1"
         android:layout_width="295dp"
         android:layout_height="36dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_edit_text"
         android:drawableStart="@drawable/winner_champion_trophy"
         android:hint="Nome do Jogador 1"

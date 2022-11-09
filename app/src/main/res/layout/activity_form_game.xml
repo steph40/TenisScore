@@ -45,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:text="Adicionar"
+        app:layout_constraintEnd_toEndOf="@+id/include"
         app:layout_constraintStart_toEndOf="@+id/buttonBack"
-        tools:layout_editor_absoluteY="472dp" />
+        app:layout_constraintTop_toTopOf="@+id/buttonBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
