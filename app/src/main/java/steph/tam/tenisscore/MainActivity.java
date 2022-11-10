@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     int reqCode = 1; // requestCode
-    //List<Game> games;
+    List<Game> games;
     //ListView gamesListView;
 
 
