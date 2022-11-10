@@ -45,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:text="Adicionar"
-        android:onClick="onClickSave"
         app:layout_constraintEnd_toEndOf="@+id/include"
         app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toTopOf="@+id/buttonBack" />
