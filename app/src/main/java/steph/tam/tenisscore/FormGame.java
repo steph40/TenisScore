@@ -27,10 +27,6 @@ public class FormGame extends AppCompatActivity {
 
         String tournamentName = eTournamentName.getText().toString();
 
-        Bundle b = new Bundle();
-        b.putString("tourName",tournamentName);
-
-        i.putExtras(b);
 
         setResult(RESULT_OK, i);
 
