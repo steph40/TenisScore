@@ -48,6 +48,9 @@ public class FormGame extends AppCompatActivity {
 
                     Bundle b = new Bundle();
                     b.putString("tourName", tournamentName);
+                    b.putString("P1", nameP1);
+                    b.putString("P2", nameP2);
+                    b.putString("tourDate", date);
                     i.putExtras(b);
                     startActivity(i);
                     finish();
