@@ -28,15 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gamesListView = (ListView) findViewById(R.id.lv_game);
 
-        games =new ArrayList<>();
-
-        adapter = new GameAdapter(MainActivity.this);
-        gamesListView.setAdapter(adapter);
-
-        // enables filtering using the keyboard, if available
-        gamesListView.setTextFilterEnabled(true);
     }
 
     @Override
@@ -69,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
 
 
-                // gets the Bundle of the response intent
-                Bundle b = data.getExtras();
-                String var1 = b.getString("tourName");
+
+
+
 
 
 
