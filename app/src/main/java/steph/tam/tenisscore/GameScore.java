@@ -21,15 +21,16 @@ public class GameScore extends AppCompatActivity {
         TextView tv_nameTour = (TextView) findViewById(R.id.nameTour);
         TextView tv_P1 = (TextView) findViewById(R.id.tvNameP1);
         TextView tv_P2 = (TextView) findViewById(R.id.tvNameP2);
-        //TextView tv_data = (TextView) findViewById(R.id.tvDate);
+        TextView tv_data = (TextView) findViewById(R.id.tvDate);
 
         String v_nameTour = b.getString("tourName");
         String v_P1 = b.getString("P1");
         String v_P2 = b.getString("P2");
-        //String v_data = b.getString("tourDate");
+        String v_data = b.getString("tourDate");
 
         tv_nameTour.setText(v_nameTour);
         tv_P1.setText(" " + v_P1);
         tv_P2.setText(" " + v_P2);
+        tv_data.setText(v_data);
     }
 }
