@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public class GameAdapter extends BaseAdapter {
     Context context;
     List<Game> adaptGames;
 
-    public GameAdapter(Context context, List<Game> adaptGames) {
+    public GameAdapter(Context context) {
         this.context = context;
         this.adaptGames = adaptGames;
     }
@@ -43,14 +42,6 @@ public class GameAdapter extends BaseAdapter {
         textName.setText(g.getNameTournament());
         //textEmail.setText(g.getNamePlayer1());
 
-        // sets the icon for this contact
-        /*if (c.getType() == Contact.FAMILY) {
-            imageType.setImageResource(R.drawable.family);
-        } else if (c.getType() == Contact.WORK) {
-            imageType.setImageResource(R.drawable.work);
-        } else if (c.getType() == Contact.OTHER) {
-            imageType.setImageResource(R.drawable.other);
-        }*/
 
         // returns the view
         return rowView;

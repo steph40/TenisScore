@@ -12,13 +12,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     int reqCode = 1; // requestCode
     List<Game> games;
-    //ListView gamesListView;
+    ListView gamesListView;
+    ListAdapter adapter;
 
 
     @Override
@@ -26,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ListAdapter adapter = new GameAdapter(this, games);
-        //gamesListView = (ListView) findViewById(R.id.lv_game);
-        //gamesListView.setAdapter(adapter);
+        gamesListView = (ListView) findViewById(R.id.lv_game);
+
+        games =new ArrayList<>();
+
+        adapter = new GameAdapter(MainActivity.this);
+        gamesListView.setAdapter(adapter);
 
         // enables filtering using the keyboard, if available
-        //gamesListView.setTextFilterEnabled(true);
+        gamesListView.setTextFilterEnabled(true);
     }
 
     @Override
