@@ -45,7 +45,12 @@ public class FormGame extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Certo", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(),GameScore.class);//create new intent
+
+                    Bundle b = new Bundle();
+                    b.putString("tourName", tournamentName);
+                    i.putExtras(b);
                     startActivity(i);
+                    finish();
                 }
 
                 //Bundle b = new Bundle();

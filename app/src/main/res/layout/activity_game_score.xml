@@ -6,4 +6,171 @@
     android:layout_height="match_parent"
     tools:context=".GameScore">
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/nameTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="torneio"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTour"
+        app:srcCompat="@drawable/squash_rackets" />
+
+    <TextView
+        android:id="@+id/tvNameP1"
+        android:layout_width="130dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/tennis"
+        android:padding="10dp"
+        android:text="P1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvNameP2"
+        android:layout_width="130dp"
+        android:layout_height="39dp"
+        android:drawableStart="@drawable/tennis"
+        android:padding="10dp"
+        android:text="P2"
+        app:layout_constraintStart_toStartOf="@+id/tvNameP1"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/tvNameP1"
+        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/tvNameP2"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="20dp"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:text="AD"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="82dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="20dp"
+        android:text="Ponto"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="82dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="20dp"
+        android:text="Ponto"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
