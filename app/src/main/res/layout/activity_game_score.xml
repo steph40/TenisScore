@@ -7,37 +7,37 @@
     tools:context=".GameScore">
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/tvSet1_2"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/tvR2"
+        app:layout_constraintTop_toBottomOf="@+id/tvR1" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvSet1"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/tvSet3_1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tvSet3_1"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/tvSet2_1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/nameTour"
+        android:id="@+id/tvNameTour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -83,95 +83,95 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvR1"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvNameP1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tvR2"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvNameP2"
         app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tvSet3_2"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        app:layout_constraintStart_toEndOf="@+id/tvSet2_2"
+        app:layout_constraintTop_toTopOf="@+id/tvSet2_2" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tvSet2_2"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="@+id/textView18" />
+        app:layout_constraintStart_toEndOf="@+id/tvSet1_2"
+        app:layout_constraintTop_toTopOf="@+id/tvSet1_2" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvSet2"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/tvSet3_2"
+        app:layout_constraintTop_toBottomOf="@+id/tvSet1" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvSet1_1"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/tvR1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvSet2_1"
         android:layout_width="20dp"
         android:layout_height="39dp"
         android:paddingTop="9dp"
-        android:text="AD"
+        android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/tvSet1_1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Ponto1"
         android:layout_width="82dp"
         android:layout_height="39dp"
         android:layout_marginStart="20dp"
         android:text="Ponto"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/tvSet1"
+        app:layout_constraintTop_toTopOf="@+id/tvSet1" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Ponto2"
         android:layout_width="82dp"
         android:layout_height="39dp"
         android:layout_marginStart="20dp"
         android:text="Ponto"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintEnd_toEndOf="@+id/Ponto1"
+        app:layout_constraintStart_toEndOf="@+id/tvSet2"
+        app:layout_constraintTop_toBottomOf="@+id/tvSet1" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -182,7 +182,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTour" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameTour" />
 
     <TextView
         android:id="@+id/textView2"
@@ -190,8 +190,8 @@
         android:layout_height="20dp"
         android:text="S"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/textView3" />
+        app:layout_constraintBottom_toTopOf="@+id/tvR1"
+        app:layout_constraintEnd_toEndOf="@+id/tvR1" />
 
     <TextView
         android:id="@+id/textView6"
@@ -199,8 +199,8 @@
         android:layout_height="20dp"
         android:text="R"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView13"
-        app:layout_constraintEnd_toEndOf="@+id/textView13" />
+        app:layout_constraintBottom_toTopOf="@+id/tvSet1"
+        app:layout_constraintEnd_toEndOf="@+id/tvSet1" />
 
     <TextView
         android:id="@+id/textView7"
@@ -208,8 +208,8 @@
         android:layout_height="20dp"
         android:text="3"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
-        app:layout_constraintEnd_toStartOf="@+id/textView13" />
+        app:layout_constraintBottom_toTopOf="@+id/tvSet3_1"
+        app:layout_constraintEnd_toStartOf="@+id/tvSet1" />
 
     <TextView
         android:id="@+id/textView8"
@@ -217,8 +217,8 @@
         android:layout_height="20dp"
         android:text="2"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toStartOf="@+id/textView12" />
+        app:layout_constraintBottom_toTopOf="@+id/tvSet2_1"
+        app:layout_constraintEnd_toStartOf="@+id/tvSet3_1" />
 
     <TextView
         android:id="@+id/textView9"
@@ -226,16 +226,16 @@
         android:layout_height="20dp"
         android:text="1"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/textView4" />
+        app:layout_constraintBottom_toTopOf="@+id/tvSet1_1"
+        app:layout_constraintEnd_toEndOf="@+id/tvSet1_1" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Finalizar"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintEnd_toEndOf="@+id/Ponto2"
+        app:layout_constraintTop_toBottomOf="@+id/Ponto2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
