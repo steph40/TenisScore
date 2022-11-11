@@ -9,7 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class GameScore extends AppCompatActivity {
     Button ponto1;
@@ -29,6 +33,8 @@ public class GameScore extends AppCompatActivity {
     TextView eR2;
     TextView set1;
     TextView set2;
+    int valor1 = 0;
+    int valor2 = 0;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,12 +62,17 @@ public class GameScore extends AppCompatActivity {
         set1 = (TextView) findViewById(id.tvSet1);
         set2 = (TextView) findViewById(id.tvSet2);
 
-        ponto1.setOnClickListener(new View.OnClickListener() {
+        /*ponto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                valor1 = 0;
+
+                set1.setText(valor1);
 
             }
-        });
+        });*/
+
+
 
 
         fin.setOnClickListener(new View.OnClickListener() {
