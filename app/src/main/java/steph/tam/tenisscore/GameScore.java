@@ -33,8 +33,8 @@ public class GameScore extends AppCompatActivity {
     TextView eR2;
     TextView set1;
     TextView set2;
-    int valor1 = 0;
-    int valor2 = 0;
+    int valor1 = 0, valor2 = 0, r1 = 0, r2 = 0, r1_1 = 7, r1_2 = 0, r2_1 = 4, r2_2 = 7, r3_1 = 5, r3_2 = 0;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,16 +62,9 @@ public class GameScore extends AppCompatActivity {
         set1 = (TextView) findViewById(id.tvSet1);
         set2 = (TextView) findViewById(id.tvSet2);
 
-        /*ponto1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                valor1 = 0;
+        View.OnClickListener listener = setResultados(set1, set2, ponto1, ponto2, eset1_1, eset1_2,eR1, eR2);
 
-                set1.setText(valor1);
-
-            }
-        });*/
-
+        ponto1.setOnClickListener(listener);
 
 
 
@@ -93,6 +86,7 @@ public class GameScore extends AppCompatActivity {
 
                 Intent it = new Intent(getApplicationContext(), MainActivity.class);
                 Bundle bl = new Bundle();
+
 
                 bl.putString("b_nametour", nametour);
                 bl.putString("b_name1", name1);
@@ -127,5 +121,116 @@ public class GameScore extends AppCompatActivity {
         tv_P1.setText(" " + v_P1);
         tv_P2.setText(" " + v_P2);
         tv_data.setText(v_data);
+    }
+
+    public View.OnClickListener setResultados(TextView set1, TextView set2, Button ponto1, Button ponto2
+            , TextView eset1_1, TextView eset1_2, TextView eR1, TextView eR2){
+        return new View.OnClickListener(){
+
+            public void onClick(View v){
+
+                switch (v.getId()){
+                    case id.Ponto1:
+                        if(valor1==0 || valor1==15) {
+                            valor1 += 15;
+                            set1.setText(valor1 + "");
+                            break;
+                        }
+
+                        if(valor1==30){
+                            valor1 +=10;
+                            set1.setText(valor1+"");
+                            break;
+                        }
+
+
+                        if(valor1 == 40) {
+                            if (valor1 == valor2) {
+                                valor1 += 1;
+                                set1.setText("AD");
+                                set2.setText("");
+                                break;
+                            }
+                            if (valor2 == 41) {
+                                valor1 = 40;
+                                valor2 = 40;
+                                set1.setText(valor1 + "");
+                                set2.setText(valor2 + "");
+                                break;
+                            }
+
+                            if( r1 < 7 && r2 < 6){
+
+                                r1++;
+                                eR1.setText(r1+"");
+                                valor1 = 0;
+                                valor2 = 0;
+                                set1.setText(valor1+"");
+                                set2.setText(valor2+"");
+                                if((r2_1 == 7 &&  r2_2 <= 5) || (r2_1 <= 5 && r2_2 == 7)){
+
+                                    eR1.setText(r1+"");
+
+                                    if(r1 == 7 && r2 <= 5){
+                                        r3_1++;
+                                        eset3_1.setText(r3_1+"");
+                                        eR1.setText("0");
+                                        r1 = 0;
+                                        r2 = 0;
+                                        if(r3_1 == 7){
+                                            Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                        break;
+                                    }else{
+
+                                    }
+                                    break;
+                                }
+                                if((r1_1 == 7 && r1_2 <= 5) || (r1_1 <= 5 && r1_2 == 7)){
+                                    eR1.setText(r1+"");
+                                    if(r1 == 7 && r2 <= 5){
+                                        r2_1++;
+                                        eset2_1.setText(r2_1+"");
+                                        eR1.setText("0");
+                                        r1 = 0;
+                                        r2 = 0;
+                                        if(r1_1 == 7 && r2_1 == 7){
+                                            Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                        break;
+                                    }
+                                    break;
+                                }
+                                if(r1 == 7 && r2 <= 5){
+                                    r1_1++;
+                                    eset1_1.setText(r1_1+"");
+                                    eR1.setText("0");
+                                    r1 = 0;
+                                    r2 = 0;
+                                    break;
+                                }
+                                break;
+                            }
+
+                        }
+                        if(valor1==41){
+                            if(r1 < 7 && r2 < 7){
+                                r1++;
+                                eset1_1.setText(r1+"");
+                                valor1=0;
+                                valor2=0;
+                            }
+
+                            break;
+                        }
+
+
+                        break;
+
+                }
+            }
+        };
     }
 }

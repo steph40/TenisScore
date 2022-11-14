@@ -9,9 +9,9 @@ public class Game {
     //private  String set1_1;
     //private  String set2_1;
     //private  String set3_1;
-    //private  String set1_1;
+    //private  String set1_2;
     //private  String set2_2;
-    //private  String set3_3;
+    //private  String set3_2;
     //private  String r1;
     //private  String r2;
 
