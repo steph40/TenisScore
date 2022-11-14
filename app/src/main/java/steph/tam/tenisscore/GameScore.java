@@ -33,7 +33,7 @@ public class GameScore extends AppCompatActivity {
     TextView eR2;
     TextView set1;
     TextView set2;
-    int valor1 = 0, valor2 = 0, r1 = 0, r2 = 0, r1_1 = 7, r1_2 = 0, r2_1 = 4, r2_2 = 7, r3_1 = 5, r3_2 = 0;
+    int valor1 = 0, valor2 = 0, r1 = 0, r2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0;
 
 
     @SuppressLint("MissingInflatedId")
