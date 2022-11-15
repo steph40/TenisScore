@@ -68,6 +68,7 @@ public class GameScore extends AppCompatActivity {
 
 
 
+
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
