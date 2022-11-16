@@ -47,7 +47,8 @@
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_data"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/tv_data"

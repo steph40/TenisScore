@@ -77,7 +77,7 @@ public class GameScore extends AppCompatActivity {
         View.OnClickListener listener = setResultados(set1, set2, ponto1, ponto2, eset1_1, eset1_2, eR1, eR2);
 
         ponto1.setOnClickListener(listener);
-
+        ponto2.setOnClickListener(listener);
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,27 +143,24 @@ public class GameScore extends AppCompatActivity {
                 switch (v.getId()) {
                     case id.Ponto1:
 
-                        if (valor1 == 0 || valor1 == 15) {
+                        if (valor1 == 0 || valor1 == 15) { //Se jogador 1 tiver 0 ou 15 pontos
                             valor1 += 15;
                             set1.setText(valor1 + "");
                             break;
                         }
-
-                        if (valor1 == 30) {
+                        if (valor1 == 30) {//Se jogador 1 tiver 30 pontos
                             valor1 += 10;
                             set1.setText(valor1 + "");
                             break;
                         }
-
-
-                        if (valor1 == 40) {
-                            if (valor1 == valor2) {
+                        if (valor1 == 40) {//Se jogador 1 tiver 40 pontos
+                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos
                                 valor1 += 1;
                                 set1.setText("AD");
                                 set2.setText("");
                                 break;
                             }
-                            if (valor2 == 41) {
+                            if (valor2 == 41) {//Se o jogador 1 fizer ponto e o jogador 2 tiver AD
                                 valor1 = 40;
                                 valor2 = 40;
                                 set1.setText(valor1 + "");
@@ -172,7 +169,6 @@ public class GameScore extends AppCompatActivity {
                             }
 
                             if (r1 < 7 && r2 < 6) {
-
                                 r1++;
                                 eR1.setText(r1 + "");
                                 valor1 = 0;
@@ -180,9 +176,7 @@ public class GameScore extends AppCompatActivity {
                                 set1.setText(valor1 + "");
                                 set2.setText(valor2 + "");
                                 if ((r2_1 == 7 && r2_2 <= 5) || (r2_1 <= 5 && r2_2 == 7)) {
-
                                     eR1.setText(r1 + "");
-
                                     if (r1 == 7 && r2 <= 5) {
                                         r3_1++;
                                         eset3_1.setText(r3_1 + "");
@@ -195,7 +189,6 @@ public class GameScore extends AppCompatActivity {
                                         }
                                         break;
                                     } else {
-
                                     }
                                     break;
                                 }
@@ -234,12 +227,44 @@ public class GameScore extends AppCompatActivity {
                                 valor1 = 0;
                                 valor2 = 0;
                             }
+                            break;
+                        }
+                        break;
+
+                    case id.Ponto2:
+
+                        if (valor2 == 0 || valor2 == 15) { //Se jogador 2 tiver 0 ou 15 pontos
+                            valor2 += 15;
+                            set2.setText(valor2 + "");
+                            break;
+                        }
+                        if (valor2 == 30) {//Se jogador 1 tiver 30 pontos
+                            valor2 += 10;
+                            set2.setText(valor2 + "");
+                            break;
+                        }
+                        if (valor2 == 40) {//Se jogador 1 tiver 40 pontos
+                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos
+                                valor2 += 1;
+                                set2.setText("AD");
+                                set1.setText("");
+                                break;
+                            }
+                            if (valor1 == 41) {//Se o jogador 1 fizer ponto e o jogador 2 tiver AD
+                                valor1 = 40;
+                                valor2 = 40;
+                                set1.setText(valor1 + "");
+                                set2.setText(valor2 + "");
+                                break;
+                            }
+                            break;
+                        }
+                        if (valor2 == 41) {
 
                             break;
                         }
 
                         break;
-
                 }
             }
         };
