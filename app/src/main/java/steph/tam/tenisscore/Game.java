@@ -13,8 +13,8 @@ public class Game {
     //private  String set1_2;
     //private  String set2_2;
     //private  String set3_2;
-    //private  String r1;
-    //private  String r2;
+    //private boolean vencedor;
+
 
     public Game(int id ,String nameTournament, String dateTournament,String namePlayer1, String namePlayer2) {
         this.id=id;
@@ -28,8 +28,8 @@ public class Game {
         //this.set1_2 = set1_2;
         //this.set2_2 = set2_2;
         //this.set3_2 = set3_2;
-        //this.r1 = r1;
-        //this.r2 = r2;
+
+
     }
 
     public String getNameTournament() {

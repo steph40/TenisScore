@@ -7,11 +7,12 @@
 
     <TextView
         android:id="@+id/tournament"
-        android:layout_width="276dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
         android:drawableStart="@drawable/trophy"
+        android:drawableEnd="@drawable/trophy"
         android:padding="8dp"
-        android:text="tournament"
+        android:text="Tournament"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,12 +24,12 @@
         android:id="@+id/tv_p1"
         android:layout_width="105dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="5dp"
-        android:paddingTop="6dp"
+        android:layout_marginStart="4dp"
         android:drawableStart="@drawable/tennis"
+        android:paddingTop="6dp"
         android:text="Player1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tournament" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_data" />
 
     <TextView
         android:id="@+id/tv_p2"
@@ -45,7 +46,16 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tournament"
+        app:layout_constraintTop_toBottomOf="@+id/tv_data"
         app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tournament" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

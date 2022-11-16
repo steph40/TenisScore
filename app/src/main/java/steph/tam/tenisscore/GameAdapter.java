@@ -33,6 +33,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_tournament = (TextView) rowView.findViewById(R.id.tournament);
         TextView tv_player1 = (TextView) rowView.findViewById(R.id.tv_p1);
         TextView tv_player2 = (TextView) rowView.findViewById(R.id.tv_p2);
+        TextView tv_date = (TextView) rowView.findViewById(R.id.tv_data);
 
 
         // obtains the contact for this position
@@ -42,6 +43,7 @@ public class GameAdapter extends BaseAdapter {
         tv_tournament.setText(g.getNameTournament());
         tv_player1.setText(g.getNamePlayer1());
         tv_player2.setText(g.getNamePlayer2());
+        tv_date.setText(g.getDateTournament());
 
 
         // returns the view
