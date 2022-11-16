@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ public class GameScore extends AppCompatActivity {
     Button ponto1;
     Button ponto2;
     Button fin;
+    Button edit;
     TextView eName1;
     TextView eName2;
     TextView eNametour;
@@ -34,6 +36,7 @@ public class GameScore extends AppCompatActivity {
     TextView set1;
     TextView set2;
     int valor1 = 0, valor2 = 0, r1 = 0, r2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0;
+    int reqCode = 1;
 
 
     @SuppressLint("MissingInflatedId")
@@ -47,6 +50,7 @@ public class GameScore extends AppCompatActivity {
         ponto1 = (Button) findViewById(id.Ponto1);
         ponto2 = (Button) findViewById(id.Ponto2);
         fin = (Button) findViewById(id.buttonFin);
+        edit = (Button) findViewById(id.buttonEdit);
         eName1 = (TextView) findViewById(id.tvNameP1);
         eName2 = (TextView) findViewById(id.tvNameP2);
         eNametour = (TextView) findViewById(id.tvNameTour);
@@ -67,6 +71,26 @@ public class GameScore extends AppCompatActivity {
         ponto1.setOnClickListener(listener);
 
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), EditActivity.class);
+                Bundle bu = new Bundle();
+
+                String name1 = eName1.getText().toString();
+                String name2 = eName2.getText().toString();
+                String nameTour = eNametour.getText().toString();
+
+
+
+                bu.putString("bu_name1", name1);
+                bu.putString("bu_name2", name2);
+                bu.putString("bu_nametour", nameTour);
+
+                in.putExtras(bu);
+                startActivityForResult(in, reqCode);
+            }
+        });
 
 
         fin.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +109,10 @@ public class GameScore extends AppCompatActivity {
                 String r1 = eR1.getText().toString();
                 String r2 = eR2.getText().toString();
 
-                Intent it = new Intent(getApplicationContext(), MainActivity.class);
+                MainActivity.games.add(new Game(nametour));
+                setResult(RESULT_OK);
+                finish();
+                /*Intent it = new Intent();
                 Bundle bl = new Bundle();
 
 
@@ -103,8 +130,8 @@ public class GameScore extends AppCompatActivity {
                 bl.putString("b_R2", r2);
 
                 it.putExtras(bl);
-                startActivity(it);
-                finish();
+                setResult(RESULT_OK, it);
+                finish();*/
             }
         });
 
@@ -233,5 +260,32 @@ public class GameScore extends AppCompatActivity {
                 }
             }
         };
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == reqCode) { // // if it is the request that I did
+
+            if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
+
+
+                // gets the Bundle of the response intent
+                Bundle b = data.getExtras();
+
+                // gets the data in the Bundle
+                String var1 = b.getString("name1");
+                String var2 = b.getString("name2");
+                String var3 = b.getString("nameTour");
+
+
+                eName1.setText(var1);
+                eName2.setText(var2);
+                eNametour.setText(var3);
+
+
+
+            }
+        }
     }
 }

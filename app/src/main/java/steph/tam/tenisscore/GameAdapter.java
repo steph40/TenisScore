@@ -13,9 +13,9 @@ public class GameAdapter extends BaseAdapter {
     Context context;
     List<Game> adaptGames;
 
-    public GameAdapter(Context context) {
+    public GameAdapter(Context context, List<Game> games) {
         this.context = context;
-        this.adaptGames = adaptGames;
+        this.adaptGames = games;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -1,5 +1,6 @@
 package steph.tam.tenisscore;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     int reqCode = 1; // requestCode
-    List<Game> games;
-    ListView gamesListView;
-    ListAdapter adapter;
+    public static List<Game> games;
+    private ListView gamesListView;
+    private GameAdapter adapter;
 
 
     @Override
@@ -28,7 +30,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        gamesListView = findViewById(R.id.lv_game);
 
+        games = new ArrayList<>();
+
+        adapter = new GameAdapter(this, games);
+        gamesListView.setAdapter(adapter);
+        int a = games.size();
+
+        Toast.makeText(getApplicationContext(), a+"", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -53,28 +63,32 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, reqCode);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == reqCode) { // // if it is the request that I did
+
             if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
 
-
-
-
-
-
-
-
-
-
-
-
+                Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
 
             }
         }
-    }
+    }*/
 
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
 }

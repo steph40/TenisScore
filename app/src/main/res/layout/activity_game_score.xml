@@ -238,4 +238,14 @@
         app:layout_constraintEnd_toEndOf="@+id/Ponto2"
         app:layout_constraintTop_toBottomOf="@+id/Ponto2" />
 
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonFin"
+        app:layout_constraintStart_toStartOf="@+id/tvNameP2"
+        app:layout_constraintTop_toTopOf="@+id/buttonFin"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +30,7 @@ public class FormGame extends AppCompatActivity {
 
         Intent iIn = getIntent();// get intent
 
-        add = (Button) findViewById(R.id.buttonSave);
+        add = (Button) findViewById(R.id.buttonAdd);
         eTournamentName = (EditText) findViewById(R.id.tourName);
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
