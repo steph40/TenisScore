@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         gamesListView.setAdapter(adapter);
         int a = games.size();
 
-        Toast.makeText(getApplicationContext(), a+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), a + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -60,35 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickFormGame(MainActivity view) {
         Intent i = new Intent(this, FormGame.class);
-        startActivityForResult(i, reqCode);
+        startActivityForResult(i, 1);
+        //startActivity(i);
     }
 
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == reqCode) { // // if it is the request that I did
-
-            if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
-
-                Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }*/
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    adapter.notifyDataSetChanged();
-                }
-                break;
-            default:
-                break;
+        if (resultCode == RESULT_OK && requestCode==1) {
+            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
+            adapter.notifyDataSetChanged();
         }
-    }
 
+    }
 }
+

@@ -109,7 +109,8 @@ public class GameScore extends AppCompatActivity {
                 String r1 = eR1.getText().toString();
                 String r2 = eR2.getText().toString();
 
-                MainActivity.games.add(new Game(nametour));
+
+                //Intent iM = new Intent();
                 setResult(RESULT_OK);
                 finish();
                 /*Intent it = new Intent();
@@ -140,7 +141,7 @@ public class GameScore extends AppCompatActivity {
         TextView tv_P2 = (TextView) findViewById(id.tvNameP2);
         TextView tv_data = (TextView) findViewById(id.tvDate);
 
-        String v_nameTour = b.getString("tourName");
+        /*String v_nameTour = b.getString("tourName");
         String v_P1 = b.getString("P1");
         String v_P2 = b.getString("P2");
         String v_data = b.getString("tourDate");
@@ -148,7 +149,7 @@ public class GameScore extends AppCompatActivity {
         tv_nameTour.setText(v_nameTour);
         tv_P1.setText(" " + v_P1);
         tv_P2.setText(" " + v_P2);
-        tv_data.setText(v_data);
+        tv_data.setText(v_data);*/
     }
 
     public View.OnClickListener setResultados(TextView set1, TextView set2, Button ponto1, Button ponto2
@@ -159,6 +160,7 @@ public class GameScore extends AppCompatActivity {
 
                 switch (v.getId()){
                     case id.Ponto1:
+
                         if(valor1==0 || valor1==15) {
                             valor1 += 15;
                             set1.setText(valor1 + "");
@@ -254,7 +256,6 @@ public class GameScore extends AppCompatActivity {
                             break;
                         }
 
-
                         break;
 
                 }
@@ -266,9 +267,7 @@ public class GameScore extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == reqCode) { // // if it is the request that I did
-
             if (resultCode == RESULT_OK) {  // if the result is RESULT_OK
-
 
                 // gets the Bundle of the response intent
                 Bundle b = data.getExtras();
@@ -283,9 +282,8 @@ public class GameScore extends AppCompatActivity {
                 eName2.setText(var2);
                 eNametour.setText(var3);
 
-
-
             }
         }
     }
+
 }

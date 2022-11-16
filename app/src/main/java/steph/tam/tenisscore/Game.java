@@ -3,6 +3,7 @@ package steph.tam.tenisscore;
 public class Game {
 
     private String nameTournament;
+    private int id;
     //private String dateTournament;
     //private String namePlayer1;
     //private String namePlayer2;
@@ -15,7 +16,8 @@ public class Game {
     //private  String r1;
     //private  String r2;
 
-    public Game(String nameTournament) {
+    public Game(int id ,String nameTournament) {
+        this.id=id;
         this.nameTournament = nameTournament;
         //this.dateTournament = dateTournament;
         //this.namePlayer1 = namePlayer1;

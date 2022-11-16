@@ -1,5 +1,6 @@
 package steph.tam.tenisscore;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -65,14 +66,10 @@ public class FormGame extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
 
-                    Bundle b = new Bundle();
-                    b.putString("tourName", tournamentName);
-                    b.putString("P1", nameP1);
-                    b.putString("P2", nameP2);
-                    b.putString("tourDate", date);
-                    i.putExtras(b);
-                    startActivity(i);
-                    finish();
+                    Game g = new Game(MainActivity.games.size()+1,tournamentName);
+                    MainActivity.games.add(g);
+                    startActivityForResult(i,1);
+
                 }
 
             }
@@ -89,4 +86,15 @@ public class FormGame extends AppCompatActivity {
     public void onClickBackMain() {
         finish();
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode==1) {
+            setResult(RESULT_OK);
+            finish();
+        }
+
+    }
+
 }
