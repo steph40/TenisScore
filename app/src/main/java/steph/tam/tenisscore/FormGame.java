@@ -61,7 +61,6 @@ public class FormGame extends AppCompatActivity {
                 String nameP1 = eNameP1.getText().toString();
                 String nameP2 = eNameP2.getText().toString();
 
-
                 if (nameP1.trim().isEmpty() == true || tournamentName.trim().isEmpty() == true || nameP2.trim().isEmpty() == true || date.trim().isEmpty() == true) {
                     Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
                 } else {
