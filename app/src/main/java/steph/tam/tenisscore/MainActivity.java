@@ -19,7 +19,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    int reqCode = 1; // requestCode
     public static List<Game> games;
     private ListView gamesListView;
     private GameAdapter adapter;
@@ -36,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new GameAdapter(this, games);
         gamesListView.setAdapter(adapter);
-        int a = games.size();
 
-        Toast.makeText(getApplicationContext(), a + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -52,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item1:
                 onClickFormGame(this);
                 return true;
-
             default:
                 return false;
         }
@@ -61,18 +57,35 @@ public class MainActivity extends AppCompatActivity {
     public void onClickFormGame(MainActivity view) {
         Intent i = new Intent(this, FormGame.class);
         startActivityForResult(i, 1);
-        //startActivity(i);
     }
 
-
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode==1) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
             Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
         }
+    }
 
+    /**
+     * @param id
+     * @return
+     */
+    public static Game gameById(int id) {
+        if (games != null && !games.isEmpty()) {
+            for (Game g : games) {
+                if (g.getId() == id) {
+                    return g;
+                }
+            }
+        }
+        return null;
     }
 }
 

@@ -29,13 +29,12 @@ public class FormGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_game);
 
-        Intent iIn = getIntent();// get intent
-
         add = (Button) findViewById(R.id.buttonAdd);
         eTournamentName = (EditText) findViewById(R.id.tourName);
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
+
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -45,6 +44,7 @@ public class FormGame extends AppCompatActivity {
                 updateLabel();
             }
         };
+
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,25 +56,26 @@ public class FormGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String nameP1 = eNameP1.getText().toString();
                 String tournamentName = eTournamentName.getText().toString();
-                String nameP2 = eNameP2.getText().toString();
                 String date = eDate.getText().toString();
+                String nameP1 = eNameP1.getText().toString();
+                String nameP2 = eNameP2.getText().toString();
+
 
                 if (nameP1.trim().isEmpty() == true || tournamentName.trim().isEmpty() == true || nameP2.trim().isEmpty() == true || date.trim().isEmpty() == true) {
                     Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
                 } else {
+
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
-
-                    Game g = new Game(MainActivity.games.size()+1,tournamentName);
+                    int id = MainActivity.games.size() + 1;
+                    i.putExtra("id",id);
+                    Game g = new Game(id, tournamentName,date,nameP1,nameP2);
                     MainActivity.games.add(g);
-                    startActivityForResult(i,1);
 
+                    startActivityForResult(i, 1);
                 }
-
             }
         });
-
     }
 
     private void updateLabel() {
@@ -89,12 +90,9 @@ public class FormGame extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode==1) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
             setResult(RESULT_OK);
             finish();
         }
-
     }
-
 }

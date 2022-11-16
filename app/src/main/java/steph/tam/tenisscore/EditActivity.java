@@ -24,11 +24,15 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
         Intent iIn = getIntent();
+        Game game = MainActivity.gameById(iIn.getExtras().getInt("id"));
+
         Bundle b = iIn.getExtras();
         fin = (Button) findViewById(R.id.buttonFinEdit);
         eName1 = (EditText) findViewById(R.id.playerName1Edit);
         eName2 = (EditText) findViewById(R.id.playerName2Edit);
         eNameTour = (EditText) findViewById(R.id.tourNameEdit);
+
+
 
         String v_nameTour = b.getString("bu_nametour");
         String v_name1 = b.getString("bu_name1");
@@ -41,21 +45,16 @@ public class EditActivity extends AppCompatActivity {
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String name1 = eName1.getText().toString();
                 String name2 = eName2.getText().toString();
                 String nameTour = eNameTour.getText().toString();
+
                 if (name1.trim().isEmpty() == true || name2.trim().isEmpty() == true || nameTour.trim().isEmpty() == true) {
                     Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent i = new Intent();
-                    Bundle b = new Bundle();
 
-                    b.putString("name1", name1);
-                    b.putString("name2", name2);
-                    b.putString("nameTour", nameTour);
-
-                    i.putExtras(b);
-                    setResult(RESULT_OK, i);
+                    setResult(RESULT_OK);
                     finish();
                 }
             }
