@@ -154,7 +154,7 @@ public class GameScore extends AppCompatActivity {
                             break;
                         }
                         if (valor1 == 40) {//Se jogador 1 tiver 40 pontos
-                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos
+                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos entra num AD
                                 valor1 += 1;
                                 set1.setText("AD");
                                 set2.setText("");
@@ -220,7 +220,7 @@ public class GameScore extends AppCompatActivity {
                             }
 
                         }
-                        if (valor1 == 41) {
+                        if (valor1 == 41) { //Se jogador 1 estiver num AD
                             if (r1 < 7 && r2 < 7) {
                                 r1++;
                                 eset1_1.setText(r1 + "");
@@ -244,7 +244,7 @@ public class GameScore extends AppCompatActivity {
                             break;
                         }
                         if (valor2 == 40) {//Se jogador 1 tiver 40 pontos
-                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos
+                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos entra num AD
                                 valor2 += 1;
                                 set2.setText("AD");
                                 set1.setText("");
@@ -259,7 +259,7 @@ public class GameScore extends AppCompatActivity {
                             }
                             break;
                         }
-                        if (valor2 == 41) {
+                        if (valor2 == 41) { //se jogador 2 estiver num AD
 
                             break;
                         }
