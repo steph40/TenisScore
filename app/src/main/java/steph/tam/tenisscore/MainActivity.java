@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public static List<Game> games;
     private ListView gamesListView;
     private GameAdapter adapter;
-    ImageButton remove;
 
 
     @SuppressLint("MissingInflatedId")
@@ -44,15 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new GameAdapter(this, games);
         gamesListView.setAdapter(adapter);
-
-        remove = (ImageButton) findViewById(id.remove);
-
-        /*remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
     }
 
@@ -86,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
-            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
         }
 
