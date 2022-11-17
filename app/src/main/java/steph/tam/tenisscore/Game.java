@@ -63,4 +63,8 @@ public class Game {
     public void setNamePlayer2(String namePlayer2) {
         this.namePlayer2 = namePlayer2;
     }
+
+    public void setDateTournament(String dateTournament) {
+        this.dateTournament = dateTournament;
+    }
 }

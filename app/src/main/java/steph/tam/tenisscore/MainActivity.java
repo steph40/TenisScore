@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+
     public void removerItem(View view){
         Intent i = new Intent(view.getContext(),Remover.class);
         Game item = (Game) adapter.getItem(gamesListView.getPositionForView(view));
