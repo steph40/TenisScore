@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
         }
+
     }
 
     /**
@@ -104,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    public void removerItem(View view){
+        Intent i = new Intent(view.getContext(),Remover.class);
+        Game item = (Game) adapter.getItem(gamesListView.getPositionForView(view));
+        i.putExtra("id",item.getId());
+        startActivityForResult(i,1);
     }
 }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_player1 = (TextView) rowView.findViewById(R.id.tv_p1);
         TextView tv_player2 = (TextView) rowView.findViewById(R.id.tv_p2);
         TextView tv_date = (TextView) rowView.findViewById(R.id.tv_data);
+
 
 
         // obtains the contact for this position

@@ -45,10 +45,11 @@
         android:id="@+id/remove"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:onClick="removerItem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_data"
         app:srcCompat="@android:drawable/ic_menu_delete"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/tv_data"
