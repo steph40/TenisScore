@@ -67,7 +67,7 @@ public class FormGame extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(FormGame.this);
 
                     // Set the message show for the Alert time
-                    builder.setMessage("Todos os campos são obrigatórios !");
+                    builder.setMessage("Todos os campos são obrigatórios!");
 
                     // Set Alert Title
                     builder.setTitle("Atenção");

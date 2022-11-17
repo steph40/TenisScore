@@ -45,8 +45,6 @@
         android:id="@+id/remove"
         android:layout_width="56dp"
         android:layout_height="62dp"
-
-        android:onClick="removerItem"
         app:layout_constraintBottom_toBottomOf="@+id/tv_p2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_data"

@@ -10,9 +10,12 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new GameAdapter(this, games);
         gamesListView.setAdapter(adapter);
+
 
     }
 
@@ -115,42 +119,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * @param view
-     */
-    public void removerItem(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        // Set the message show for the Alert time
-        builder.setMessage("Deseja remover ?");
-
-        // Set Alert Title
-        builder.setTitle("Alerta");
-
-        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-        builder.setCancelable(false);
-
-        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
-            // When the user click yes button then app will close
-            Intent i = new Intent(view.getContext(), Remover.class);
-            Game item = (Game) adapter.getItem(gamesListView.getPositionForView(view));
-            i.putExtra("id", item.getId());
-            startActivityForResult(i, 1);
-
-        });
-
-        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setNegativeButton("Não", (DialogInterface.OnClickListener) (dialog, which) -> {
-            // If user click no then dialog box is canceled.
-            dialog.cancel();
-        });
-
-        // Create the Alert dialog
-        AlertDialog alertDialog = builder.create();
-        // Show the Alert Dialog box
-        alertDialog.show();
-
-    }
 }
 

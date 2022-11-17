@@ -1,12 +1,17 @@
 package steph.tam.tenisscore;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
@@ -36,7 +41,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_player2 = (TextView) rowView.findViewById(R.id.tv_p2);
         TextView tv_date = (TextView) rowView.findViewById(R.id.tv_data);
 
-
+        deleteItem(rowView, position);
 
         // obtains the contact for this position
         Game g = adaptGames.get(position);
@@ -68,5 +73,44 @@ public class GameAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    private void deleteItem(View rowView, int position){
+        ImageButton b = (ImageButton) rowView.findViewById(R.id.remove);
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                // Set the message show for the Alert time
+                builder.setMessage("Deseja remover ?");
+
+                // Set Alert Title
+                builder.setTitle("Alerta");
+
+                // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+                builder.setCancelable(false);
+
+                // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+                builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    // When the user click yes button then app will close
+                    MainActivity.games.remove(position);
+                    notifyDataSetChanged();
+
+                });
+
+                // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+                builder.setNegativeButton("Não", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    // If user click no then dialog box is canceled.
+                    dialog.cancel();
+                });
+
+                // Create the Alert dialog
+                AlertDialog alertDialog = builder.create();
+                // Show the Alert Dialog box
+                alertDialog.show();
+            }
+        });
     }
 }
