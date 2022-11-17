@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Deseja remover ?");
 
         // Set Alert Title
-        builder.setTitle("Alerta !");
+        builder.setTitle("Alerta");
 
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
         builder.setCancelable(false);
