@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_p1"
         app:layout_constraintTop_toBottomOf="@+id/tv_p1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/remove"
         android:layout_width="40dp"
         android:layout_height="40dp"
