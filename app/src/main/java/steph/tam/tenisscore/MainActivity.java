@@ -1,15 +1,20 @@
 package steph.tam.tenisscore;
 
+import static steph.tam.tenisscore.R.*;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -24,20 +29,30 @@ public class MainActivity extends AppCompatActivity {
     public static List<Game> games;
     private ListView gamesListView;
     private GameAdapter adapter;
+    ImageButton remove;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
 
-        gamesListView = findViewById(R.id.lv_game);
-
+        gamesListView = findViewById(id.lv_game);
 
         games = new ArrayList<>();
 
         adapter = new GameAdapter(this, games);
         gamesListView.setAdapter(adapter);
+
+        remove = (ImageButton) findViewById(id.remove);
+
+        /*remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
     }
 
@@ -49,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1:
+            case id.item1:
                 onClickFormGame(this);
                 return true;
             default:

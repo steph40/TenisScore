@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EditActivity extends AppCompatActivity {
 
     Button fin;
+    Button back;
     EditText eName1;
     EditText eName2;
     EditText eNameTour;
+
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class EditActivity extends AppCompatActivity {
         Game game = MainActivity.gameById(iIn.getExtras().getInt("id"));
 
         fin = (Button) findViewById(R.id.buttonFinEdit);
+        back = (Button) findViewById(R.id.buttonBackEdit);
         eName1 = (EditText) findViewById(R.id.playerName1Edit);
         eName2 = (EditText) findViewById(R.id.playerName2Edit);
         eNameTour = (EditText) findViewById(R.id.tourNameEdit);
@@ -55,6 +58,13 @@ public class EditActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
