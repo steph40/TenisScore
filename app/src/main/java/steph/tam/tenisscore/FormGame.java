@@ -106,6 +106,7 @@ public class FormGame extends AppCompatActivity {
     }
 
     public void onClickBackMain() {
+        setResult(RESULT_CANCELED);
         finish();
     }
 
