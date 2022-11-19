@@ -90,7 +90,7 @@ public class FormGame extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
                     int id = MainActivity.games.size() + 1;
                     i.putExtra("id",id);
-                    Game g = new Game(id, tournamentName,date,nameP1,nameP2);
+                    Game g = new Game(id, tournamentName,date,nameP1,nameP2,0,0);
                     MainActivity.games.add(g);
 
                     startActivityForResult(i, 1);

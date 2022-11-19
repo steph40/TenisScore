@@ -73,6 +73,8 @@ public class GameScore extends AppCompatActivity {
         eDatetour.setText(game.getDateTournament());
         eName1.setText(game.getNamePlayer1());
         eName2.setText(game.getNamePlayer2());
+        eset1_1.setText(game.getSet1_1()+"");
+        eset1_2.setText(game.getSet1_2()+"");
 
         View.OnClickListener listener = setResultados(set1, set2, ponto1, ponto2, eset1_1, eset1_2, eR1, eR2);
 
@@ -263,7 +265,6 @@ public class GameScore extends AppCompatActivity {
 
                             break;
                         }
-
                         break;
                 }
             }

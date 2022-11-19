@@ -12,25 +12,25 @@ public class Game implements Comparable<Game> {
     private String dateTournament;
     private String namePlayer1;
     private String namePlayer2;
-    //private  String set1_1;
+    private int set1_1;
     //private  String set2_1;
     //private  String set3_1;
-    //private  String set1_2;
+    private int set1_2;
     //private  String set2_2;
     //private  String set3_2;
     //private boolean vencedor;
 
 
-    public Game(int id ,String nameTournament, String dateTournament,String namePlayer1, String namePlayer2) {
-        this.id=id;
+    public Game(int id, String nameTournament, String dateTournament, String namePlayer1, String namePlayer2, int set1_1, int set1_2) {
+        this.id = id;
         this.nameTournament = nameTournament;
         this.dateTournament = dateTournament;
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
-        //this.set1_1 = set1_1;
+        this.set1_1 = set1_1;
         //this.set2_1 = set2_1;
         //this.set3_1 = set3_1;
-        //this.set1_2 = set1_2;
+        this.set1_2 = set1_2;
         //this.set2_2 = set2_2;
         //this.set3_2 = set3_2;
 
@@ -90,5 +90,21 @@ public class Game implements Comparable<Game> {
     @Override
     public int compareTo(Game game) {
         return getDateToSort().compareTo(game.getDateToSort());
+    }
+
+    public int getSet1_1() {
+        return set1_1;
+    }
+
+    public int getSet1_2() {
+        return set1_2;
+    }
+
+    public void setSet1_1(int set1_1) {
+        this.set1_1 = set1_1;
+    }
+
+    public void setSet1_2(int set1_2) {
+        this.set1_2 = set1_2;
     }
 }
