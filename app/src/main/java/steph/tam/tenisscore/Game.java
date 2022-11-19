@@ -1,6 +1,11 @@
 package steph.tam.tenisscore;
 
-public class Game {
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Game implements Comparable<Game> {
 
     private String nameTournament;
     private int id;
@@ -52,6 +57,19 @@ public class Game {
         return namePlayer2;
     }
 
+    public Date getDateToSort(){
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = simpledateformat.parse(dateTournament);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
+    }
+
+
     public void setNameTournament(String nameTournament) {
         this.nameTournament = nameTournament;
     }
@@ -66,5 +84,11 @@ public class Game {
 
     public void setDateTournament(String dateTournament) {
         this.dateTournament = dateTournament;
+    }
+
+
+    @Override
+    public int compareTo(Game game) {
+        return getDateToSort().compareTo(game.getDateToSort());
     }
 }

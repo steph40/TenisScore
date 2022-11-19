@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GameAdapter extends BaseAdapter {
@@ -22,6 +23,7 @@ public class GameAdapter extends BaseAdapter {
     public GameAdapter(Context context, List<Game> games) {
         this.context = context;
         this.adaptGames = games;
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

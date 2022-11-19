@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         games = new ArrayList<>();
 
         adapter = new GameAdapter(this, games);
+
         gamesListView.setAdapter(adapter);
 
 
@@ -82,7 +84,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
+            //sort the view by the date
+            Collections.sort(games);
             adapter.notifyDataSetChanged();
+
         }
 
     }
