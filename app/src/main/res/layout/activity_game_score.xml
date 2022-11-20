@@ -13,8 +13,8 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/tvR2"
-        app:layout_constraintTop_toBottomOf="@+id/tvR1" />
+        app:layout_constraintStart_toEndOf="@+id/tvNameP2"
+        app:layout_constraintTop_toBottomOf="@+id/tvSet1_1" />
 
     <TextView
         android:id="@+id/tvSet1"
@@ -83,26 +83,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
 
     <TextView
-        android:id="@+id/tvR1"
-        android:layout_width="20dp"
-        android:layout_height="39dp"
-        android:paddingTop="9dp"
-        android:text="0"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/tvNameP1"
-        app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
-
-    <TextView
-        android:id="@+id/tvR2"
-        android:layout_width="20dp"
-        android:layout_height="39dp"
-        android:paddingTop="9dp"
-        android:text="0"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/tvNameP2"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameP1" />
-
-    <TextView
         android:id="@+id/tvSet3_2"
         android:layout_width="20dp"
         android:layout_height="39dp"
@@ -139,7 +119,7 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/tvR1"
+        app:layout_constraintStart_toStartOf="@+id/tvSet1_2"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
     <TextView
@@ -183,15 +163,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameTour" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:text="S"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/tvR1"
-        app:layout_constraintEnd_toEndOf="@+id/tvR1" />
 
     <TextView
         android:id="@+id/textView6"
