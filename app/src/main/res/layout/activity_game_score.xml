@@ -33,6 +33,7 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/tvSet2_1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
@@ -89,6 +90,7 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/tvSet2_2"
         app:layout_constraintTop_toTopOf="@+id/tvSet2_2" />
 
@@ -99,6 +101,7 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/tvSet1_2"
         app:layout_constraintTop_toTopOf="@+id/tvSet1_2" />
 
@@ -129,6 +132,7 @@
         android:paddingTop="9dp"
         android:text="0"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/tvSet1_1"
         app:layout_constraintTop_toTopOf="@+id/tvNameP1" />
 
@@ -179,6 +183,7 @@
         android:layout_height="20dp"
         android:text="3"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tvSet3_1"
         app:layout_constraintEnd_toStartOf="@+id/tvSet1" />
 
@@ -188,6 +193,7 @@
         android:layout_height="20dp"
         android:text="2"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tvSet2_1"
         app:layout_constraintEnd_toStartOf="@+id/tvSet3_1" />
 

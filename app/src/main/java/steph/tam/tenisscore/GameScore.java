@@ -35,7 +35,9 @@ public class GameScore extends AppCompatActivity {
     TextView eR2;
     TextView set1;
     TextView set2;
-    int valor1 = 0, valor2 = 0, r1 = 0, r2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0;
+    TextView tv3;
+    TextView tv2;
+    int valor1 = 0, valor2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
 
     @SuppressLint("MissingInflatedId")
@@ -64,10 +66,10 @@ public class GameScore extends AppCompatActivity {
         eset1_2 = (TextView) findViewById(id.tvSet1_2);
         eset2_2 = (TextView) findViewById(id.tvSet2_2);
         eset3_2 = (TextView) findViewById(id.tvSet3_2);
-        eR1 = (TextView) findViewById(id.tvR1);
-        eR2 = (TextView) findViewById(id.tvR2);
         set1 = (TextView) findViewById(id.tvSet1);
         set2 = (TextView) findViewById(id.tvSet2);
+        tv3 = (TextView) findViewById(R.id.textView7);
+        tv2 = (TextView) findViewById(R.id.textView8);
 
         eNametour.setText(game.getNameTournament());
         eDatetour.setText(game.getDateTournament());
@@ -104,33 +106,25 @@ public class GameScore extends AppCompatActivity {
                 String set1_2 = eset1_2.getText().toString();
                 String set2_2 = eset2_2.getText().toString();
                 String set3_2 = eset3_2.getText().toString();
-                String r1 = eR1.getText().toString();
-                String r2 = eR2.getText().toString();
 
 
                 //Intent iM = new Intent();
+                if(vencedor == 0){
+                    MainActivity.games.remove(game);
+                }
+                if(vencedor == 1 || vencedor == 2){
+                    //game.setvencedor(vencedor)
+                    //game.set1_1(set1_1)
+                    //game.set1_2(set1_2)
+                    //game.set2_1(set2_1)
+                    //game.set2_2(set2_2)
+                    //game.set3_1(set3_1)
+                    //game.set3_1(set3_1)
+                    //game.set3_2(set3_2)
+                    //game.set3_2(set3_2)
+                }
                 setResult(RESULT_OK);
                 finish();
-                /*Intent it = new Intent();
-                Bundle bl = new Bundle();
-
-
-                bl.putString("b_nametour", nametour);
-                bl.putString("b_name1", name1);
-                bl.putString("b_name2", name2);
-                bl.putString("b_datetour", datetour);
-                bl.putString("b_set1_1", set1_1);
-                bl.putString("b_set2_1", set2_1);
-                bl.putString("b_set3_1", set3_1);
-                bl.putString("b_set1_2", set1_2);
-                bl.putString("b_set2_2", set2_2);
-                bl.putString("b_set3_2", set3_2);
-                bl.putString("b_R1", r1);
-                bl.putString("b_R2", r2);
-
-                it.putExtras(bl);
-                setResult(RESULT_OK, it);
-                finish();*/
             }
         });
 
@@ -140,135 +134,301 @@ public class GameScore extends AppCompatActivity {
             , TextView eset1_1, TextView eset1_2, TextView eR1, TextView eR2) {
         return new View.OnClickListener() {
 
-            public void onClick(View v) {
-
-                switch (v.getId()) {
-                    case id.Ponto1:
-
-                        if (valor1 == 0 || valor1 == 15) { //Se jogador 1 tiver 0 ou 15 pontos
-                            valor1 += 15;
-                            set1.setText(valor1 + "");
-                            break;
-                        }
-                        if (valor1 == 30) {//Se jogador 1 tiver 30 pontos
-                            valor1 += 10;
-                            set1.setText(valor1 + "");
-                            break;
-                        }
-                        if (valor1 == 40) {//Se jogador 1 tiver 40 pontos
-                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos entra num AD
-                                valor1 += 1;
-                                set1.setText("AD");
-                                set2.setText("");
-                                break;
-                            }
-                            if (valor2 == 41) {//Se o jogador 1 fizer ponto e o jogador 2 tiver AD
-                                valor1 = 40;
-                                valor2 = 40;
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.Ponto1:
+                        switch (valor1) {
+                            case 0:
+                            case 15:
+                                valor1 += 15;
                                 set1.setText(valor1 + "");
-                                set2.setText(valor2 + "");
                                 break;
-                            }
-
-                            if (r1 < 7 && r2 < 6) {
-                                r1++;
-                                eR1.setText(r1 + "");
-                                valor1 = 0;
-                                valor2 = 0;
+                            case 30:
+                                valor1 += 10;
                                 set1.setText(valor1 + "");
-                                set2.setText(valor2 + "");
-                                if ((r2_1 == 7 && r2_2 <= 5) || (r2_1 <= 5 && r2_2 == 7)) {
-                                    eR1.setText(r1 + "");
-                                    if (r1 == 7 && r2 <= 5) {
-                                        r3_1++;
-                                        eset3_1.setText(r3_1 + "");
-                                        eR1.setText("0");
-                                        r1 = 0;
-                                        r2 = 0;
-                                        if (r3_1 == 7) {
-                                            Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        }
-                                        break;
-                                    } else {
+                                break;
+                            case 40:
+                                if (valor1 == valor2) {
+                                    valor1 += 1;
+                                    set1.setText("AD");
+                                    set2.setText("");
+                                    break;
+                                }
+                                if (valor2 == 41) {
+                                    valor1 = 40;
+                                    valor2 = 40;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    break;
+                                }
+
+                                if ((vencedor1 == 1 && vencedor2 == 2) || vencedor1 == 2 && vencedor2 == 1) { //ir para o set3
+                                    r3_1++;
+                                    eset3_1.setText(r3_1 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
+                                        vencedor = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
                                     }
                                     break;
                                 }
-                                if ((r1_1 == 7 && r1_2 <= 5) || (r1_1 <= 5 && r1_2 == 7)) {
-                                    eR1.setText(r1 + "");
-                                    if (r1 == 7 && r2 <= 5) {
-                                        r2_1++;
-                                        eset2_1.setText(r2_1 + "");
-                                        eR1.setText("0");
-                                        r1 = 0;
-                                        r2 = 0;
-                                        if (r1_1 == 7 && r2_1 == 7) {
-                                            Toast.makeText(getApplicationContext(), "Vencedor", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        }
+                                if (vencedor1 == 1 || vencedor1 == 2) { //ir para o set2
+                                    r2_1++;
+                                    eset2_1.setText(r2_1 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
+                                        vencedor = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
                                         break;
                                     }
-                                    break;
+                                    if (vencedor1 == 2 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
+                                        vencedor2 = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
+                                        winSet2();
+                                        break;
+                                    }
                                 }
-                                if (r1 == 7 && r2 <= 5) {
+                                if (vencedor1 == 0) { //ir para o set1
                                     r1_1++;
                                     eset1_1.setText(r1_1 + "");
-                                    eR1.setText("0");
-                                    r1 = 0;
-                                    r2 = 0;
-                                    break;
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r1_1 >= 6 && r1_2 <= r1_1 - 2) {
+                                        eset1_1.setText(r1_1 + "");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
+                                        winSet1();
+                                        break;
+                                    }
                                 }
                                 break;
-                            }
-
-                        }
-                        if (valor1 == 41) { //Se jogador 1 estiver num AD
-                            if (r1 < 7 && r2 < 7) {
-                                r1++;
-                                eset1_1.setText(r1 + "");
-                                valor1 = 0;
-                                valor2 = 0;
-                            }
-                            break;
+                            case 41:
+                                if ((vencedor1 == 1 && vencedor2 == 2) || vencedor1 == 2 && vencedor2 == 1) { //ir para o set3
+                                    r3_1++;
+                                    eset3_1.setText(r3_1 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
+                                        vencedor = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                    }
+                                    break;
+                                }
+                                if (vencedor1 == 1 || vencedor1 == 2) { //ir para o set2
+                                    r2_1++;
+                                    eset2_1.setText(r2_1 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
+                                        vencedor = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                        break;
+                                    }
+                                    if (vencedor1 == 2 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
+                                        vencedor2 = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
+                                        winSet2();
+                                        break;
+                                    }
+                                }
+                                if (vencedor1 == 0) { //ir para o set1
+                                    r1_1++;
+                                    eset1_1.setText(r1_1 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r1_1 >= 6 && r1_2 <= r1_1 - 2) {
+                                        r1_1++;
+                                        eset1_1.setText(r1_1 + "");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 1;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
+                                        winSet1();
+                                        break;
+                                    }
+                                }
                         }
                         break;
-
                     case id.Ponto2:
-
-                        if (valor2 == 0 || valor2 == 15) { //Se jogador 2 tiver 0 ou 15 pontos
-                            valor2 += 15;
-                            set2.setText(valor2 + "");
-                            break;
-                        }
-                        if (valor2 == 30) {//Se jogador 1 tiver 30 pontos
-                            valor2 += 10;
-                            set2.setText(valor2 + "");
-                            break;
-                        }
-                        if (valor2 == 40) {//Se jogador 1 tiver 40 pontos
-                            if (valor1 == valor2) {//Se jogador 1 e o jogador 2 tiver 40 pontos entra num AD
-                                valor2 += 1;
-                                set2.setText("AD");
-                                set1.setText("");
-                                break;
-                            }
-                            if (valor1 == 41) {//Se o jogador 1 fizer ponto e o jogador 2 tiver AD
-                                valor1 = 40;
-                                valor2 = 40;
-                                set1.setText(valor1 + "");
+                        switch (valor2) {
+                            case 0:
+                            case 15:
+                                valor2 += 15;
                                 set2.setText(valor2 + "");
                                 break;
-                            }
-                            break;
+                            case 30:
+                                valor2 += 10;
+                                set2.setText(valor2 + "");
+                                break;
+                            case 40:
+                                if (valor2 == valor1) {
+                                    valor2 += 1;
+                                    set2.setText("AD");
+                                    set1.setText("");
+                                    break;
+                                }
+                                if (valor1 == 41) {
+                                    valor1 = 40;
+                                    valor2 = 40;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    break;
+                                }
+                                if ((vencedor1 == 1 && vencedor2 == 2) || vencedor1 == 2 && vencedor2 == 1) { //ir para o set3
+                                    r3_2++;
+                                    eset3_2.setText(r3_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
+                                        vencedor = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                    }
+                                    break;
+                                }
+                                if (vencedor1 == 1 || vencedor1 == 2) { //ir para o set2
+                                    r2_2++;
+                                    eset2_2.setText(r2_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
+                                        vencedor = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                        break;
+                                    }
+                                    if (vencedor1 == 1 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
+                                        vencedor2 = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
+                                        winSet2();
+                                        break;
+                                    }
+                                }
+                                if (vencedor1 == 0) { //ir para o set1
+                                    r1_2++;
+                                    eset1_2.setText(r1_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r1_2 >= 6 && r1_1 <= r1_2 - 2) {//ir para o set1
+                                        eset1_2.setText(r1_2 + "");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
+                                        winSet1();
+                                        break;
+                                    }
+                                }
+                                break;
+                            case 41:
+                                if ((vencedor1 == 1 && vencedor2 == 2) || vencedor1 == 2 && vencedor2 == 1) { //ir para o set3
+                                    r3_2++;
+                                    eset3_2.setText(r3_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
+                                        vencedor = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                    }
+                                    break;
+                                }
+                                if (vencedor1 == 1 || vencedor1 == 2) { //ir para o set2
+                                    r2_2++;
+                                    eset2_2.setText(r2_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
+                                        vencedor = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
+                                        gameFinished();
+                                        break;
+                                    }
+                                    if (vencedor1 == 1 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
+                                        vencedor2 = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
+                                        winSet2();
+                                        break;
+                                    }
+                                }
+                                if (vencedor1 == 0) { //ir para o set1
+                                    r1_2++;
+                                    eset1_2.setText(r1_2 + "");
+                                    valor1 = 0;
+                                    valor2 = 0;
+                                    set1.setText(valor1 + "");
+                                    set2.setText(valor2 + "");
+                                    if (r1_2 >= 6 && r1_1 <= r1_2 - 2) {//ir para o set1
+                                        eset1_2.setText(r1_2 + "");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 2;
+                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
+                                        winSet1();
+                                        break;
+                                    }
+                                }
+                                break;
                         }
-                        if (valor2 == 41) { //se jogador 2 estiver num AD
-
-                            break;
-                        }
-                        break;
                 }
             }
         };
+    }
+
+    public void gameFinished() {
+        ponto1.setVisibility(View.INVISIBLE);
+        ponto2.setVisibility(View.INVISIBLE);
+    }
+
+    public void winSet2() {
+        eset3_1.setVisibility(View.VISIBLE);
+        eset3_2.setVisibility(View.VISIBLE);
+        tv3.setVisibility(View.VISIBLE);
+    }
+
+    public void winSet1() {
+        eset2_1.setVisibility(View.VISIBLE);
+        eset2_2.setVisibility(View.VISIBLE);
+        tv2.setVisibility(View.VISIBLE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

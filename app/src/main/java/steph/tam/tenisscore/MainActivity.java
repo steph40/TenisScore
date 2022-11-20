@@ -106,24 +106,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
-
-    /**
-     * @param id
-     * @return
-     */
-    public static boolean removeGame(int id) {
-        if (games != null && !games.isEmpty()) {
-            for (Game g : games) {
-                if (g.getId() == id) {
-                    games.remove(g);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-
 }
 

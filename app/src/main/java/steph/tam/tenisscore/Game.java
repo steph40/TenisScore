@@ -18,7 +18,7 @@ public class Game implements Comparable<Game> {
     private int set1_2;
     //private  String set2_2;
     //private  String set3_2;
-    //private boolean vencedor;
+    //private int vencedor; se for 1 - jogador 1 a verde, se for 2 - jogador 2 a verde
 
 
     public Game(int id, String nameTournament, String dateTournament, String namePlayer1, String namePlayer2, int set1_1, int set1_2) {

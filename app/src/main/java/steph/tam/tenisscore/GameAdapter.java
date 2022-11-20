@@ -54,6 +54,8 @@ public class GameAdapter extends BaseAdapter {
         tv_player2.setText(g.getNamePlayer2());
         tv_date.setText(g.getDateTournament());
 
+        //if(g.getVencedor() == 1){verde o jogador 2}
+        //if(g.getVencedor() == 2){ verde o jogador 2}
 
         // returns the view
         return rowView;
