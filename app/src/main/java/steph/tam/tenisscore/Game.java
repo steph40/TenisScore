@@ -22,7 +22,7 @@ public class Game implements Comparable<Game> {
 
 
     public Game(int id, String nameTournament, String dateTournament, String namePlayer1, String namePlayer2, int set1_1, int set2_1, int set3_1,
-                int set1_2, int set2_2, int set3_2) {
+                int set1_2, int set2_2, int set3_2 ,int vencedor) {
         this.id = id;
         this.nameTournament = nameTournament;
         this.dateTournament = dateTournament;
@@ -34,6 +34,7 @@ public class Game implements Comparable<Game> {
         this.set1_2 = set1_2;
         this.set2_2 = set2_2;
         this.set3_2 = set3_2;
+        this.vencedor = vencedor;
 
 
     }
