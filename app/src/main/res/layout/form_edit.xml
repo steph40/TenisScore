@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edit_text"
         android:drawableStart="@drawable/trophy"
-        android:hint="Nome do torneio"
+        android:hint="Nome do Jogo"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textSize="14sp"
