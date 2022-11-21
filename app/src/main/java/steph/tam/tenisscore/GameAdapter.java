@@ -3,6 +3,9 @@ package steph.tam.tenisscore;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,12 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_player1 = (TextView) rowView.findViewById(R.id.tv_p1);
         TextView tv_player2 = (TextView) rowView.findViewById(R.id.tv_p2);
         TextView tv_date = (TextView) rowView.findViewById(R.id.tv_data);
+        TextView tv_1_1 = (TextView) rowView.findViewById(R.id.textView3);
+        TextView tv_1_2 = (TextView) rowView.findViewById(R.id.textView4);
+        TextView tv_2_1 = (TextView) rowView.findViewById(R.id.textView12);
+        TextView tv_2_2 = (TextView) rowView.findViewById(R.id.textView5);
+        TextView tv_3_1 = (TextView) rowView.findViewById(R.id.textView11);
+        TextView tv_3_2 = (TextView) rowView.findViewById(R.id.textView10);
 
         deleteItem(rowView, position);
 
@@ -50,12 +59,24 @@ public class GameAdapter extends BaseAdapter {
 
         // sets the TextView texts
         tv_tournament.setText(g.getNameTournament());
+        tv_date.setText(g.getDateTournament());
         tv_player1.setText(g.getNamePlayer1());
         tv_player2.setText(g.getNamePlayer2());
-        tv_date.setText(g.getDateTournament());
+        tv_1_1.setText(g.getSet1_1() + "");
+        tv_1_2.setText(g.getSet1_2() + "");
+        tv_2_1.setText(g.getSet2_1() + "");
+        tv_2_2.setText(g.getSet2_2() + "");
+        tv_3_1.setText(g.getSet3_1() + "");
+        tv_3_2.setText(g.getSet3_2() + "");
 
-        //if(g.getVencedor() == 1){verde o jogador 2}
-        //if(g.getVencedor() == 2){ verde o jogador 2}
+        if (g.getVencedor() == 1) {
+            tv_player1.setTextColor(Color.parseColor("#369B13"));
+            tv_player1.setTypeface(Typeface.DEFAULT_BOLD);
+        }
+        if (g.getVencedor() == 2) {
+            tv_player2.setTextColor(Color.parseColor("#369B13"));
+            tv_player2.setTypeface(Typeface.DEFAULT_BOLD);
+        }
 
         // returns the view
         return rowView;
@@ -79,7 +100,7 @@ public class GameAdapter extends BaseAdapter {
         return position;
     }
 
-    private void deleteItem(View rowView, int position){
+    private void deleteItem(View rowView, int position) {
         ImageButton b = (ImageButton) rowView.findViewById(R.id.remove);
 
         b.setOnClickListener(new View.OnClickListener() {

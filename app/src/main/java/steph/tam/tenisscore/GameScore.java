@@ -75,8 +75,8 @@ public class GameScore extends AppCompatActivity {
         eDatetour.setText(game.getDateTournament());
         eName1.setText(game.getNamePlayer1());
         eName2.setText(game.getNamePlayer2());
-        eset1_1.setText(game.getSet1_1()+"");
-        eset1_2.setText(game.getSet1_2()+"");
+        eset1_1.setText(game.getSet1_1() + "");
+        eset1_2.setText(game.getSet1_2() + "");
 
         View.OnClickListener listener = setResultados(set1, set2, ponto1, ponto2, eset1_1, eset1_2, eR1, eR2);
 
@@ -96,32 +96,19 @@ public class GameScore extends AppCompatActivity {
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name1 = eName1.getText().toString();
-                String name2 = eName2.getText().toString();
-                String nametour = eNametour.getText().toString();
-                String datetour = eDatetour.getText().toString();
-                String set1_1 = eset1_1.getText().toString();
-                String set2_1 = eset2_1.getText().toString();
-                String set3_1 = eset3_1.getText().toString();
-                String set1_2 = eset1_2.getText().toString();
-                String set2_2 = eset2_2.getText().toString();
-                String set3_2 = eset3_2.getText().toString();
-
 
                 //Intent iM = new Intent();
-                if(vencedor == 0){
+                if (vencedor == 0) {
                     MainActivity.games.remove(game);
                 }
-                if(vencedor == 1 || vencedor == 2){
-                    //game.setvencedor(vencedor)
-                    //game.set1_1(set1_1)
-                    //game.set1_2(set1_2)
-                    //game.set2_1(set2_1)
-                    //game.set2_2(set2_2)
-                    //game.set3_1(set3_1)
-                    //game.set3_1(set3_1)
-                    //game.set3_2(set3_2)
-                    //game.set3_2(set3_2)
+                if (vencedor == 1 || vencedor == 2) {
+                    game.setVencedor(vencedor);
+                    game.setSet1_1(r1_1);
+                    game.setSet1_2(r1_2);
+                    game.setSet2_1(r2_1);
+                    game.setSet2_2(r2_2);
+                    game.setSet3_1(r3_1);
+                    game.setSet3_2(r3_2);
                 }
                 setResult(RESULT_OK);
                 finish();
