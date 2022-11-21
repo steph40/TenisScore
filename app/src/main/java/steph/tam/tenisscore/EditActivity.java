@@ -51,6 +51,9 @@ public class EditActivity extends AppCompatActivity {
         eNameTour.setText(game.getNameTournament());
         eDate.setText(game.getDateTournament());
 
+        /**
+         * Definir a data
+         */
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -61,12 +64,19 @@ public class EditActivity extends AppCompatActivity {
             }
         };
 
+        /**
+         * Carregar na EditText da data
+         */
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(EditActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        /**
+         * Carregar no botão de Guardar
+         */
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +120,9 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Carregar no botão de Voltar
+         */
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +132,9 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Atualizar a data
+     */
     private void updateLabel() {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.FRANCE);

@@ -78,12 +78,14 @@ public class GameScore extends AppCompatActivity {
         eset1_1.setText(game.getSet1_1() + "");
         eset1_2.setText(game.getSet1_2() + "");
 
-        View.OnClickListener listener = setResultados(set1, set2, ponto1, ponto2, eset1_1, eset1_2, eR1, eR2);
+        View.OnClickListener listener = setResultados();
 
         ponto1.setOnClickListener(listener);
         ponto2.setOnClickListener(listener);
 
-        //Ao clicar no botão de editar
+        /**
+         * Ao clicar no botão de editar
+         */
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +95,9 @@ public class GameScore extends AppCompatActivity {
             }
         });
 
-        //Ao clicar no botão de finalizar
+        /** Ao clicar no botão de finalizar
+         *
+         */
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,9 +121,10 @@ public class GameScore extends AppCompatActivity {
 
     }
 
-    //Função para contagem de jogo
-    public View.OnClickListener setResultados(TextView set1, TextView set2, Button ponto1, Button ponto2
-            , TextView eset1_1, TextView eset1_2, TextView eR1, TextView eR2) {
+    /** Função para contagem de pontos jogo
+     *
+     */
+    public View.OnClickListener setResultados() {
         return new View.OnClickListener() {
 
             @Override
@@ -180,7 +185,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     if (vencedor1 == 2 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor2 = 1;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
                                         winSet2();
                                         break;
                                     }
@@ -199,7 +203,6 @@ public class GameScore extends AppCompatActivity {
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
                                         vencedor1 = 1;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
                                         winSet1();
                                         break;
                                     }
@@ -235,7 +238,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     if (vencedor1 == 2 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor2 = 1;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
                                         winSet2();
                                         break;
                                     }
@@ -254,7 +256,6 @@ public class GameScore extends AppCompatActivity {
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
                                         vencedor1 = 1;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
                                         winSet1();
                                         break;
                                     }
@@ -315,7 +316,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     if (vencedor1 == 1 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor2 = 2;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
                                         winSet2();
                                         break;
                                     }
@@ -334,7 +334,6 @@ public class GameScore extends AppCompatActivity {
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
                                         vencedor1 = 2;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
                                         winSet1();
                                         break;
                                     }
@@ -370,7 +369,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     if (vencedor1 == 1 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor2 = 2;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set2", Toast.LENGTH_SHORT).show();
                                         winSet2();
                                         break;
                                     }
@@ -389,7 +387,6 @@ public class GameScore extends AppCompatActivity {
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
                                         vencedor1 = 2;
-                                        Toast.makeText(getApplicationContext(), "Vencedor set1", Toast.LENGTH_SHORT).show();
                                         winSet1();
                                         break;
                                     }

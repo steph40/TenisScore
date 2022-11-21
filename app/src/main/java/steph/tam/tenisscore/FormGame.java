@@ -47,6 +47,9 @@ public class FormGame extends AppCompatActivity {
             }
         };
 
+        /**
+         * Ao carregar na Edit Text para colocar a data
+         */
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +57,9 @@ public class FormGame extends AppCompatActivity {
             }
         });
 
+        /**
+         * Ao carregar no botão para adicionar um jogo
+         */
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,17 +105,29 @@ public class FormGame extends AppCompatActivity {
         });
     }
 
+    /**
+     * Definir a data selecionada como String
+     */
     private void updateLabel() {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.FRANCE);
         eDate.setText(dateFormat.format(myCalendar.getTime()));
     }
 
+    /**
+     * Carregar no Botão voltar
+     */
     public void onClickBackMain() {
         setResult(RESULT_CANCELED);
         finish();
     }
 
+    /**
+     * Esperar pela resposta da activity seguinte
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 1) {
