@@ -247,7 +247,6 @@ public class GameScore extends AppCompatActivity {
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
                                     if (r1_1 >= 6 && r1_2 <= r1_1 - 2) {
-                                        r1_1++;
                                         eset1_1.setText(r1_1 + "");
                                         valor1 = 0;
                                         valor2 = 0;
