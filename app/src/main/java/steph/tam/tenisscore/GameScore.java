@@ -83,6 +83,7 @@ public class GameScore extends AppCompatActivity {
         ponto1.setOnClickListener(listener);
         ponto2.setOnClickListener(listener);
 
+        //Ao clicar no botão de editar
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,12 +93,11 @@ public class GameScore extends AppCompatActivity {
             }
         });
 
-
+        //Ao clicar no botão de finalizar
         fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //Intent iM = new Intent();
                 if (vencedor == 0) {
                     MainActivity.games.remove(game);
                 }
@@ -117,6 +117,7 @@ public class GameScore extends AppCompatActivity {
 
     }
 
+    //Função para contagem de jogo
     public View.OnClickListener setResultados(TextView set1, TextView set2, Button ponto1, Button ponto2
             , TextView eset1_1, TextView eset1_2, TextView eR1, TextView eR2) {
         return new View.OnClickListener() {
@@ -400,23 +401,38 @@ public class GameScore extends AppCompatActivity {
         };
     }
 
+    /**
+     * Função para os botões de "ponto" ficarem invisiveis
+     */
     public void gameFinished() {
         ponto1.setVisibility(View.INVISIBLE);
         ponto2.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Função para as TextViews do set 3 aparecerem
+     */
     public void winSet2() {
         eset3_1.setVisibility(View.VISIBLE);
         eset3_2.setVisibility(View.VISIBLE);
         tv3.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Função para as TextViews do set 2 aparecerem
+     */
     public void winSet1() {
         eset2_1.setVisibility(View.VISIBLE);
         eset2_2.setVisibility(View.VISIBLE);
         tv2.setVisibility(View.VISIBLE);
     }
 
+    /**Função da espera do resultado da EditActivity
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -429,5 +445,4 @@ public class GameScore extends AppCompatActivity {
             eName2.setText(game.getNamePlayer2());
         }
     }
-
 }

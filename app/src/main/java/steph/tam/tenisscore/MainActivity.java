@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         gamesListView.setAdapter(adapter);
 
-
     }
 
     /**
