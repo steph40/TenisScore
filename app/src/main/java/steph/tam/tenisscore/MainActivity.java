@@ -11,13 +11,16 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static List<Game> games;
     private ListView gamesListView;
     private GameAdapter adapter;
+    private TextView titulo;
 
 
     @SuppressLint("MissingInflatedId")
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(layout.activity_main);
 
         gamesListView = findViewById(id.lv_game);
+        titulo = findViewById(id.tv_title_main);
 
         games = new ArrayList<>();
 
@@ -68,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
             case id.item2:
                 onClickAbout(this);
                 return true;
+            case id.item3:
+                onClickUser(this);
+                return true;
             default:
                 return false;
         }
@@ -81,6 +89,35 @@ public class MainActivity extends AppCompatActivity {
     public void onClickFormGame(MainActivity view) {
         Intent i = new Intent(this, FormGame.class);
         startActivityForResult(i, 1);
+    }
+
+    public void onClickUser(MainActivity view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Set Alert Title
+        builder.setTitle("Nome de utilizador");
+
+        EditText inputUser = new EditText(this);
+        builder.setView(inputUser);
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
+            String username = inputUser.getText().toString();
+            titulo.setText("Jogos do " + username);
+            //Alterar no Shared preferences ******
+        });
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // When the user click no button then app will close
+            dialog.cancel();
+        });
+
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
     }
 
     /**
