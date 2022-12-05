@@ -2,6 +2,7 @@ package steph.tam.tenisscore;
 
 import static steph.tam.tenisscore.R.*;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,9 +65,17 @@ public class MainActivity extends AppCompatActivity {
             case id.item1:
                 onClickFormGame(this);
                 return true;
+            case id.item2:
+                onClickAbout(this);
+                return true;
             default:
                 return false;
         }
+    }
+
+    public void onClickAbout(MainActivity view) {
+        Intent i = new Intent(this, About.class);
+        startActivityForResult(i, 1);
     }
 
     public void onClickFormGame(MainActivity view) {
