@@ -8,8 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView gamesListView;
     private GameAdapter adapter;
     private TextView titulo;
+    SharedPreferences prefs;
 
 
     @SuppressLint("MissingInflatedId")
@@ -48,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new GameAdapter(this, games);
 
         gamesListView.setAdapter(adapter);
+
+        //SharedPreferences
+        prefs = getSharedPreferences("username", MODE_PRIVATE);
+        String user = prefs.getString("nomeUser", null);
+
+        if (user != null) {
+            titulo.setText("Jogos do " + user);
+        }
+
 
     }
 
@@ -104,9 +116,13 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
 
         builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
-            String username = inputUser.getText().toString();
-            titulo.setText("Jogos do " + username);
-            //Alterar no Shared preferences ******
+            //****************Falta verificar se ficou vazio ****************
+            String user = inputUser.getText().toString();
+            titulo.setText("Jogos do " + user);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("nomeUser", user);
+            editor.commit();
+
         });
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
