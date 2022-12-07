@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -39,6 +40,7 @@ public class GameScore extends AppCompatActivity {
     TextView tv2;
     int valor1 = 0, valor2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
+    GameDBAdapter db;
 
     @SuppressLint("MissingInflatedId")
     @Override

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private GameAdapter adapter;
     private TextView titulo;
     SharedPreferences prefs;
+    GameDBAdapter db;
 
 
     @SuppressLint("MissingInflatedId")
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         gamesListView.setAdapter(adapter);
 
+        //Toast.makeText(getApplicationContext(), db.getId()+"", Toast.LENGTH_SHORT).show();
         //SharedPreferences
         prefs = getSharedPreferences("username", MODE_PRIVATE);
         String user = prefs.getString("nomeUser", null);

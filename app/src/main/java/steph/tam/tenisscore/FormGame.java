@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class FormGame extends AppCompatActivity {
     Button add;
     Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
+    GameDBAdapter db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class FormGame extends AppCompatActivity {
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
+        db = new GameDBAdapter(this);
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -111,7 +114,16 @@ public class FormGame extends AppCompatActivity {
                     i.putExtra("id", id);
                     Game g = new Game(id, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
                     MainActivity.games.add(g);
-
+                    /*db.open();
+                    if(db.insertGame(g.getNameTournament(), g.getDateTournament(), g.getNamePlayer1(), g.getNamePlayer2(), 0,0,0,0,0,0,0) == true){
+                        Cursor x= db.getId();
+                        x.moveToFirst();
+                        int k = x.getInt(0);
+                        Toast.makeText(getApplicationContext(), "Sucesso"+k, Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Erro", Toast.LENGTH_SHORT).show();
+                    }
+                    db.close();*/
                     startActivityForResult(i, 1);
                 }
             }
