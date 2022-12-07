@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, 1);
     }
 
+    int verify = 0;
+
     public void onClickUser(MainActivity view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -116,13 +119,11 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
 
         builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
-            //****************Falta verificar se ficou vazio ****************
             String user = inputUser.getText().toString();
             titulo.setText("Jogos do " + user);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("nomeUser", user);
             editor.commit();
-
         });
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {

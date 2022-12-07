@@ -24,6 +24,7 @@ public class FormGame extends AppCompatActivity {
     EditText eNameP1;
     EditText eNameP2;
     Button add;
+    Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -31,6 +32,7 @@ public class FormGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_game);
 
+        voltar = findViewById(R.id.buttonBack);
         add = (Button) findViewById(R.id.buttonAdd);
         eTournamentName = (EditText) findViewById(R.id.tourName);
         eDate = (EditText) findViewById(R.id.tourDate);
@@ -54,6 +56,17 @@ public class FormGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(FormGame.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        /**
+         * Carregar no Botão voltar
+         */
+        voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                finish();
             }
         });
 
@@ -112,14 +125,6 @@ public class FormGame extends AppCompatActivity {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.FRANCE);
         eDate.setText(dateFormat.format(myCalendar.getTime()));
-    }
-
-    /**
-     * Carregar no Botão voltar
-     */
-    public void onClickBackMain() {
-        setResult(RESULT_CANCELED);
-        finish();
     }
 
     /**
