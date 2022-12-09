@@ -113,12 +113,8 @@ public class FormGame extends AppCompatActivity {
 
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
 
-
-                    //Game g = new Game(id, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
-                    //MainActivity.games.add(g);
                     gestao.insertGame(tournamentName,date,nameP1,nameP2,0,0,0,0,0,0,0);
-                    //Mostrar o id
-                    Toast.makeText(getApplicationContext(),gestao.lastId()+"" , Toast.LENGTH_SHORT).show();
+
                     i.putExtra("id", gestao.lastId());
 
                     startActivityForResult(i, 1);

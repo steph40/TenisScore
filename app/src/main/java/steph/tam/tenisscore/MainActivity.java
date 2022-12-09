@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == 1) {
             games = gestao.getGamesArray();
-            Collections.sort(games);
             adapter.updateList(games);
         }
 

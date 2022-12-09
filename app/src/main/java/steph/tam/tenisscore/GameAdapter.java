@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -124,8 +125,14 @@ public class GameAdapter extends BaseAdapter {
                 // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
                 builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
                     // When the user click yes button then app will close
-                    MainActivity.games.remove(position);
-                    notifyDataSetChanged();
+                    Gestao gestao = new Gestao(context.getApplicationContext());
+                    Game game = MainActivity.games.get(position);
+
+                    gestao.deleteGame(game.getId());
+                    List <Game> games = gestao.getGamesArray();
+                    //Collections.sort(games);
+                    updateList(games);
+
 
                 });
 
@@ -144,6 +151,7 @@ public class GameAdapter extends BaseAdapter {
     }
 
     public void updateList(List<Game> games) {
+        Collections.sort(games);
         adaptGames.clear();
         adaptGames.addAll(games);
         notifyDataSetChanged();
