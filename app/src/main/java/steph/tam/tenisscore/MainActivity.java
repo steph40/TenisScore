@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     Gestao gestao;
 
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +49,12 @@ public class MainActivity extends AppCompatActivity {
         titulo = findViewById(id.tv_title_main);
 
         gestao = new Gestao(this);
-        games = gestao.getGamesArray() ;
+        games = gestao.getGamesArray();
 
         adapter = new GameAdapter(this, games);
 
         gamesListView.setAdapter(adapter);
 
-        //Toast.makeText(getApplicationContext(), db.getId()+"", Toast.LENGTH_SHORT).show();
         //SharedPreferences
         prefs = getSharedPreferences("username", MODE_PRIVATE);
         String user = prefs.getString("nomeUser", null);
