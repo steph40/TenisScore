@@ -23,14 +23,14 @@ public class Gestao {
         db.close();
         return resultado;
     }
-    /*
-    public void updateGameScore(int id, int set1_1, int set2_1, int set1_2, int set2_2, int set3_1, int set3_2, int vencedor) {
+
+    public void updateGameScore(int id, int set1_1, int set2_1, int set3_1, int set1_2, int set2_2, int set3_2, int vencedor) {
         db.open();
-        if (db.updateGameScore(set1_1, set2_1, set3_1, set2_1, set2_2, set3_2, vencedor, id)) {
+        if (db.updateGameScore(id, set1_1, set2_1,  set3_1,  set1_2,  set2_2,  set3_2,  vencedor)) {
             db.close();
         }
         db.close();
-    }*/
+    }
 
     public int lastId() {
         int id = -1;

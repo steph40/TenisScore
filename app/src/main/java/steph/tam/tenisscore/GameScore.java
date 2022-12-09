@@ -49,7 +49,7 @@ public class GameScore extends AppCompatActivity {
         setContentView(layout.activity_game_score);
 
         Intent iIn = getIntent();
-        gestao= new Gestao(this);
+        gestao = new Gestao(this);
 
         game = gestao.getGame(iIn.getExtras().getInt("id"));
 
@@ -120,7 +120,8 @@ public class GameScore extends AppCompatActivity {
                     game.setSet3_1(r3_1);
                     game.setSet3_2(r3_2);
                     //Update
-                   // gestao.updateGameScore(iIn.getExtras().getInt("id"),game.getSet1_1(),game.getSet1_2(),game.getSet2_1(),);
+                    gestao.updateGameScore(iIn.getExtras().getInt("id"), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
+                            , game.getSet2_2(), game.getSet3_2(), game.getVencedor());
                 }
                 setResult(RESULT_OK);
                 finish();
@@ -129,8 +130,8 @@ public class GameScore extends AppCompatActivity {
 
     }
 
-    /** Função para contagem de pontos jogo
-     *
+    /**
+     * Função para contagem de pontos jogo
      */
     public View.OnClickListener setResultados() {
         return new View.OnClickListener() {
@@ -432,7 +433,8 @@ public class GameScore extends AppCompatActivity {
         tv2.setVisibility(View.VISIBLE);
     }
 
-    /**Função da espera do resultado da EditActivity
+    /**
+     * Função da espera do resultado da EditActivity
      *
      * @param requestCode
      * @param resultCode
