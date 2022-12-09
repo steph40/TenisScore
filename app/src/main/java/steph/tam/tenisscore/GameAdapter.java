@@ -32,7 +32,6 @@ public class GameAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-
         // convertView has the previous View for this position
         View rowView = convertView;
 
@@ -73,12 +72,12 @@ public class GameAdapter extends BaseAdapter {
         tv_3_2.setText(g.getSet3_2() + "");
 
         if (g.getVencedor() == 1) {
-            tv_player1.setText(g.getNamePlayer1()+" * ");
+            tv_player1.setText(g.getNamePlayer1() + " * ");
             tv_player1.setTypeface(Typeface.DEFAULT_BOLD);
             tv_player1.setTextSize(16);
         }
         if (g.getVencedor() == 2) {
-            tv_player2.setText(g.getNamePlayer2()+" * ");
+            tv_player2.setText(g.getNamePlayer2() + " * ");
             tv_player2.setTypeface(Typeface.DEFAULT_BOLD);
             tv_player2.setTextSize(16);
         }
@@ -142,5 +141,11 @@ public class GameAdapter extends BaseAdapter {
                 alertDialog.show();
             }
         });
+    }
+
+    public void updateList(List<Game> games) {
+        adaptGames.clear();
+        adaptGames.addAll(games);
+        notifyDataSetChanged();
     }
 }

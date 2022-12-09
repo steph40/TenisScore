@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         gestao = new Gestao(this);
         games = gestao.getGamesArray();
-
+        Collections.sort(games);
         adapter = new GameAdapter(this, games);
 
         gamesListView.setAdapter(adapter);
@@ -148,27 +148,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
-            //sort the view by the date
+            games = gestao.getGamesArray();
             Collections.sort(games);
-            adapter.notifyDataSetChanged();
-
+            adapter.updateList(games);
         }
 
     }
 
-    /**
-     * @param id
-     * @return
-     */
-    public static Game gameById(int id) {
-        if (games != null && !games.isEmpty()) {
-            for (Game g : games) {
-                if (g.getId() == id) {
-                    return g;
-                }
-            }
-        }
-        return null;
-    }
+
 }
 
