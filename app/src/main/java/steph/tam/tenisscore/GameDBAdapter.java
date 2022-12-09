@@ -6,7 +6,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 public class GameDBAdapter {
 
@@ -86,24 +85,24 @@ public class GameDBAdapter {
     }
 
     //Update
-    public boolean updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2){
+    public boolean updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2) {
         String sql = "UPDATE " + DB_TABLE + " SET nameTournament = ?, date = ?, nameP1 = ?, nameP2 = ? WHERE id = ? ;";
         Object[] args = new Object[]{nameTournament, date, nameP1, nameP2, id};
         try {
             db.execSQL(sql, args);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             return false;
         }
         return true;
     }
 
-    public boolean updateGameScore(int id, int set1_1, int set2_1,int set1_2, int set2_2, int set3_1, int set3_2, int vencedor){
+    public boolean updateGameScore(int id, int set1_1, int set2_1, int set1_2, int set2_2, int set3_1, int set3_2, int vencedor) {
         String sql = "UPDATE " + DB_TABLE + " SET set1_1 = ?, set2_1 = ?, set3_1 = ?, set1_2 = ?, set2_2 = ?, set3_2 = ?, vencedor = ? WHERE id = ? ;";
         Object[] args = new Object[]{set1_1, set2_1, set3_1, set2_1, set2_2, set3_2, vencedor, id};
         try {
             db.execSQL(sql, args);
             return true;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             return false;
         }
 
@@ -123,9 +122,8 @@ public class GameDBAdapter {
         return db.rawQuery(sql, null);
     }
 
-    public Cursor getId(){
-        String sql = "SELECT last_insert_rowid();";
-
+    public Cursor getLastId() {
+        String sql = "SELECT MAX(id) FROM games;";
         return db.rawQuery(sql, null);
     }
 
@@ -140,7 +138,6 @@ public class GameDBAdapter {
         } catch (SQLException e) {
             return false;
         }
-
     }
 
 

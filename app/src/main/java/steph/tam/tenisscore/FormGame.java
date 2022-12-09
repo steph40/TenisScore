@@ -27,7 +27,8 @@ public class FormGame extends AppCompatActivity {
     Button add;
     Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
-    GameDBAdapter db;
+    Gestao gestao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class FormGame extends AppCompatActivity {
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
-        db = new GameDBAdapter(this);
+        gestao= new Gestao(this);
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -110,20 +111,15 @@ public class FormGame extends AppCompatActivity {
                 } else {
 
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
-                    int id = MainActivity.games.size() + 1;
-                    i.putExtra("id", id);
-                    Game g = new Game(id, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
-                    MainActivity.games.add(g);
-                    /*db.open();
-                    if(db.insertGame(g.getNameTournament(), g.getDateTournament(), g.getNamePlayer1(), g.getNamePlayer2(), 0,0,0,0,0,0,0) == true){
-                        Cursor x= db.getId();
-                        x.moveToFirst();
-                        int k = x.getInt(0);
-                        Toast.makeText(getApplicationContext(), "Sucesso"+k, Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Erro", Toast.LENGTH_SHORT).show();
-                    }
-                    db.close();*/
+
+
+                    //Game g = new Game(id, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+                    //MainActivity.games.add(g);
+                    gestao.insertGame(tournamentName,date,nameP1,nameP2,0,0,0,0,0,0,0);
+                    //Mostrar o id
+                    Toast.makeText(getApplicationContext(),gestao.lastId()+"" , Toast.LENGTH_SHORT).show();
+                    i.putExtra("id", gestao.lastId());
+
                     startActivityForResult(i, 1);
                 }
             }

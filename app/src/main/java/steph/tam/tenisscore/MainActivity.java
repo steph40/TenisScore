@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private GameAdapter adapter;
     private TextView titulo;
     SharedPreferences prefs;
-    GameDBAdapter db;
+    Gestao gestao;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         gamesListView = findViewById(id.lv_game);
         titulo = findViewById(id.tv_title_main);
 
-        games = new ArrayList<>();
+        gestao = new Gestao(this);
+        games = gestao.getGamesArray() ;
 
         adapter = new GameAdapter(this, games);
 
@@ -106,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, 1);
     }
 
-    int verify = 0;
-
     public void onClickUser(MainActivity view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -121,11 +121,13 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
 
         builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
+
             String user = inputUser.getText().toString();
             titulo.setText("Jogos do " + user);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("nomeUser", user);
             editor.commit();
+
         });
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {

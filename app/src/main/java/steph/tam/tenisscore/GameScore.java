@@ -40,7 +40,7 @@ public class GameScore extends AppCompatActivity {
     TextView tv2;
     int valor1 = 0, valor2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
-    GameDBAdapter db;
+    Gestao gestao;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,7 +49,10 @@ public class GameScore extends AppCompatActivity {
         setContentView(layout.activity_game_score);
 
         Intent iIn = getIntent();
-        game = MainActivity.gameById(iIn.getExtras().getInt("id"));
+        gestao= new Gestao(this);
+
+        game = gestao.getGame(iIn.getExtras().getInt("id"));
+
 
         //Buttons
         ponto1 = (Button) findViewById(id.Ponto1);
@@ -106,6 +109,7 @@ public class GameScore extends AppCompatActivity {
 
                 if (vencedor == 0) {
                     MainActivity.games.remove(game);
+                    //Delete
                 }
                 if (vencedor == 1 || vencedor == 2) {
                     game.setVencedor(vencedor);
@@ -115,6 +119,8 @@ public class GameScore extends AppCompatActivity {
                     game.setSet2_2(r2_2);
                     game.setSet3_1(r3_1);
                     game.setSet3_2(r3_2);
+                    //Update
+                   // gestao.updateGameScore(iIn.getExtras().getInt("id"),game.getSet1_1(),game.getSet1_2(),game.getSet2_1(),);
                 }
                 setResult(RESULT_OK);
                 finish();
