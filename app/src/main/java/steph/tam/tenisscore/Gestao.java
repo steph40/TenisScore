@@ -32,6 +32,25 @@ public class Gestao {
         db.close();
     }
 
+    public void updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2){
+        db.open();
+        if(db.updateGameForm(id, nameTournament, date, nameP1, nameP2) == true){
+            db.close();
+        }
+        db.close();
+    }
+
+    public boolean deleteGame(int id){
+        db.open();
+        if(db.deleteGame(id) == true){
+            db.close();
+            return true;
+        }
+        db.close();
+        return false;
+
+    }
+
     public int lastId() {
         int id = -1;
         db.open();
@@ -82,6 +101,8 @@ public class Gestao {
         db.close();
         return games;
     }
+
+
 
 
 }

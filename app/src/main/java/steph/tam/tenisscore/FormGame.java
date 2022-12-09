@@ -35,6 +35,7 @@ public class FormGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_game);
 
+
         voltar = findViewById(R.id.buttonBack);
         add = (Button) findViewById(R.id.buttonAdd);
         eTournamentName = (EditText) findViewById(R.id.tourName);

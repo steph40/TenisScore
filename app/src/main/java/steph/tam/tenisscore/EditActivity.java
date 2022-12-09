@@ -28,15 +28,17 @@ public class EditActivity extends AppCompatActivity {
     EditText eNameTour;
     EditText eDate;
     final Calendar myCalendar = Calendar.getInstance();
+    Gestao gestao;
 
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        gestao = new Gestao(this);
 
         Intent iIn = getIntent();
-        Game game = MainActivity.gameById(iIn.getExtras().getInt("id"));
+        Game game = gestao.getGame(iIn.getExtras().getInt("id"));
 
         fin = (Button) findViewById(R.id.buttonFinEdit);
         back = (Button) findViewById(R.id.buttonBackEdit);
@@ -113,6 +115,7 @@ public class EditActivity extends AppCompatActivity {
                     game.setNamePlayer2(name2);
                     game.setNameTournament(nameTour);
                     game.setDateTournament(date);
+                    gestao.updateGameForm(game.getId(), game.getNameTournament(), game.getDateTournament(), game.getNamePlayer1(), game.getNamePlayer2());
 
                     setResult(RESULT_OK);
                     finish();

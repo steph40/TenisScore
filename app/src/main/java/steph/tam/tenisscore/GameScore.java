@@ -40,6 +40,7 @@ public class GameScore extends AppCompatActivity {
     TextView tv2;
     int valor1 = 0, valor2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
+    Game game2;
     Gestao gestao;
 
     @SuppressLint("MissingInflatedId")
@@ -110,6 +111,7 @@ public class GameScore extends AppCompatActivity {
                 if (vencedor == 0) {
                     MainActivity.games.remove(game);
                     //Delete
+                    gestao.deleteGame(game.getId());
                 }
                 if (vencedor == 1 || vencedor == 2) {
                     game.setVencedor(vencedor);
@@ -120,7 +122,7 @@ public class GameScore extends AppCompatActivity {
                     game.setSet3_1(r3_1);
                     game.setSet3_2(r3_2);
                     //Update
-                    gestao.updateGameScore(iIn.getExtras().getInt("id"), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
+                    gestao.updateGameScore(game.getId(), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
                             , game.getSet2_2(), game.getSet3_2(), game.getVencedor());
                 }
                 setResult(RESULT_OK);
@@ -446,10 +448,11 @@ public class GameScore extends AppCompatActivity {
 
         // // if it is the request that I did
         if (resultCode == RESULT_OK && requestCode == 1) {  // if the result is RESULT_OK
-            eNametour.setText(game.getNameTournament());
-            eDatetour.setText(game.getDateTournament());
-            eName1.setText(game.getNamePlayer1());
-            eName2.setText(game.getNamePlayer2());
+            game2 = gestao.getGame(game.getId());
+            eNametour.setText(game2.getNameTournament());
+            eDatetour.setText(game2.getDateTournament());
+            eName1.setText(game2.getNamePlayer1());
+            eName2.setText(game2.getNamePlayer2());
         }
     }
 }

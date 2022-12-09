@@ -31,6 +31,8 @@ public class GameAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
+
+
         // convertView has the previous View for this position
         View rowView = convertView;
 
@@ -53,6 +55,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_3_2 = (TextView) rowView.findViewById(R.id.textView10);
 
         deleteItem(rowView, position);
+
 
         // obtains the contact for this position
         Game g = adaptGames.get(position);
