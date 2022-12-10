@@ -2,11 +2,13 @@ package steph.tam.tenisscore;
 
 import static steph.tam.tenisscore.R.*;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -109,8 +111,8 @@ public class GameScore extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (vencedor == 0) {
-                    MainActivity.games.remove(game);
-                    //Delete
+                    MainActivity.games.remove(game);//Duvida se é preciso remover da lista  Steph: Eu acho que nao porque nao esta adicionado a lista porque a lista
+                    //é o que vai buscar á base de dados   Hugo:?
                     gestao.deleteGame(game.getId());
                 }
                 if (vencedor == 1 || vencedor == 2) {
@@ -176,6 +178,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
@@ -190,6 +193,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
@@ -229,6 +233,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
@@ -243,6 +248,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
@@ -307,6 +313,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
@@ -321,6 +328,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
@@ -360,6 +368,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
@@ -374,6 +383,7 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
+                                        vencedor(vencedor);
                                         Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
@@ -436,6 +446,22 @@ public class GameScore extends AppCompatActivity {
     }
 
     /**
+     * Função para distinguir o vencedor
+     *
+     * @param vencedor
+     */
+    public void vencedor(int vencedor) {
+        if (vencedor == 1) {
+            eName1.setTypeface(Typeface.DEFAULT_BOLD);
+            eName1.setTextSize(16);
+        }
+        if (vencedor == 2) {
+            eName2.setTypeface(Typeface.DEFAULT_BOLD);
+            eName2.setTextSize(16);
+        }
+    }
+
+    /**
      * Função da espera do resultado da EditActivity
      *
      * @param requestCode
@@ -455,4 +481,26 @@ public class GameScore extends AppCompatActivity {
             eName2.setText(game2.getNamePlayer2());
         }
     }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("set1_1", eset1_1.getText().toString());
+        outState.putString("set1_2", eset1_2.getText().toString());
+        //outState.putString("R1", set1.getText().toString());
+        //outState.putString("set2_1", eset2_1.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle outState) {
+        super.onRestoreInstanceState(outState);
+        String set1_1 = outState.getString("set1_1");
+        String set1_2 = outState.getString("set1_2");
+        //String r1 = outState.getString("R1");
+        // String set2_1 = outState.getString("set2_1");
+        eset1_1.setText(set1_1);
+        eset1_2.setText(set1_2);
+        //set1.setText(r1);
+        //eset2_1.setText(set2_1);
+
+    }
+
 }
