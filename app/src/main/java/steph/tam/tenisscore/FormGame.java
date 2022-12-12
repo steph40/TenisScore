@@ -30,16 +30,7 @@ public class FormGame extends AppCompatActivity {
     Gestao gestao;
     boolean dateState;
 
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, month);
-            myCalendar.set(Calendar.DAY_OF_MONTH, day);
-            updateLabel();
-            dateState = false;
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +44,7 @@ public class FormGame extends AppCompatActivity {
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
-        gestao= new Gestao(this);
-
+        gestao = new Gestao(this);
 
 
         /**
@@ -117,7 +107,7 @@ public class FormGame extends AppCompatActivity {
 
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
 
-                    gestao.insertGame(tournamentName,date,nameP1,nameP2,0,0,0,0,0,0,0);
+                    gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
 
                     i.putExtra("id", gestao.lastId());
 
@@ -126,6 +116,17 @@ public class FormGame extends AppCompatActivity {
             }
         });
     }
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel();
+            dateState = false;
+        }
+    };
 
     /**
      * Definir a data selecionada como String
@@ -138,6 +139,7 @@ public class FormGame extends AppCompatActivity {
 
     /**
      * Esperar pela resposta da activity seguinte
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -152,7 +154,7 @@ public class FormGame extends AppCompatActivity {
 
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("dialogState", dateState);
-        if(dateState == true) {
+        if (dateState == true) {
             outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
             outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
             outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -166,7 +168,7 @@ public class FormGame extends AppCompatActivity {
         dateState = outState.getBoolean("dialogState");
 
 
-        if(dateState == true){
+        if (dateState == true) {
             new DatePickerDialog(FormGame.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
         }
 

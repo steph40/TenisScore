@@ -31,19 +31,6 @@ public class EditActivity extends AppCompatActivity {
     Gestao gestao;
     boolean dateState;
 
-    /**
-     * Definir a data
-     */
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, month);
-            myCalendar.set(Calendar.DAY_OF_MONTH, day);
-            updateLabel();
-            dateState = false;
-        }
-    };
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +125,20 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Definir a data
+     */
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel();
+            dateState = false;
+        }
+    };
 
     /**
      * Atualizar a data

@@ -487,8 +487,6 @@ public class GameScore extends AppCompatActivity {
         outState.putInt("vencedor1", vencedor1);
         outState.putInt("vencedor2", vencedor2);
         outState.putInt("vencedor", vencedor);
-
-        //outState.putString("set2_1", eset2_1.getText().toString());
         super.onSaveInstanceState(outState);
     }
 
@@ -506,25 +504,25 @@ public class GameScore extends AppCompatActivity {
         vencedor2 = outState.getInt("vencedor2");
         vencedor = outState.getInt("vencedor");
 
-        set1.setText(valor1+"");
-        set2.setText(valor2+"");
+        set1.setText(valor1 + "");
+        set2.setText(valor2 + "");
 
-        eset1_1.setText(r1_1+"");
-        eset1_2.setText(r1_2+"");
+        eset1_1.setText(r1_1 + "");
+        eset1_2.setText(r1_2 + "");
 
-        if(vencedor1 == 1 || vencedor1 == 2) {
+        if (vencedor1 == 1 || vencedor1 == 2) {
             winSet1();
-            eset2_1.setText(r2_1+"");
-            eset2_2.setText(r2_2+"");
+            eset2_1.setText(r2_1 + "");
+            eset2_2.setText(r2_2 + "");
         }
 
-        if(vencedor1 == 1 && vencedor2 == 2 || vencedor1 == 2 && vencedor2 == 1) {
+        if (vencedor1 == 1 && vencedor2 == 2 || vencedor1 == 2 && vencedor2 == 1) {
             winSet2();
-            eset3_1.setText(r3_1+"");
-            eset3_2.setText(r3_2+"");
+            eset3_1.setText(r3_1 + "");
+            eset3_2.setText(r3_2 + "");
         }
 
-        if(vencedor != 0){
+        if (vencedor != 0) {
             vencedor(vencedor);
             gameFinished();
         }
