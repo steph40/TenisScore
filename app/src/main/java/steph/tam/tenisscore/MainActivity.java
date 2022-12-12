@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView titulo;
     SharedPreferences prefs;
     Gestao gestao;
+    EditText inputUser;
+    String user;
+    boolean dialogState;
 
 
     @SuppressLint("MissingInflatedId")
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         //SharedPreferences
         prefs = getSharedPreferences("username", MODE_PRIVATE);
-        String user = prefs.getString("nomeUser", null);
+        user = prefs.getString("nomeUser", null);
 
         if (user != null) {
             titulo.setText("Jogos do " + user);
@@ -108,11 +111,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickUser(MainActivity view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
+        dialogState = true;
         // Set Alert Title
         builder.setTitle("Nome de utilizador");
 
-        EditText inputUser = new EditText(this);
+        inputUser = new EditText(this);
         builder.setView(inputUser);
 
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
@@ -130,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click no button then app will close
+            dialogState = false;
             dialog.cancel();
         });
 
@@ -150,6 +154,26 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == 1) {
             games = gestao.getGamesArray();
             adapter.updateList(games);
+        }
+
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("dialogState", dialogState);
+        if(dialogState == true)
+            outState.putString("inputUser", inputUser.getText().toString());
+
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle outState) {
+        super.onRestoreInstanceState(outState);
+        dialogState = outState.getBoolean("dialogState");
+
+
+        if(dialogState == true){
+            onClickUser(this);
+            inputUser.setText(outState.getString("inputUser"));
         }
 
     }

@@ -28,7 +28,18 @@ public class FormGame extends AppCompatActivity {
     Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
     Gestao gestao;
+    boolean dateState;
 
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel();
+            dateState = false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +55,7 @@ public class FormGame extends AppCompatActivity {
         eNameP2 = (EditText) findViewById(R.id.playerName2);
         gestao= new Gestao(this);
 
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, month);
-                myCalendar.set(Calendar.DAY_OF_MONTH, day);
-                updateLabel();
-            }
-        };
+
 
         /**
          * Ao carregar na Edit Text para colocar a data
@@ -60,6 +63,7 @@ public class FormGame extends AppCompatActivity {
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dateState = true;
                 new DatePickerDialog(FormGame.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -144,5 +148,27 @@ public class FormGame extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         }
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("dialogState", dateState);
+        if(dateState == true) {
+            outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
+            outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
+            outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
+        }
+
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle outState) {
+        super.onRestoreInstanceState(outState);
+        dateState = outState.getBoolean("dialogState");
+
+
+        if(dateState == true){
+            new DatePickerDialog(FormGame.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
+        }
+
     }
 }

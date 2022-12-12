@@ -179,7 +179,6 @@ public class GameScore extends AppCompatActivity {
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
                                     break;
@@ -194,7 +193,6 @@ public class GameScore extends AppCompatActivity {
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
                                     }
@@ -234,7 +232,6 @@ public class GameScore extends AppCompatActivity {
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
                                     break;
@@ -249,7 +246,6 @@ public class GameScore extends AppCompatActivity {
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
                                     }
@@ -314,7 +310,6 @@ public class GameScore extends AppCompatActivity {
                                     if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
                                     break;
@@ -329,7 +324,6 @@ public class GameScore extends AppCompatActivity {
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
                                     }
@@ -369,7 +363,6 @@ public class GameScore extends AppCompatActivity {
                                     if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                     }
                                     break;
@@ -384,7 +377,7 @@ public class GameScore extends AppCompatActivity {
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
-                                        Toast.makeText(getApplicationContext(), "Vencedor do jogo", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Vencedor do Jogo", Toast.LENGTH_SHORT).show();
                                         gameFinished();
                                         break;
                                     }
@@ -483,23 +476,58 @@ public class GameScore extends AppCompatActivity {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString("set1_1", eset1_1.getText().toString());
-        outState.putString("set1_2", eset1_2.getText().toString());
-        //outState.putString("R1", set1.getText().toString());
+        outState.putInt("set1_1", r1_1);
+        outState.putInt("set1_2", r1_2);
+        outState.putInt("set2_1", r2_1);
+        outState.putInt("set2_2", r2_2);
+        outState.putInt("set3_1", r3_1);
+        outState.putInt("set3_2", r3_2);
+        outState.putInt("R1", valor1);
+        outState.putInt("R2", valor2);
+        outState.putInt("vencedor1", vencedor1);
+        outState.putInt("vencedor2", vencedor2);
+        outState.putInt("vencedor", vencedor);
+
         //outState.putString("set2_1", eset2_1.getText().toString());
         super.onSaveInstanceState(outState);
     }
 
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        String set1_1 = outState.getString("set1_1");
-        String set1_2 = outState.getString("set1_2");
-        //String r1 = outState.getString("R1");
-        // String set2_1 = outState.getString("set2_1");
-        eset1_1.setText(set1_1);
-        eset1_2.setText(set1_2);
-        //set1.setText(r1);
-        //eset2_1.setText(set2_1);
+        r1_1 = outState.getInt("set1_1");
+        r1_2 = outState.getInt("set1_2");
+        r2_1 = outState.getInt("set2_1");
+        r2_2 = outState.getInt("set2_2");
+        r3_1 = outState.getInt("set3_1");
+        r3_2 = outState.getInt("set3_2");
+        valor1 = outState.getInt("R1");
+        valor2 = outState.getInt("R2");
+        vencedor1 = outState.getInt("vencedor1");
+        vencedor2 = outState.getInt("vencedor2");
+        vencedor = outState.getInt("vencedor");
+
+        set1.setText(valor1+"");
+        set2.setText(valor2+"");
+
+        eset1_1.setText(r1_1+"");
+        eset1_2.setText(r1_2+"");
+
+        if(vencedor1 == 1 || vencedor1 == 2) {
+            winSet1();
+            eset2_1.setText(r2_1+"");
+            eset2_2.setText(r2_2+"");
+        }
+
+        if(vencedor1 == 1 && vencedor2 == 2 || vencedor1 == 2 && vencedor2 == 1) {
+            winSet2();
+            eset3_1.setText(r3_1+"");
+            eset3_2.setText(r3_2+"");
+        }
+
+        if(vencedor != 0){
+            vencedor(vencedor);
+            gameFinished();
+        }
 
     }
 

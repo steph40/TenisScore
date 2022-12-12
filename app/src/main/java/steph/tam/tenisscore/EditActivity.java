@@ -29,7 +29,21 @@ public class EditActivity extends AppCompatActivity {
     EditText eDate;
     final Calendar myCalendar = Calendar.getInstance();
     Gestao gestao;
+    boolean dateState;
 
+    /**
+     * Definir a data
+     */
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel();
+            dateState = false;
+        }
+    };
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +67,7 @@ public class EditActivity extends AppCompatActivity {
         eNameTour.setText(game.getNameTournament());
         eDate.setText(game.getDateTournament());
 
-        /**
-         * Definir a data
-         */
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, month);
-                myCalendar.set(Calendar.DAY_OF_MONTH, day);
-                updateLabel();
-            }
-        };
+
 
         /**
          * Carregar na EditText da data
@@ -72,6 +75,7 @@ public class EditActivity extends AppCompatActivity {
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dateState = true;
                 new DatePickerDialog(EditActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -142,5 +146,27 @@ public class EditActivity extends AppCompatActivity {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.FRANCE);
         eDate.setText(dateFormat.format(myCalendar.getTime()));
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("dialogState", dateState);
+        if(dateState == true) {
+            outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
+            outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
+            outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
+        }
+
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle outState) {
+        super.onRestoreInstanceState(outState);
+        dateState = outState.getBoolean("dialogState");
+
+
+        if(dateState == true){
+            new DatePickerDialog(EditActivity.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
+        }
+
     }
 }
