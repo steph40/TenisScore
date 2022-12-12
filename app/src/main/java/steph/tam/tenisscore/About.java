@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class About extends AppCompatActivity {
     Button voltar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

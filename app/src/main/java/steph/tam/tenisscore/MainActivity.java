@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("dialogState", dialogState);
-        if(dialogState == true)
+        if (dialogState == true)
             outState.putString("inputUser", inputUser.getText().toString());
 
         super.onSaveInstanceState(outState);
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         dialogState = outState.getBoolean("dialogState");
 
 
-        if(dialogState == true){
+        if (dialogState == true) {
             onClickUser(this);
             inputUser.setText(outState.getString("inputUser"));
         }

@@ -55,7 +55,6 @@ public class EditActivity extends AppCompatActivity {
         eDate.setText(game.getDateTournament());
 
 
-
         /**
          * Carregar na EditText da data
          */
@@ -151,7 +150,7 @@ public class EditActivity extends AppCompatActivity {
 
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("dialogState", dateState);
-        if(dateState == true) {
+        if (dateState == true) {
             outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
             outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
             outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -165,7 +164,7 @@ public class EditActivity extends AppCompatActivity {
         dateState = outState.getBoolean("dialogState");
 
 
-        if(dateState == true){
+        if (dateState == true) {
             new DatePickerDialog(EditActivity.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
         }
 

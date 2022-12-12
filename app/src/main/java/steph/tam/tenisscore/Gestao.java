@@ -26,23 +26,23 @@ public class Gestao {
 
     public void updateGameScore(int id, int set1_1, int set2_1, int set3_1, int set1_2, int set2_2, int set3_2, int vencedor) {
         db.open();
-        if (db.updateGameScore(id, set1_1, set2_1,  set3_1,  set1_2,  set2_2,  set3_2,  vencedor)) {
+        if (db.updateGameScore(id, set1_1, set2_1, set3_1, set1_2, set2_2, set3_2, vencedor)) {
             db.close();
         }
         db.close();
     }
 
-    public void updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2){
+    public void updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2) {
         db.open();
-        if(db.updateGameForm(id, nameTournament, date, nameP1, nameP2) == true){
+        if (db.updateGameForm(id, nameTournament, date, nameP1, nameP2) == true) {
             db.close();
         }
         db.close();
     }
 
-    public boolean deleteGame(int id){
+    public boolean deleteGame(int id) {
         db.open();
-        if(db.deleteGame(id) == true){
+        if (db.deleteGame(id) == true) {
             db.close();
             return true;
         }
@@ -101,8 +101,6 @@ public class Gestao {
         db.close();
         return games;
     }
-
-
 
 
 }

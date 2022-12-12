@@ -31,7 +31,6 @@ public class FormGame extends AppCompatActivity {
     boolean dateState;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

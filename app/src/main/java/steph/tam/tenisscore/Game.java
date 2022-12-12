@@ -22,7 +22,7 @@ public class Game implements Comparable<Game> {
 
 
     public Game(int id, String nameTournament, String dateTournament, String namePlayer1, String namePlayer2, int set1_1, int set2_1, int set3_1,
-                int set1_2, int set2_2, int set3_2 ,int vencedor) {
+                int set1_2, int set2_2, int set3_2, int vencedor) {
         this.id = id;
         this.nameTournament = nameTournament;
         this.dateTournament = dateTournament;
@@ -91,6 +91,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o nome do torneio
+     *
      * @param nameTournament
      */
     public void setNameTournament(String nameTournament) {
@@ -99,6 +100,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o nome do Jogador 1
+     *
      * @param namePlayer1
      */
     public void setNamePlayer1(String namePlayer1) {
@@ -107,6 +109,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o nome do Jogador 2
+     *
      * @param namePlayer2
      */
     public void setNamePlayer2(String namePlayer2) {
@@ -115,6 +118,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define a data do torneio
+     *
      * @param dateTournament
      */
     public void setDateTournament(String dateTournament) {
@@ -123,6 +127,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Comparar as datas para ordenar
+     *
      * @param game
      * @return
      */
@@ -147,6 +152,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o valor do set 1 do jogador 1
+     *
      * @param set1_1
      */
     public void setSet1_1(int set1_1) {
@@ -155,6 +161,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o valor do set 1 do jogador 2
+     *
      * @param set1_2
      */
     public void setSet1_2(int set1_2) {
@@ -162,7 +169,6 @@ public class Game implements Comparable<Game> {
     }
 
     /**
-     *
      * @return retorna o valor do set 2 do jogador 1
      */
     public int getSet2_1() {
@@ -199,6 +205,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o vencedor do jogo
+     *
      * @param vencedor
      */
     public void setVencedor(int vencedor) {
@@ -207,6 +214,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o set 2 do jogador 1
+     *
      * @param set2_1
      */
     public void setSet2_1(int set2_1) {
@@ -215,6 +223,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o set 3 do jogador 1
+     *
      * @param set3_1
      */
     public void setSet3_1(int set3_1) {
@@ -223,6 +232,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o set 2 do jogador 2
+     *
      * @param set2_2
      */
     public void setSet2_2(int set2_2) {
@@ -231,6 +241,7 @@ public class Game implements Comparable<Game> {
 
     /**
      * Define o set 3 do jogador 2
+     *
      * @param set3_2
      */
     public void setSet3_2(int set3_2) {

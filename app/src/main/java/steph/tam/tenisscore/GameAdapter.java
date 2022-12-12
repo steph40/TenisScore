@@ -129,7 +129,7 @@ public class GameAdapter extends BaseAdapter {
                     Game game = MainActivity.games.get(position);
 
                     gestao.deleteGame(game.getId());
-                    List <Game> games = gestao.getGamesArray();
+                    List<Game> games = gestao.getGamesArray();
                     //Collections.sort(games);
                     updateList(games);
 
