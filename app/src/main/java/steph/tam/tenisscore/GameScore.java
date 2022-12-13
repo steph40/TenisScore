@@ -507,6 +507,14 @@ public class GameScore extends AppCompatActivity {
         set1.setText(valor1 + "");
         set2.setText(valor2 + "");
 
+        if (valor1 == 41) {
+            set1.setText("AD");
+            set2.setText("");
+        }
+        if (valor2 == 41) {
+            set1.setText("");
+            set2.setText("AD");
+        }
         eset1_1.setText(r1_1 + "");
         eset1_2.setText(r1_2 + "");
 
