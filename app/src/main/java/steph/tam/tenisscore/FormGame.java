@@ -166,7 +166,6 @@ public class FormGame extends AppCompatActivity {
         super.onRestoreInstanceState(outState);
         dateState = outState.getBoolean("dialogState");
 
-
         if (dateState == true) {
             new DatePickerDialog(FormGame.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
         }

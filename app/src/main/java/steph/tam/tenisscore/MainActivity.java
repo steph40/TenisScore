@@ -122,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
 
-            /*;*/
-
         });
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click no button then app will close
