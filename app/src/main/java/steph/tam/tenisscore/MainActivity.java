@@ -18,11 +18,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import java.util.Collections;
@@ -116,33 +118,40 @@ public class MainActivity extends AppCompatActivity {
 
         inputUser = new EditText(this);
         builder.setView(inputUser);
-
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
         builder.setCancelable(false);
-
         builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
 
-            String user = inputUser.getText().toString();
-            titulo.setText("Jogos do " + user);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("nomeUser", user);
-            editor.commit();
-            dialogState =false;
+            /*;*/
 
         });
-
-
-        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click no button then app will close
             dialogState = false;
             dialog.cancel();
         });
-
         // Create the Alert dialog
         AlertDialog alertDialog = builder.create();
         // Show the Alert Dialog box
         alertDialog.show();
+
+        Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        pButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String user = inputUser.getText().toString();
+                if (user.trim().isEmpty())
+                    inputUser.setError("Preencher campo");
+                else {
+                    titulo.setText("Jogos do " + user);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("nomeUser", user);
+                    editor.commit();
+                    dialogState = false;
+                    alertDialog.dismiss();
+                }
+            }
+        });
     }
 
     /**
@@ -172,12 +181,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(outState);
         dialogState = outState.getBoolean("dialogState");
 
-
         if (dialogState == true) {
             onClickUser(this);
             inputUser.setText(outState.getString("inputUser"));
+            if (inputUser.getText().toString().trim().isEmpty()) {
+                inputUser.setError("Preencher campo");
+            }
         }
-
     }
 
 
