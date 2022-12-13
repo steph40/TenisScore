@@ -2,30 +2,29 @@ package steph.tam.tenisscore;
 
 import static steph.tam.tenisscore.R.*;
 
-import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
 import android.widget.EditText;
-import android.widget.ImageButton;
+
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+
+
 import java.util.Collections;
 import java.util.List;
 
@@ -128,8 +127,11 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("nomeUser", user);
             editor.commit();
+            dialogState =false;
 
         });
+
+
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click no button then app will close
