@@ -40,7 +40,7 @@ public class GameScore extends AppCompatActivity {
     TextView set2;
     TextView tv3;
     TextView tv2;
-    int valor1 = 0, valor2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
+    int valor1 = 0, valor2 = 0, value1 = 0, value2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
     Game game2;
     Gestao gestao;
@@ -111,8 +111,6 @@ public class GameScore extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (vencedor == 0) {
-                    MainActivity.games.remove(game);//Duvida se é preciso remover da lista  Steph: Eu acho que nao porque nao esta adicionado a lista porque a lista
-                    //é o que vai buscar á base de dados   Hugo:?
                     gestao.deleteGame(game.getId());
                 }
                 if (vencedor == 1 || vencedor == 2) {
@@ -146,6 +144,64 @@ public class GameScore extends AppCompatActivity {
                     case R.id.Ponto1:
                         switch (valor1) {
                             case 0:
+                                if(r1_1 == 6 && r1_2 == 6){
+                                    value1++;
+                                    set1.setText(value1+"");
+                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                        r1_1++;
+                                        eset1_1.setText(r1_1+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 1;
+                                        winSet1();
+                                    }
+                                    break;
+                                }
+                                if(r2_1 == 6 && r2_2 == 6){
+                                    value1++;
+                                    set1.setText(value1+"");
+                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                        r2_1++;
+                                        eset2_1.setText(r2_1+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        if(vencedor1 == 1){
+                                            vencedor = 1;
+                                            vencedor(vencedor);
+                                            gameFinished();
+                                            break;
+                                        }
+                                        vencedor2 = 1;
+                                        winSet2();
+                                    }
+                                    break;
+                                }
+                                if(r3_1 == 6 && r3_2 == 6){
+                                    value1++;
+                                    set1.setText(value1+"");
+                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                        r3_1++;
+                                        eset3_1.setText(r3_1+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor = 1;
+                                        vencedor(vencedor);
+                                        gameFinished();
+                                    }
+                                    break;
+                                }
                             case 15:
                                 valor1 += 15;
                                 set1.setText(valor1 + "");
@@ -278,6 +334,64 @@ public class GameScore extends AppCompatActivity {
                     case id.Ponto2:
                         switch (valor2) {
                             case 0:
+                                if(r1_1 == 6 && r1_2 == 6){
+                                    value2++;
+                                    set2.setText(value2+"");
+                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                        r1_2++;
+                                        eset1_2.setText(r1_2+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor1 = 2;
+                                        winSet1();
+                                    }
+                                    break;
+                                }
+                                if(r2_1 == 6 && r2_2 == 6){
+                                    value2++;
+                                    set2.setText(value2+"");
+                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                        r2_2++;
+                                        eset2_2.setText(r2_2+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        if(vencedor1 == 2){
+                                            vencedor = 2;
+                                            vencedor(vencedor);
+                                            gameFinished();
+                                            break;
+                                        }
+                                        vencedor2 = 2;
+                                        winSet2();
+                                    }
+                                    break;
+                                }
+                                if(r3_1 == 6 && r3_2 == 6){
+                                    value2++;
+                                    set2.setText(value2+"");
+                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                        r3_2++;
+                                        eset3_2.setText(r3_2+"");
+                                        valor1 = 0;
+                                        valor2 = 0;
+                                        value1 = 0;
+                                        value2 = 0;
+                                        set1.setText(valor1 + "");
+                                        set2.setText(valor2 + "");
+                                        vencedor = 2;
+                                        vencedor(vencedor);
+                                        gameFinished();
+                                    }
+                                    break;
+                                }
                             case 15:
                                 valor2 += 15;
                                 set2.setText(valor2 + "");
@@ -307,7 +421,7 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
-                                    if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
+                                    if (r3_2 == 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
                                         gameFinished();
@@ -484,6 +598,8 @@ public class GameScore extends AppCompatActivity {
         outState.putInt("set3_2", r3_2);
         outState.putInt("R1", valor1);
         outState.putInt("R2", valor2);
+        outState.putInt("L1", value1);
+        outState.putInt("L2", value2);
         outState.putInt("vencedor1", vencedor1);
         outState.putInt("vencedor2", vencedor2);
         outState.putInt("vencedor", vencedor);
@@ -500,12 +616,19 @@ public class GameScore extends AppCompatActivity {
         r3_2 = outState.getInt("set3_2");
         valor1 = outState.getInt("R1");
         valor2 = outState.getInt("R2");
+        value1 = outState.getInt("L1");
+        value2 = outState.getInt("L2");
         vencedor1 = outState.getInt("vencedor1");
         vencedor2 = outState.getInt("vencedor2");
         vencedor = outState.getInt("vencedor");
 
         set1.setText(valor1 + "");
         set2.setText(valor2 + "");
+
+        if(r1_1 == 6 && r1_2 == 6 || r2_1 == 6 && r2_2 == 6 || r3_1 == 6 && r3_2 == 6){
+            set1.setText(value1+"");
+            set2.setText(value2+"");
+        }
 
         if (valor1 == 41) {
             set1.setText("AD");
