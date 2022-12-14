@@ -126,13 +126,11 @@ public class GameAdapter extends BaseAdapter {
                 builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
                     // When the user click yes button then app will close
                     Gestao gestao = new Gestao(context.getApplicationContext());
-                    Game game = MainActivity.games.get(position);
+                    Game game = MainActivity.games.get(position); //Get ID of game
 
-                    gestao.deleteGame(game.getId());
-                    List<Game> games = gestao.getGamesArray();
-                    //Collections.sort(games);
-                    updateList(games);
-
+                    gestao.deleteGame(game.getId()); //Delete game of database
+                    List<Game> games = gestao.getGamesArray(); //get array of database
+                    updateList(games); //udpate list of Main
 
                 });
 
@@ -150,10 +148,15 @@ public class GameAdapter extends BaseAdapter {
         });
     }
 
+    /**
+     * Atualizar a lista que é apresentada no main
+     *
+     * @param games
+     */
     public void updateList(List<Game> games) {
-        Collections.sort(games);
-        adaptGames.clear();
-        adaptGames.addAll(games);
+        Collections.sort(games); //Sort games of database
+        adaptGames.clear(); //Delete all of array
+        adaptGames.addAll(games); //Add all games of database in array
         notifyDataSetChanged();
     }
 }

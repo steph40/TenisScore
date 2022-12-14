@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -77,6 +78,7 @@ public class FormGame extends AppCompatActivity {
                 String nameP1 = eNameP1.getText().toString();
                 String nameP2 = eNameP2.getText().toString();
 
+                //Check if string is empty
                 if (nameP1.trim().isEmpty() == true || tournamentName.trim().isEmpty() == true || nameP2.trim().isEmpty() == true || date.trim().isEmpty() == true) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(FormGame.this);
 
@@ -113,6 +115,9 @@ public class FormGame extends AppCompatActivity {
         });
     }
 
+    /**
+     * Definir a data
+     */
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -148,9 +153,14 @@ public class FormGame extends AppCompatActivity {
         }
     }
 
+    /**
+     * Guardar o estado da Activity
+     *
+     * @param outState
+     */
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("dialogState", dateState);
-        if (dateState == true) {
+        outState.putBoolean("dialogState", dateState); //Save the state of date picker
+        if (dateState == true) { //if state of date picker is true, save the fields of date picker
             outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
             outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
             outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -159,11 +169,16 @@ public class FormGame extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * Restaurar o estado da Activity
+     *
+     * @param outState
+     */
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        dateState = outState.getBoolean("dialogState");
+        dateState = outState.getBoolean("dialogState"); //get the state of date picker
 
-        if (dateState == true) {
+        if (dateState == true) { //if state of data picker is true, create a new date picker object
             new DatePickerDialog(FormGame.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
         }
 

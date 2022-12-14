@@ -100,16 +100,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Click in About's Icon
+     *
+     * @param view
+     */
     public void onClickAbout(MainActivity view) {
         Intent i = new Intent(this, About.class);
         startActivityForResult(i, 1);
     }
 
+    /**
+     * Click in New Game Icon
+     *
+     * @param view
+     */
     public void onClickFormGame(MainActivity view) {
         Intent i = new Intent(this, FormGame.class);
         startActivityForResult(i, 1);
     }
 
+    /**
+     * Click in User's Icon
+     *
+     * @param view
+     */
     public void onClickUser(MainActivity view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         dialogState = true;
@@ -167,6 +182,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Guardar o estado da Activity
+     *
+     * @param outState
+     */
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("dialogState", dialogState);
         if (dialogState == true)
@@ -175,6 +195,11 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * Restaurar o estado da Activity
+     *
+     * @param outState
+     */
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
         dialogState = outState.getBoolean("dialogState");

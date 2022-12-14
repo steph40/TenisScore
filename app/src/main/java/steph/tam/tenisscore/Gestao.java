@@ -16,6 +16,22 @@ public class Gestao {
         db = new GameDBAdapter(ctx);
     }
 
+    /**
+     * Insert new Game in database
+     *
+     * @param nameTournament nome do torneio
+     * @param date           data do jogo
+     * @param nameP1         nome player1
+     * @param nameP2         nome player2
+     * @param set1_1         set1 do player1
+     * @param set2_1         set2 do player1
+     * @param set3_1         set3 do player1
+     * @param set1_2         set1 do player2
+     * @param set2_2         set2 do player2
+     * @param set3_2         set3 do player2
+     * @param vencedor       vencedor do jogo
+     * @return return true if insert with success and false if have an error
+     */
     public boolean insertGame(String nameTournament, String date, String nameP1, String nameP2, int set1_1, int set2_1, int set3_1
             , int set1_2, int set2_2, int set3_2, int vencedor) {
         db.open();
@@ -24,6 +40,18 @@ public class Gestao {
         return resultado;
     }
 
+    /**
+     * Update a game in database
+     *
+     * @param id       id do jogo
+     * @param set1_1   set1 do player1
+     * @param set2_1   set2 do player1
+     * @param set3_1   set3 do player1
+     * @param set1_2   set1 do player2
+     * @param set2_2   set2 do player2
+     * @param set3_2   set3 do player2
+     * @param vencedor vencedor do jogo
+     */
     public void updateGameScore(int id, int set1_1, int set2_1, int set3_1, int set1_2, int set2_2, int set3_2, int vencedor) {
         db.open();
         if (db.updateGameScore(id, set1_1, set2_1, set3_1, set1_2, set2_2, set3_2, vencedor)) {
@@ -32,6 +60,15 @@ public class Gestao {
         db.close();
     }
 
+    /**
+     * update a game in database
+     *
+     * @param id             id do jogo
+     * @param nameTournament nome do torneio
+     * @param date           data do jogo
+     * @param nameP1         nome player1
+     * @param nameP2         nome player2
+     */
     public void updateGameForm(int id, String nameTournament, String date, String nameP1, String nameP2) {
         db.open();
         if (db.updateGameForm(id, nameTournament, date, nameP1, nameP2) == true) {
@@ -40,6 +77,12 @@ public class Gestao {
         db.close();
     }
 
+    /**
+     * Delete a game in database
+     *
+     * @param id id do jogo
+     * @return return true if delete with success and false if have an error
+     */
     public boolean deleteGame(int id) {
         db.open();
         if (db.deleteGame(id) == true) {
@@ -51,6 +94,11 @@ public class Gestao {
 
     }
 
+    /**
+     * Get last id of the database
+     *
+     * @return return id
+     */
     public int lastId() {
         int id = -1;
         db.open();
@@ -64,6 +112,12 @@ public class Gestao {
         return id;
     }
 
+    /**
+     * Get a game of the database
+     *
+     * @param id id do jogo
+     * @return return a game
+     */
     public Game getGame(int id) {
         db.open();
         Cursor curRes = db.getGame(id);
@@ -82,6 +136,11 @@ public class Gestao {
         return null;
     }
 
+    /**
+     * Get all games of the database
+     *
+     * @return return a array with all games
+     */
     public ArrayList<Game> getGamesArray() {
         ArrayList<Game> games = new ArrayList<>();
         db.open();

@@ -34,8 +34,6 @@ public class GameScore extends AppCompatActivity {
     TextView eset2_2;
     TextView eset3_1;
     TextView eset3_2;
-    TextView eR1;
-    TextView eR2;
     TextView set1;
     TextView set2;
     TextView tv3;
@@ -144,12 +142,12 @@ public class GameScore extends AppCompatActivity {
                     case R.id.Ponto1:
                         switch (valor1) {
                             case 0:
-                                if(r1_1 == 6 && r1_2 == 6){
+                                if (r1_1 == 6 && r1_2 == 6) { //Tie Break of set1
                                     value1++;
-                                    set1.setText(value1+"");
-                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                    set1.setText(value1 + "");
+                                    if (value1 >= 7 && value2 <= value1 - 2) {
                                         r1_1++;
-                                        eset1_1.setText(r1_1+"");
+                                        eset1_1.setText(r1_1 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
@@ -161,19 +159,19 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     break;
                                 }
-                                if(r2_1 == 6 && r2_2 == 6){
+                                if (r2_1 == 6 && r2_2 == 6) { //Tie Break of set2
                                     value1++;
-                                    set1.setText(value1+"");
-                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                    set1.setText(value1 + "");
+                                    if (value1 >= 7 && value2 <= value1 - 2) {
                                         r2_1++;
-                                        eset2_1.setText(r2_1+"");
+                                        eset2_1.setText(r2_1 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
                                         value2 = 0;
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
-                                        if(vencedor1 == 1){
+                                        if (vencedor1 == 1) { //Check if this player won set1
                                             vencedor = 1;
                                             vencedor(vencedor);
                                             gameFinished();
@@ -184,12 +182,12 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     break;
                                 }
-                                if(r3_1 == 6 && r3_2 == 6){
+                                if (r3_1 == 6 && r3_2 == 6) { //Tie Break of set3
                                     value1++;
-                                    set1.setText(value1+"");
-                                    if(value1 >= 7 && value2 <= value1 - 2){
+                                    set1.setText(value1 + "");
+                                    if (value1 >= 7 && value2 <= value1 - 2) {
                                         r3_1++;
-                                        eset3_1.setText(r3_1+"");
+                                        eset3_1.setText(r3_1 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
@@ -334,12 +332,12 @@ public class GameScore extends AppCompatActivity {
                     case id.Ponto2:
                         switch (valor2) {
                             case 0:
-                                if(r1_1 == 6 && r1_2 == 6){
+                                if (r1_1 == 6 && r1_2 == 6) { //Tie Break of set1
                                     value2++;
-                                    set2.setText(value2+"");
-                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                    set2.setText(value2 + "");
+                                    if (value2 >= 7 && value1 <= value2 - 2) {
                                         r1_2++;
-                                        eset1_2.setText(r1_2+"");
+                                        eset1_2.setText(r1_2 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
@@ -351,19 +349,19 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     break;
                                 }
-                                if(r2_1 == 6 && r2_2 == 6){
+                                if (r2_1 == 6 && r2_2 == 6) { //Tie Break of set2
                                     value2++;
-                                    set2.setText(value2+"");
-                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                    set2.setText(value2 + "");
+                                    if (value2 >= 7 && value1 <= value2 - 2) {
                                         r2_2++;
-                                        eset2_2.setText(r2_2+"");
+                                        eset2_2.setText(r2_2 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
                                         value2 = 0;
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
-                                        if(vencedor1 == 2){
+                                        if (vencedor1 == 2) { //Check if this player won set1
                                             vencedor = 2;
                                             vencedor(vencedor);
                                             gameFinished();
@@ -374,12 +372,12 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     break;
                                 }
-                                if(r3_1 == 6 && r3_2 == 6){
+                                if (r3_1 == 6 && r3_2 == 6) { //Tie Break of set3
                                     value2++;
-                                    set2.setText(value2+"");
-                                    if(value2 >= 7 && value1 <= value2 - 2){
+                                    set2.setText(value2 + "");
+                                    if (value2 >= 7 && value1 <= value2 - 2) {
                                         r3_2++;
-                                        eset3_2.setText(r3_2+"");
+                                        eset3_2.setText(r3_2 + "");
                                         valor1 = 0;
                                         valor2 = 0;
                                         value1 = 0;
@@ -589,35 +587,52 @@ public class GameScore extends AppCompatActivity {
         }
     }
 
+    /**
+     * Guardar o estado da Activity
+     *
+     * @param outState
+     */
     public void onSaveInstanceState(Bundle outState) {
+        //Save set's points
         outState.putInt("set1_1", r1_1);
         outState.putInt("set1_2", r1_2);
         outState.putInt("set2_1", r2_1);
         outState.putInt("set2_2", r2_2);
         outState.putInt("set3_1", r3_1);
         outState.putInt("set3_2", r3_2);
+        //save actual game's points
         outState.putInt("R1", valor1);
         outState.putInt("R2", valor2);
         outState.putInt("L1", value1);
         outState.putInt("L2", value2);
+        //Save set's winners
         outState.putInt("vencedor1", vencedor1);
         outState.putInt("vencedor2", vencedor2);
         outState.putInt("vencedor", vencedor);
+
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * Restaurar o estado da Activity
+     *
+     * @param outState
+     */
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
+        //get set's points
         r1_1 = outState.getInt("set1_1");
         r1_2 = outState.getInt("set1_2");
         r2_1 = outState.getInt("set2_1");
         r2_2 = outState.getInt("set2_2");
         r3_1 = outState.getInt("set3_1");
         r3_2 = outState.getInt("set3_2");
+        //get actual game's points
         valor1 = outState.getInt("R1");
         valor2 = outState.getInt("R2");
         value1 = outState.getInt("L1");
         value2 = outState.getInt("L2");
+        //get set's winners
         vencedor1 = outState.getInt("vencedor1");
         vencedor2 = outState.getInt("vencedor2");
         vencedor = outState.getInt("vencedor");
@@ -625,15 +640,19 @@ public class GameScore extends AppCompatActivity {
         set1.setText(valor1 + "");
         set2.setText(valor2 + "");
 
-        if(r1_1 == 6 && r1_2 == 6 || r2_1 == 6 && r2_2 == 6 || r3_1 == 6 && r3_2 == 6){
-            set1.setText(value1+"");
-            set2.setText(value2+"");
+        //check if game is in Tie Break
+        if (r1_1 == 6 && r1_2 == 6 || r2_1 == 6 && r2_2 == 6 || r3_1 == 6 && r3_2 == 6) {
+            set1.setText(value1 + "");
+            set2.setText(value2 + "");
         }
 
+        //Check game is in Advantage for player1
         if (valor1 == 41) {
             set1.setText("AD");
             set2.setText("");
         }
+
+        //Check game is in Advantage for player2
         if (valor2 == 41) {
             set1.setText("");
             set2.setText("AD");
@@ -641,18 +660,21 @@ public class GameScore extends AppCompatActivity {
         eset1_1.setText(r1_1 + "");
         eset1_2.setText(r1_2 + "");
 
+        //check if set1 have a winner
         if (vencedor1 == 1 || vencedor1 == 2) {
             winSet1();
             eset2_1.setText(r2_1 + "");
             eset2_2.setText(r2_2 + "");
         }
 
+        //check if set2 have a winner
         if (vencedor1 == 1 && vencedor2 == 2 || vencedor1 == 2 && vencedor2 == 1) {
             winSet2();
             eset3_1.setText(r3_1 + "");
             eset3_2.setText(r3_2 + "");
         }
 
+        //check if game have a winner
         if (vencedor != 0) {
             vencedor(vencedor);
             gameFinished();

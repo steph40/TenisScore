@@ -78,6 +78,7 @@ public class EditActivity extends AppCompatActivity {
                 String nameTour = eNameTour.getText().toString();
                 String date = eDate.getText().toString();
 
+                //Check if string is empty
                 if (name1.trim().isEmpty() == true || name2.trim().isEmpty() == true || nameTour.trim().isEmpty() == true || date.trim().isEmpty() == true) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
 
@@ -101,10 +102,13 @@ public class EditActivity extends AppCompatActivity {
                     // Show the Alert Dialog box
                     alertDialog.show();
                 } else {
+                    //if string is not empty, edit the fields of object
                     game.setNamePlayer1(name1);
                     game.setNamePlayer2(name2);
                     game.setNameTournament(nameTour);
                     game.setDateTournament(date);
+
+                    //Update database with object
                     gestao.updateGameForm(game.getId(), game.getNameTournament(), game.getDateTournament(), game.getNamePlayer1(), game.getNamePlayer2());
 
                     setResult(RESULT_OK);
@@ -148,9 +152,14 @@ public class EditActivity extends AppCompatActivity {
         eDate.setText(dateFormat.format(myCalendar.getTime()));
     }
 
+    /**
+     * Guardar o estado da Activity
+     *
+     * @param outState
+     */
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("dialogState", dateState);
-        if (dateState == true) {
+        outState.putBoolean("dialogState", dateState); //Save the state of date picker
+        if (dateState == true) { //if state of date picker is true, save the fields of date picker
             outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
             outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
             outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -159,12 +168,17 @@ public class EditActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * Restaurar o estado da Activity
+     *
+     * @param outState
+     */
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        dateState = outState.getBoolean("dialogState");
+        dateState = outState.getBoolean("dialogState"); //get the state of date picker
 
 
-        if (dateState == true) {
+        if (dateState == true) { //if state of data picker is true, create a new date picker object
             new DatePickerDialog(EditActivity.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
         }
 

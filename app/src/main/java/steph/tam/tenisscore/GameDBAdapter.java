@@ -15,6 +15,7 @@ public class GameDBAdapter {
     String DB_TABLE = "games";
     int DB_VERSION = 1;
 
+    //String to create table
     String SQL_CREATE = "CREATE TABLE " + DB_TABLE +
             " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "nameTournament TEXT NOT NULL, " +
