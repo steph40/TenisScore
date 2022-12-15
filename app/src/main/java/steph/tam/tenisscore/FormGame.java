@@ -118,6 +118,9 @@ public class FormGame extends AppCompatActivity {
                 } else {
 
                     Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
+                    i.putExtra("ano",aYear);
+                    i.putExtra("mes",aMonth);
+                    i.putExtra("dia",aDay);
 
                     gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
 

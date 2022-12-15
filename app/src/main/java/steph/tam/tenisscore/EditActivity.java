@@ -42,6 +42,9 @@ public class EditActivity extends AppCompatActivity {
 
         Intent iIn = getIntent();
         Game game = gestao.getGame(iIn.getExtras().getInt("id"));
+        aYear = iIn.getExtras().getInt("ano");
+        aMonth = iIn.getExtras().getInt("mes");
+        aDay = iIn.getExtras().getInt("dia");
 
         fin = (Button) findViewById(R.id.buttonFinEdit);
         back = (Button) findViewById(R.id.buttonBackEdit);

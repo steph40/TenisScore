@@ -97,6 +97,9 @@ public class GameScore extends AppCompatActivity {
             public void onClick(View view) {
                 Intent in = new Intent(getApplicationContext(), EditActivity.class);
                 in.putExtra("id", game.getId());
+                in.putExtra("ano", iIn.getExtras().getInt("ano"));
+                in.putExtra("mes", iIn.getExtras().getInt("mes"));
+                in.putExtra("dia", iIn.getExtras().getInt("dia"));
                 startActivityForResult(in, 1);
             }
         });
