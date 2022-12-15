@@ -30,7 +30,7 @@ public class FormGame extends AppCompatActivity {
     Gestao gestao;
     boolean dateState;
     int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
-    boolean firstTime = true;
+    DatePickerDialog datePicker;
 
 
     @Override
@@ -55,14 +55,20 @@ public class FormGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dateState = true;
-                //if (firstTime == true) {
-                    //new DatePickerDialog(FormGame.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                    //firstTime = false;
-                //} else {
-                    new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay).show();
-                //}
+                datePicker = new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay);
+                datePicker.show();
+                Button cancel = datePicker.getButton(DialogInterface.BUTTON_NEGATIVE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dateState = false;
+                        Toast.makeText(getApplicationContext(), dateState + "", Toast.LENGTH_SHORT).show();
+                        datePicker.dismiss();
+                    }
+                });
             }
         });
+
 
         /**
          * Carregar no Botão voltar
@@ -177,7 +183,7 @@ public class FormGame extends AppCompatActivity {
         outState.putInt("dateMonth", aMonth);
         outState.putInt("dateDay", aDay);
         if (dateState == true) { //if state of date picker is true, save the fields of date picker
-            outState.putBoolean("firstTime", firstTime);
+
             outState.putInt("dateYear", aYear);
             outState.putInt("dateMonth", aMonth);
             outState.putInt("dateDay", aDay);
@@ -194,14 +200,13 @@ public class FormGame extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
         dateState = outState.getBoolean("dialogState"); //get the state of date picker
-        firstTime = outState.getBoolean("firstTime");
+
         aYear = outState.getInt("dateYear");
         aMonth = outState.getInt("dateMonth");
         aDay = outState.getInt("dateDay");
 
         if (dateState == true) { //if state of data picker is true, create a new date picker object
             new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay).show();
-            Toast.makeText(getApplicationContext(),outState.getInt("dateMonth")+"",Toast.LENGTH_SHORT).show();
         }
 
     }
