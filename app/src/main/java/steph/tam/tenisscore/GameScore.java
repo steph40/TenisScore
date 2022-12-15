@@ -42,6 +42,7 @@ public class GameScore extends AppCompatActivity {
     Game game;
     Game game2;
     Gestao gestao;
+    int aYear, aMonth, aDay;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,7 +54,9 @@ public class GameScore extends AppCompatActivity {
         gestao = new Gestao(this);
 
         game = gestao.getGame(iIn.getExtras().getInt("id"));
-
+        aYear = iIn.getExtras().getInt("ano");
+        aMonth = iIn.getExtras().getInt("mes");
+        aDay = iIn.getExtras().getInt("dia");
 
         //Buttons
         ponto1 = (Button) findViewById(id.Ponto1);
@@ -97,9 +100,9 @@ public class GameScore extends AppCompatActivity {
             public void onClick(View view) {
                 Intent in = new Intent(getApplicationContext(), EditActivity.class);
                 in.putExtra("id", game.getId());
-                in.putExtra("ano", iIn.getExtras().getInt("ano"));
-                in.putExtra("mes", iIn.getExtras().getInt("mes"));
-                in.putExtra("dia", iIn.getExtras().getInt("dia"));
+                in.putExtra("ano", aYear);
+                in.putExtra("mes", aMonth);
+                in.putExtra("dia", aDay);
                 startActivityForResult(in, 1);
             }
         });
@@ -587,6 +590,10 @@ public class GameScore extends AppCompatActivity {
             eDatetour.setText(game2.getDateTournament());
             eName1.setText(game2.getNamePlayer1());
             eName2.setText(game2.getNamePlayer2());
+
+            aYear = data.getExtras().getInt("ano");
+            aMonth = data.getExtras().getInt("mes");
+            aDay = data.getExtras().getInt("dia");
         }
     }
 

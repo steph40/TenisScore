@@ -124,8 +124,11 @@ public class EditActivity extends AppCompatActivity {
 
                     //Update database with object
                     gestao.updateGameForm(game.getId(), game.getNameTournament(), game.getDateTournament(), game.getNamePlayer1(), game.getNamePlayer2());
-
-                    setResult(RESULT_OK);
+                    Intent i = new Intent();
+                    i.putExtra("ano", aYear);
+                    i.putExtra("mes", aMonth);
+                    i.putExtra("dia", aDay);
+                    setResult(RESULT_OK, i);
                     finish();
                 }
             }
