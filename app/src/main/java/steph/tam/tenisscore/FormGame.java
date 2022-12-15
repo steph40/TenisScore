@@ -171,6 +171,7 @@ public class FormGame extends AppCompatActivity {
      * @param outState
      */
     public void onSaveInstanceState(Bundle outState) {
+        outState.putString("date", String.valueOf(myCalendar.getTime()));
         outState.putBoolean("dialogState", dateState); //Save the state of date picker
         outState.putInt("dateYear", aYear);
         outState.putInt("dateMonth", aMonth);
