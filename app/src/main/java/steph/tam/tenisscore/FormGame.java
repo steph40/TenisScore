@@ -29,7 +29,7 @@ public class FormGame extends AppCompatActivity {
     final Calendar myCalendar = Calendar.getInstance();
     Gestao gestao;
     boolean dateState;
-    int aYear, aMonth, aDay;
+    int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
     boolean firstTime = true;
 
 
@@ -55,12 +55,12 @@ public class FormGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dateState = true;
-                if (firstTime == true) {
-                    new DatePickerDialog(FormGame.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                    firstTime = false;
-                } else {
-                    new DatePickerDialog(FormGame.this, date, aYear, myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                }
+                //if (firstTime == true) {
+                    //new DatePickerDialog(FormGame.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    //firstTime = false;
+                //} else {
+                    new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay).show();
+                //}
             }
         });
 
