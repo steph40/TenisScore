@@ -62,7 +62,6 @@ public class FormGame extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         dateState = false;
-                        Toast.makeText(getApplicationContext(), dateState + "", Toast.LENGTH_SHORT).show();
                         datePicker.dismiss();
                     }
                 });

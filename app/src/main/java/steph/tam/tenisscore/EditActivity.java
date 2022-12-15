@@ -30,6 +30,8 @@ public class EditActivity extends AppCompatActivity {
     final Calendar myCalendar = Calendar.getInstance();
     Gestao gestao;
     boolean dateState;
+    int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
+    DatePickerDialog datePicker;
 
 
     @SuppressLint("MissingInflatedId")
@@ -62,7 +64,16 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dateState = true;
-                new DatePickerDialog(EditActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                datePicker = new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay);
+                datePicker.show();
+                Button cancel = datePicker.getButton(DialogInterface.BUTTON_NEGATIVE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dateState = false;
+                        datePicker.dismiss();
+                    }
+                });
             }
         });
 
@@ -135,6 +146,9 @@ public class EditActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
+            aYear = year;
+            aMonth = month;
+            aDay = day;
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, month);
             myCalendar.set(Calendar.DAY_OF_MONTH, day);
@@ -158,11 +172,16 @@ public class EditActivity extends AppCompatActivity {
      * @param outState
      */
     public void onSaveInstanceState(Bundle outState) {
+        outState.putString("date", String.valueOf(myCalendar.getTime()));
         outState.putBoolean("dialogState", dateState); //Save the state of date picker
+        outState.putInt("dateYear", aYear);
+        outState.putInt("dateMonth", aMonth);
+        outState.putInt("dateDay", aDay);
         if (dateState == true) { //if state of date picker is true, save the fields of date picker
-            outState.putInt("dateYear", myCalendar.get(Calendar.YEAR));
-            outState.putInt("dateMonth", myCalendar.get(Calendar.MONTH));
-            outState.putInt("dateDay", myCalendar.get(Calendar.DAY_OF_MONTH));
+
+            outState.putInt("dateYear", aYear);
+            outState.putInt("dateMonth", aMonth);
+            outState.putInt("dateDay", aDay);
         }
 
         super.onSaveInstanceState(outState);
@@ -177,9 +196,12 @@ public class EditActivity extends AppCompatActivity {
         super.onRestoreInstanceState(outState);
         dateState = outState.getBoolean("dialogState"); //get the state of date picker
 
+        aYear = outState.getInt("dateYear");
+        aMonth = outState.getInt("dateMonth");
+        aDay = outState.getInt("dateDay");
 
         if (dateState == true) { //if state of data picker is true, create a new date picker object
-            new DatePickerDialog(EditActivity.this, date, outState.getInt("dateYear"), outState.getInt("dateMonth"), outState.getInt("dateDay")).show();
+            new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay).show();
         }
 
     }
