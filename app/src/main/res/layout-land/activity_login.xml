@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registar">
+    tools:context=".Login">
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile" />
@@ -21,57 +21,58 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="REGISTAR"
+        android:layout_marginTop="12dp"
+        android:text="LOGIN"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
-        android:id="@+id/editRUsername"
+        android:id="@+id/editTUsername"
         android:layout_width="295dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Nome de utilizador"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <EditText
-        android:id="@+id/editRPassword"
+        android:id="@+id/editTPassword"
         android:layout_width="295dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Password"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editRUsername" />
+        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintStart_toEndOf="@+id/editTUsername"
+        app:layout_constraintTop_toTopOf="@+id/editTUsername" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Registar"
-        app:layout_constraintEnd_toEndOf="@+id/editRPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editRPassword" />
+        android:text="Login"
+        app:layout_constraintEnd_toEndOf="@+id/editTPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTPassword" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voltar"
-        app:layout_constraintStart_toStartOf="@+id/editRPassword"
+        android:text="Registar"
+        app:layout_constraintStart_toStartOf="@+id/editTPassword"
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
