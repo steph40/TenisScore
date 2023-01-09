@@ -24,7 +24,7 @@ import android.widget.EditText;
 
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import java.util.Collections;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     EditText inputUser;
     String user;
     boolean dialogState;
+    static GameInterface gameService;
 
 
     @SuppressLint("MissingInflatedId")
@@ -48,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
+
+
+
+
+
+
+
+
+
 
         gamesListView = findViewById(id.lv_game);
         titulo = findViewById(id.tv_title_main);
