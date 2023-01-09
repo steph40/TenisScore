@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     EditText inputUser;
     String user;
     boolean dialogState;
-    static GameInterface gameService;
+    //static GameInterface gameService;
 
 
     @SuppressLint("MissingInflatedId")

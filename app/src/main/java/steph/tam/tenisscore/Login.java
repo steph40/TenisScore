@@ -13,7 +13,7 @@ public class Login extends AppCompatActivity {
 
     Button login;
     Button registar;
-    GameInterface gameService;
+    //GameInterface gameService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
