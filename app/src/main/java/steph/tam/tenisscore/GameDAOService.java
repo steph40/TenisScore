@@ -1,5 +1,7 @@
 package steph.tam.tenisscore;
 
+import android.util.Log;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -20,7 +22,7 @@ public class GameDAOService implements GameDAO {
         httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")
+                .baseUrl("http://10.0.2.2:5000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build());
         Retrofit retrofit = builder.build();
@@ -28,6 +30,7 @@ public class GameDAOService implements GameDAO {
         gameService = retrofit.create(GameService.class);
 
     }
+
 
     public void register(Utilizador user, RegisterListener listener) {
         Call<Void> call = gameService.registerUser(user);

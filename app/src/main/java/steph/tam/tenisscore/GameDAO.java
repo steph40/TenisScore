@@ -6,5 +6,9 @@ public interface GameDAO {
         void onSuccess(String message);
         void onError(String message);
     }
-    void register(Utilizador user , RegisterListener listener);
+
+    void register(Utilizador user, RegisterListener listener);
+
+
+
 }
