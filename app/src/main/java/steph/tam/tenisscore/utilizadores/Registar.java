@@ -1,4 +1,4 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.utilizadores;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import steph.tam.tenisscore.controller.GameDAO;
+import steph.tam.tenisscore.controller.GameDAOService;
+import steph.tam.tenisscore.R;
 
 public class Registar extends AppCompatActivity {
 
@@ -41,7 +45,6 @@ public class Registar extends AppCompatActivity {
                     public void onSuccess(String message) {
                         Intent i = new Intent(getApplicationContext(), Login.class);
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        setResult(RESULT_OK, i);
                         finish();
                     }
 
@@ -50,7 +53,13 @@ public class Registar extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
 
+        voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

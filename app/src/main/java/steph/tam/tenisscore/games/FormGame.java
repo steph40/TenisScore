@@ -1,6 +1,9 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.games;
 
-import android.annotation.SuppressLint;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,24 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class EditActivity extends AppCompatActivity {
+import steph.tam.tenisscore.R;
 
-    Button fin;
-    Button back;
-    EditText eName1;
-    EditText eName2;
-    EditText eNameTour;
+public class FormGame extends AppCompatActivity {
+    EditText eTournamentName;
     EditText eDate;
+    EditText eNameP1;
+    EditText eNameP2;
+    Button add;
+    Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
     Gestao gestao;
     boolean dateState;
@@ -34,40 +33,29 @@ public class EditActivity extends AppCompatActivity {
     DatePickerDialog datePicker;
 
 
-    @SuppressLint("MissingInflatedId")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_form_game);
+
+
+        voltar = findViewById(R.id.buttonBack);
+        add = (Button) findViewById(R.id.buttonAdd);
+        eTournamentName = (EditText) findViewById(R.id.tourName);
+        eDate = (EditText) findViewById(R.id.tourDate);
+        eNameP1 = (EditText) findViewById(R.id.playerName1);
+        eNameP2 = (EditText) findViewById(R.id.playerName2);
         gestao = new Gestao(this);
-
-        Intent iIn = getIntent();
-        Game game = gestao.getGame(iIn.getExtras().getInt("id"));
-        aYear = iIn.getExtras().getInt("ano");
-        aMonth = iIn.getExtras().getInt("mes");
-        aDay = iIn.getExtras().getInt("dia");
-
-        fin = (Button) findViewById(R.id.buttonFinEdit);
-        back = (Button) findViewById(R.id.buttonBackEdit);
-        eName1 = (EditText) findViewById(R.id.playerName1Edit);
-        eName2 = (EditText) findViewById(R.id.playerName2Edit);
-        eNameTour = (EditText) findViewById(R.id.tourNameEdit);
-        eDate = (EditText) findViewById(R.id.tourDateEdit);
-
-        //Recebe os dados do objeto que vamos editar para meter no editText
-        eName1.setText(game.getNamePlayer1());
-        eName2.setText(game.getNamePlayer2());
-        eNameTour.setText(game.getNameTournament());
-        eDate.setText(game.getDateTournament());
 
 
         /**
-         * Carregar na EditText da data
+         * Ao carregar na Edit Text para colocar a data
          */
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dateState = true;
-                datePicker = new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay);
+                datePicker = new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay);
                 datePicker.show();
                 Button cancel = datePicker.getButton(DialogInterface.BUTTON_NEGATIVE);
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -80,24 +68,36 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+
         /**
-         * Carregar no botão de Guardar
+         * Carregar no Botão voltar
          */
-        fin.setOnClickListener(new View.OnClickListener() {
+        voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+        /**
+         * Ao carregar no botão para adicionar um jogo
+         */
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String name1 = eName1.getText().toString();
-                String name2 = eName2.getText().toString();
-                String nameTour = eNameTour.getText().toString();
+                String tournamentName = eTournamentName.getText().toString();
                 String date = eDate.getText().toString();
+                String nameP1 = eNameP1.getText().toString();
+                String nameP2 = eNameP2.getText().toString();
 
                 //Check if string is empty
-                if (name1.trim().isEmpty() == true || name2.trim().isEmpty() == true || nameTour.trim().isEmpty() == true || date.trim().isEmpty() == true) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+                if (nameP1.trim().isEmpty() == true || tournamentName.trim().isEmpty() == true || nameP2.trim().isEmpty() == true || date.trim().isEmpty() == true) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FormGame.this);
 
                     // Set the message show for the Alert time
-                    builder.setMessage("Todos os campos são obrigatórios !");
+                    builder.setMessage("Todos os campos são obrigatórios!");
 
                     // Set Alert Title
                     builder.setTitle("Atenção");
@@ -116,32 +116,18 @@ public class EditActivity extends AppCompatActivity {
                     // Show the Alert Dialog box
                     alertDialog.show();
                 } else {
-                    //if string is not empty, edit the fields of object
-                    game.setNamePlayer1(name1);
-                    game.setNamePlayer2(name2);
-                    game.setNameTournament(nameTour);
-                    game.setDateTournament(date);
 
-                    //Update database with object
-                    gestao.updateGameForm(game.getId(), game.getNameTournament(), game.getDateTournament(), game.getNamePlayer1(), game.getNamePlayer2());
-                    Intent i = new Intent();
+                    Intent i = new Intent(getApplicationContext(), GameScore.class);//create new intent
                     i.putExtra("ano", aYear);
                     i.putExtra("mes", aMonth);
                     i.putExtra("dia", aDay);
-                    setResult(RESULT_OK, i);
-                    finish();
-                }
-            }
-        });
 
-        /**
-         * Carregar no botão de Voltar
-         */
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setResult(RESULT_CANCELED);
-                finish();
+                    gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+
+                    i.putExtra("id", gestao.lastId());
+
+                    startActivityForResult(i, 1);
+                }
             }
         });
     }
@@ -164,12 +150,27 @@ public class EditActivity extends AppCompatActivity {
     };
 
     /**
-     * Atualizar a data
+     * Definir a data selecionada como String
      */
     private void updateLabel() {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.FRANCE);
         eDate.setText(dateFormat.format(myCalendar.getTime()));
+    }
+
+    /**
+     * Esperar pela resposta da activity seguinte
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 
     /**
@@ -207,7 +208,7 @@ public class EditActivity extends AppCompatActivity {
         aDay = outState.getInt("dateDay");
 
         if (dateState == true) { //if state of data picker is true, create a new date picker object
-            new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay).show();
+            new DatePickerDialog(FormGame.this, date, aYear, aMonth, aDay).show();
         }
 
     }

@@ -1,10 +1,7 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.games;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 

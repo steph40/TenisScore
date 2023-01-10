@@ -1,6 +1,4 @@
-package steph.tam.tenisscore;
-
-import android.util.Log;
+package steph.tam.tenisscore.controller;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -9,6 +7,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import steph.tam.tenisscore.utilizadores.Token;
+import steph.tam.tenisscore.utilizadores.Utilizador;
 
 public class GameDAOService implements GameDAO {
 
@@ -46,6 +46,36 @@ public class GameDAOService implements GameDAO {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void login(Utilizador user, LoginListener listener) {
+        Call<Token> call = gameService.loginUser(user);
+        call.enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                Token token = response.body();
+                switch (response.code()) {
+                    case 200:
+                        if (token == null) {
+                            listener.onError("Token não gerado");
+                        } else {
+                            listener.onSuccess(token);
+                        }
+                        break;
+                    case 404:
+                        listener.onError("Utilizador ou password invalidos");
+                        break;
+                    default:
+                        listener.onError("Codigo: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
                 listener.onError(t.getMessage());
             }
         });

@@ -1,4 +1,4 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.games;
 
 import android.content.Context;
 import android.database.Cursor;

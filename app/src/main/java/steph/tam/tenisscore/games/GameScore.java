@@ -1,23 +1,19 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.games;
 
 import static steph.tam.tenisscore.R.*;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import steph.tam.tenisscore.R;
 
 public class GameScore extends AppCompatActivity {
     Button ponto1;

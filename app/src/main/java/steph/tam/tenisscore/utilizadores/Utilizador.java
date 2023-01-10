@@ -1,4 +1,4 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.utilizadores;
 
 public class Utilizador {
 

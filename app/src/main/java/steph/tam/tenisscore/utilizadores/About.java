@@ -1,10 +1,12 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.utilizadores;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import steph.tam.tenisscore.R;
 
 public class About extends AppCompatActivity {
     Button voltar;

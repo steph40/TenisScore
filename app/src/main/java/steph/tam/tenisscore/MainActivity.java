@@ -30,6 +30,12 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import steph.tam.tenisscore.games.FormGame;
+import steph.tam.tenisscore.games.Game;
+import steph.tam.tenisscore.games.GameAdapter;
+import steph.tam.tenisscore.games.Gestao;
+import steph.tam.tenisscore.utilizadores.About;
+
 public class MainActivity extends AppCompatActivity {
 
     public static List<Game> games;

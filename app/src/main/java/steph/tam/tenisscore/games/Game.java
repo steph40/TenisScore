@@ -1,7 +1,6 @@
-package steph.tam.tenisscore;
+package steph.tam.tenisscore.games;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
