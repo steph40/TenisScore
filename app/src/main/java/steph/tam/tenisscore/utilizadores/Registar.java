@@ -26,6 +26,7 @@ public class Registar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
         manager = new GameDAOService();
+
         registar = findViewById(R.id.button2);
         voltar = findViewById(R.id.button3);
         editUsername = findViewById(R.id.editRUsername);
@@ -38,21 +39,26 @@ public class Registar extends AppCompatActivity {
 
                 String username = editUsername.getText().toString();
                 String password = editPassword.getText().toString();
+                if (username.trim().isEmpty() == true) {
+                    editUsername.setError("Preenchimento obrigatório");
+                } else if (password.trim().isEmpty() == true) {
+                    editPassword.setError("Preenchimento obrigatório");
+                } else {
+                    Utilizador auxUser = new Utilizador(username, password);
+                    manager.register(auxUser, new GameDAO.RegisterListener() {
+                        @Override
+                        public void onSuccess(String message) {
+                            Intent i = new Intent(getApplicationContext(), Login.class);
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
-                Utilizador auxUser = new Utilizador(username, password);
-                manager.register(auxUser, new GameDAO.RegisterListener() {
-                    @Override
-                    public void onSuccess(String message) {
-                        Intent i = new Intent(getApplicationContext(), Login.class);
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onError(String message) {
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

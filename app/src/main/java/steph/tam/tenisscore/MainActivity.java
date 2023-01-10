@@ -35,6 +35,7 @@ import steph.tam.tenisscore.games.Game;
 import steph.tam.tenisscore.games.GameAdapter;
 import steph.tam.tenisscore.games.Gestao;
 import steph.tam.tenisscore.utilizadores.About;
+import steph.tam.tenisscore.utilizadores.InfoUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     EditText inputUser;
     String user;
     boolean dialogState;
-    //static GameInterface gameService;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -55,15 +56,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-
-
-
-
-
-
-
-
-
 
         gamesListView = findViewById(id.lv_game);
         titulo = findViewById(id.tv_title_main);
@@ -76,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
         gamesListView.setAdapter(adapter);
 
         //SharedPreferences
-        prefs = getSharedPreferences("username", MODE_PRIVATE);
-        user = prefs.getString("nomeUser", null);
+        //prefs = getSharedPreferences("username", MODE_PRIVATE);
+        //user = prefs.getString("nomeUser", null);
+
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        user = prefs.getString("token", null);
 
         if (user != null) {
             titulo.setText("Jogos do " + user);
@@ -142,45 +137,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onClickUser(MainActivity view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        dialogState = true;
-        // Set Alert Title
-        builder.setTitle("Nome de utilizador");
-
-        inputUser = new EditText(this);
-        builder.setView(inputUser);
-        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-        builder.setCancelable(false);
-        builder.setPositiveButton("Guardar", (DialogInterface.OnClickListener) (dialog, which) -> {
-
-        });
-        builder.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) (dialog, which) -> {
-            // When the user click no button then app will close
-            dialogState = false;
-            dialog.cancel();
-        });
-        // Create the Alert dialog
-        AlertDialog alertDialog = builder.create();
-        // Show the Alert Dialog box
-        alertDialog.show();
-
-        Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        pButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String user = inputUser.getText().toString();
-                if (user.trim().isEmpty())
-                    inputUser.setError("Preencher campo");
-                else {
-                    titulo.setText("Jogos do " + user);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("nomeUser", user);
-                    editor.commit();
-                    dialogState = false;
-                    alertDialog.dismiss();
-                }
-            }
-        });
+        Intent i = new Intent(this, InfoUser.class);
+        startActivityForResult(i, 1);
     }
 
     /**
@@ -204,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
      * @param outState
      */
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("dialogState", dialogState);
+       /* outState.putBoolean("dialogState", dialogState);
         if (dialogState == true)
-            outState.putString("inputUser", inputUser.getText().toString());
+            outState.putString("inputUser", inputUser.getText().toString());*/
 
         super.onSaveInstanceState(outState);
     }
@@ -218,15 +176,15 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        dialogState = outState.getBoolean("dialogState");
+       // dialogState = outState.getBoolean("dialogState");
 
-        if (dialogState == true) {
+        /*if (dialogState == true) {
             onClickUser(this);
             inputUser.setText(outState.getString("inputUser"));
             if (inputUser.getText().toString().trim().isEmpty()) {
                 inputUser.setError("Preencher campo");
             }
-        }
+        }*/
     }
 
 
