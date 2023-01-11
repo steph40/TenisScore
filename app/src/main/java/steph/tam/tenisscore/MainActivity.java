@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,9 +22,10 @@ import android.widget.EditText;
 
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static List<Game> games1;
     private ListView gamesListView;
-    private GameAdapter adapter;
+    //private GameAdapter adapter;
     private TextView titulo;
     SharedPreferences prefs;
     Gestao gestao;
     EditText inputUser;
-    String user;
+    String token;
     boolean dialogState;
     GameDAO manager;
 
@@ -57,30 +59,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
 
-        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
-        user = prefs.getString("token", null);
-        Context aux = this;
-
-
-        titulo = findViewById(id.tv_title_main);
         manager = new GameDAOService();
-        gestao = new Gestao(this);
-        manager.getAllGames(user, new GameDAO.GetGamesListener() {
+
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        token = prefs.getString("token", null);
+        Log.d("pixa",token);
+        games1= new ArrayList<>();
+        titulo = findViewById(id.tv_title_main);
+        gamesListView = findViewById(id.lv_game);
+        //Toast.makeText(getApplicationContext(),"sdco",Toast.LENGTH_SHORT).show();
+        //gestao = new Gestao(this);
+        manager.getAllGames(token, new GameDAO.GetGamesListener() {
             @Override
             public void onSuccess(List<Game> games) {
+                Toast.makeText(getApplicationContext(),games.size()+"ew",Toast.LENGTH_SHORT).show();
                 games1 = games;
                 //Collections.sort(games1);
-                GameAdapter adapter1 = new GameAdapter(aux, games1);
+                Toast.makeText(getApplicationContext(),games.size()+"",Toast.LENGTH_SHORT).show();
+                GameAdapter adapter = new GameAdapter(getApplicationContext(), games1);
 
-                gamesListView = findViewById(id.lv_game);
-                gamesListView.setAdapter(adapter1);
 
-                gamesListView.setTextFilterEnabled(true);
+                gamesListView.setAdapter(adapter);
+
+                //gamesListView.setTextFilterEnabled(true);
             }
 
             @Override
             public void onError(String message) {
-
+                Log.d("pixa","teste: "+message);
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -91,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if (user != null) {
+        /*if (user != null) {
             titulo.setText("Jogos do " + user);
-        }
+        }*/
 
 
     }
@@ -167,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == 1) {
+        /*if (resultCode == RESULT_OK && requestCode == 1) {
             games1 = gestao.getGamesArray();
             adapter.updateList(games1);
-        }
+        }*/
 
     }
 

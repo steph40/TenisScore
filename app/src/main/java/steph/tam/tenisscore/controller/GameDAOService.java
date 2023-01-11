@@ -1,5 +1,8 @@
 package steph.tam.tenisscore.controller;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -25,7 +28,7 @@ public class GameDAOService implements GameDAO {
         httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000")
+                .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build());
         Retrofit retrofit = builder.build();
@@ -69,11 +72,15 @@ public class GameDAOService implements GameDAO {
                             listener.onSuccess(token);
                         }
                         break;
+                    case 500:
+                        listener.onError("sdfjsd");
+                        break;
                     case 404:
                         listener.onError("Utilizador ou password invalidos");
                         break;
                     default:
                         listener.onError("Codigo: " + response.code());
+
                 }
             }
 
@@ -90,14 +97,19 @@ public class GameDAOService implements GameDAO {
         call.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                List<Game> games = response.body();
-                switch (response.code()){
+                List<Game> listaGames = response.body();
+                //Log.d("pixa", response.code()+"");
+                switch (response.code()) {
                     case 200:
-                        if (games != null){
-                            listener.onSuccess(games);
-                        }else{
+                        if (listaGames != null) {
+                            listener.onSuccess(listaGames);
+                        } else {
                             listener.onError("Não há jogos guardados");
                         }
+                        break;
+
+                    default:
+                        listener.onError("Código de resposta não reconhecido"+response.code());
                 }
             }
 
