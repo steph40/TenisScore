@@ -1,5 +1,7 @@
 package steph.tam.tenisscore.controller;
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -7,6 +9,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import steph.tam.tenisscore.games.Game;
 import steph.tam.tenisscore.utilizadores.Token;
 import steph.tam.tenisscore.utilizadores.Utilizador;
 
@@ -76,6 +79,30 @@ public class GameDAOService implements GameDAO {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getAllGames(String token, GetGamesListener listener) {
+        Call<List<Game>> call = gameService.getGames(token);
+        call.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                List<Game> games = response.body();
+                switch (response.code()){
+                    case 200:
+                        if (games != null){
+                            listener.onSuccess(games);
+                        }else{
+                            listener.onError("Não há jogos guardados");
+                        }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
                 listener.onError(t.getMessage());
             }
         });

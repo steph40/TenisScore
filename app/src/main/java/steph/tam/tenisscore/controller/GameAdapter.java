@@ -1,4 +1,4 @@
-package steph.tam.tenisscore.games;
+package steph.tam.tenisscore.controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +17,8 @@ import java.util.List;
 
 import steph.tam.tenisscore.MainActivity;
 import steph.tam.tenisscore.R;
+import steph.tam.tenisscore.games.Game;
+import steph.tam.tenisscore.games.Gestao;
 
 public class GameAdapter extends BaseAdapter {
     Context context;
@@ -124,7 +126,7 @@ public class GameAdapter extends BaseAdapter {
                 builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
                     // When the user click yes button then app will close
                     Gestao gestao = new Gestao(context.getApplicationContext());
-                    Game game = MainActivity.games.get(position); //Get ID of game
+                    Game game = MainActivity.games1.get(position); //Get ID of game
 
                     gestao.deleteGame(game.getId()); //Delete game of database
                     List<Game> games = gestao.getGamesArray(); //get array of database

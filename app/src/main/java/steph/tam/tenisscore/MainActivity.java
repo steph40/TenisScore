@@ -4,12 +4,11 @@ import static steph.tam.tenisscore.R.*;
 
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -18,8 +17,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ListView;
@@ -30,16 +27,18 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import steph.tam.tenisscore.controller.GameDAO;
+import steph.tam.tenisscore.controller.GameDAOService;
 import steph.tam.tenisscore.games.FormGame;
 import steph.tam.tenisscore.games.Game;
-import steph.tam.tenisscore.games.GameAdapter;
+import steph.tam.tenisscore.controller.GameAdapter;
 import steph.tam.tenisscore.games.Gestao;
 import steph.tam.tenisscore.utilizadores.About;
 import steph.tam.tenisscore.utilizadores.InfoUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static List<Game> games;
+    public static List<Game> games1;
     private ListView gamesListView;
     private GameAdapter adapter;
     private TextView titulo;
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     EditText inputUser;
     String user;
     boolean dialogState;
+    GameDAO manager;
 
 
 
@@ -57,22 +57,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
 
-        gamesListView = findViewById(id.lv_game);
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        user = prefs.getString("token", null);
+        Context aux = this;
+
+
         titulo = findViewById(id.tv_title_main);
-
+        manager = new GameDAOService();
         gestao = new Gestao(this);
-        games = gestao.getGamesArray();
-        Collections.sort(games);
-        adapter = new GameAdapter(this, games);
+        manager.getAllGames(user, new GameDAO.GetGamesListener() {
+            @Override
+            public void onSuccess(List<Game> games) {
+                games1 = games;
+                //Collections.sort(games1);
+                GameAdapter adapter1 = new GameAdapter(aux, games1);
 
-        gamesListView.setAdapter(adapter);
+                gamesListView = findViewById(id.lv_game);
+                gamesListView.setAdapter(adapter1);
+
+                gamesListView.setTextFilterEnabled(true);
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+
 
         //SharedPreferences
         //prefs = getSharedPreferences("username", MODE_PRIVATE);
         //user = prefs.getString("nomeUser", null);
 
-        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
-        user = prefs.getString("token", null);
+
 
         if (user != null) {
             titulo.setText("Jogos do " + user);
@@ -118,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickAbout(MainActivity view) {
         Intent i = new Intent(this, About.class);
-        startActivityForResult(i, 1);
+        startActivity(i);
+
     }
 
     /**
@@ -150,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
-            games = gestao.getGamesArray();
-            adapter.updateList(games);
+            games1 = gestao.getGamesArray();
+            adapter.updateList(games1);
         }
 
     }
