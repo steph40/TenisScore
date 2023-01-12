@@ -26,4 +26,10 @@ public interface GameService {
     @GET("/get_all_games")
     Call<List<Game>> getGames(@Header("Authorization") String token);
 
+    @Headers("Accept: application/json")
+    @GET("/get_game")
+    Call <Game> getGame(@Header("Authorization") String token);
+
+
+
 }

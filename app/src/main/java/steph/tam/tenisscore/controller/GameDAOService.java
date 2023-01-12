@@ -3,6 +3,7 @@ package steph.tam.tenisscore.controller;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -98,7 +99,6 @@ public class GameDAOService implements GameDAO {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                 List<Game> listaGames = response.body();
-                //Log.d("pixa", response.code()+"");
                 switch (response.code()) {
                     case 200:
                         if (listaGames != null) {
@@ -109,13 +109,41 @@ public class GameDAOService implements GameDAO {
                         break;
 
                     default:
-                        listener.onError("Código de resposta não reconhecido"+response.code());
+                        listener.onError("Código de resposta não reconhecido" + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
                 listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getGame(String token, GetGameListener listener) {
+        Call<Game> call = gameService.getGame(token);
+        call.enqueue(new Callback<Game>() {
+            @Override
+            public void onResponse(Call<Game> call, Response<Game> response) {
+                Game game = response.body();
+                switch (response.code()) {
+                    case 200:
+                        if (game != null) {
+                            listener.onSuccess(game);
+                        } else {
+                            listener.onError("Não há jogos guardados");
+                        }
+                        break;
+
+                    default:
+                        listener.onError("Código de resposta não reconhecido " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Game> call, Throwable t) {
+
             }
         });
     }
