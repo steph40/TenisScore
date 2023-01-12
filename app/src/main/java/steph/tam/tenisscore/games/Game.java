@@ -1,15 +1,22 @@
 package steph.tam.tenisscore.games;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Game implements Comparable<Game> {
 
+    @SerializedName("nomeTorneio")
     private String nameTournament;
+    @SerializedName("id")
     private int id;
+    @SerializedName("dateTorneio")
     private String dateTournament;
+    @SerializedName("jogador1")
     private String namePlayer1;
+    
     private String namePlayer2;
     private int set1_1;
     private int set2_1;

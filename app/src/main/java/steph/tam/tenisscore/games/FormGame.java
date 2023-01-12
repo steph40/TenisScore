@@ -7,17 +7,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import steph.tam.tenisscore.R;
+import steph.tam.tenisscore.controller.GameDAO;
+import steph.tam.tenisscore.controller.GameDAOService;
 
 public class FormGame extends AppCompatActivity {
     EditText eTournamentName;
@@ -31,7 +36,9 @@ public class FormGame extends AppCompatActivity {
     boolean dateState;
     int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
     DatePickerDialog datePicker;
-
+    String token;
+    GameDAO manager;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,10 @@ public class FormGame extends AppCompatActivity {
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
         gestao = new Gestao(this);
+        manager = new GameDAOService();
+
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        token = prefs.getString("token", null);
 
 
         /**
@@ -89,6 +100,7 @@ public class FormGame extends AppCompatActivity {
 
                 String tournamentName = eTournamentName.getText().toString();
                 String date = eDate.getText().toString();
+                Log.d("teste", date);
                 String nameP1 = eNameP1.getText().toString();
                 String nameP2 = eNameP2.getText().toString();
 
@@ -122,9 +134,21 @@ public class FormGame extends AppCompatActivity {
                     i.putExtra("mes", aMonth);
                     i.putExtra("dia", aDay);
 
-                    gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+                    Game auxGame = new Game(40,tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+                    manager.addGames(token, auxGame, new GameDAO.AddGameListener() {
+                        @Override
+                        public void onSuccess(String message) {
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
 
-                    i.putExtra("id", gestao.lastId());
+                        @Override
+                        public void onError(String message) {
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    //gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+
+                    //i.putExtra("id", gestao.lastId());
 
                     startActivityForResult(i, 1);
                 }

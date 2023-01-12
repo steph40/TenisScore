@@ -28,6 +28,10 @@ public interface GameService {
     @GET("/get_all_games")
     Call<List<Game>> getGames(@Header("Authorization") String token);
 
+    @Headers("Accept: application/json")
+    @POST("/add_game")
+    Call <Void> addGame(@Header("Authorization") String token, @Body Game game);
+
 
     @Headers("Accept: application/json")
     @GET("/get_game")

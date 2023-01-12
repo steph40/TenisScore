@@ -1,9 +1,5 @@
 package steph.tam.tenisscore.controller;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -119,6 +115,31 @@ public class GameDAOService implements GameDAO {
             }
         });
     }
+
+
+    public void addGames(String token, Game game, AddGameListener listener) {
+        Call<Void> call = gameService.addGame(token, game);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                switch (response.code()){
+                    case 200:
+                        listener.onSuccess("Jogo adicionado com sucesso");
+                        break;
+
+                    default:
+                        listener.onError("Jogo não adicionado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
 
     @Override
     public void getGame(String token, GetGameListener listener) {

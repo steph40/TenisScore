@@ -26,10 +26,19 @@ public interface GameDAO {
     }
     void getAllGames(String token, GetGamesListener listener);
 
+    interface AddGameListener{
+        void onSuccess(String message);
+        void onError(String message);
+    }
+    void addGames(String token,Game game,AddGameListener listener);
+
     interface GetGameListener{
         void onSuccess(Game game);
         void onError(String message);
     }
+
+
+
     void getGame(String token, GetGameListener listener);
 
 }
