@@ -1,5 +1,7 @@
 package steph.tam.tenisscore.controller;
 
+import android.util.Log;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +27,7 @@ public interface GameService {
     @Headers("Accept: application/json")
     @GET("/get_all_games")
     Call<List<Game>> getGames(@Header("Authorization") String token);
+
 
     @Headers("Accept: application/json")
     @GET("/get_game")

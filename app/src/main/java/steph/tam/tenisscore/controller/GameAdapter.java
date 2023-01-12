@@ -3,12 +3,14 @@ package steph.tam.tenisscore.controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -53,6 +55,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_2_2 = (TextView) rowView.findViewById(R.id.textView5);
         TextView tv_3_1 = (TextView) rowView.findViewById(R.id.textView11);
         TextView tv_3_2 = (TextView) rowView.findViewById(R.id.textView10);
+
 
         deleteItem(rowView, position);
 
@@ -107,8 +110,13 @@ public class GameAdapter extends BaseAdapter {
 
     private void deleteItem(View rowView, int position) {
         ImageButton b = (ImageButton) rowView.findViewById(R.id.remove);
-
         b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"teste",Toast.LENGTH_SHORT).show();
+            }
+        });
+        /*b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -125,12 +133,12 @@ public class GameAdapter extends BaseAdapter {
                 // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
                 builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
                     // When the user click yes button then app will close
-                    Gestao gestao = new Gestao(context.getApplicationContext());
-                    Game game = MainActivity.games1.get(position); //Get ID of game
+                    //Gestao gestao = new Gestao(context.getApplicationContext());
+                    //Game game = MainActivity.games1.get(position); //Get ID of game
 
-                    gestao.deleteGame(game.getId()); //Delete game of database
-                    List<Game> games = gestao.getGamesArray(); //get array of database
-                    updateList(games); //udpate list of Main
+                    //gestao.deleteGame(game.getId()); //Delete game of database
+                    //List<Game> games = gestao.getGamesArray(); //get array of database
+                    //updateList(games); //udpate list of Main
 
                 });
 
@@ -145,7 +153,7 @@ public class GameAdapter extends BaseAdapter {
                 // Show the Alert Dialog box
                 alertDialog.show();
             }
-        });
+        });*/
     }
 
     /**

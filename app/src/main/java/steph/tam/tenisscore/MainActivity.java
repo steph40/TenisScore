@@ -66,17 +66,14 @@ public class MainActivity extends AppCompatActivity {
         games1 = new ArrayList<>();
         titulo = findViewById(id.tv_title_main);
 
+
         //Toast.makeText(getApplicationContext(),"sdco",Toast.LENGTH_SHORT).show();
         //gestao = new Gestao(this);
         manager.getAllGames(token, new GameDAO.GetGamesListener() {
             @Override
             public void onSuccess(List<Game> games) {
-                //games1 = new ArrayList<>();
-                Toast.makeText(getApplicationContext(), games.size() + "ew", Toast.LENGTH_SHORT).show();
                 games1 = games;
 
-                //Collections.sort(games1);
-                Toast.makeText(getApplicationContext(), games.size() + "", Toast.LENGTH_SHORT).show();
                 GameAdapter adapter = new GameAdapter(getApplicationContext(), games1);
                 gamesListView = findViewById(id.lv_game);
                 gamesListView.setAdapter(adapter);

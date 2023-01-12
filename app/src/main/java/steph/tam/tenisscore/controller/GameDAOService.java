@@ -127,6 +127,7 @@ public class GameDAOService implements GameDAO {
             @Override
             public void onResponse(Call<Game> call, Response<Game> response) {
                 Game game = response.body();
+
                 switch (response.code()) {
                     case 200:
                         if (game != null) {
