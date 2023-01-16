@@ -123,7 +123,7 @@ public class GameDAOService implements GameDAO {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
-                switch (response.code()){
+                switch (response.code()) {
                     case 200:
                         listener.onSuccess("Jogo adicionado com sucesso");
                         break;
@@ -140,33 +140,76 @@ public class GameDAOService implements GameDAO {
         });
     }
 
+    @Override
+    public void getLastId(String token, GetLastIdListener listener) {
+        Call<Integer> call = gameService.getLastId(token);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                int id = response.body();
+                switch (response.code()) {
+                    case 200:
+                        listener.onSuccess(id);
+                        break;
+
+                    default:
+                        listener.onError("Jogo não adicionado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
 
     @Override
-    public void getGame(String token, GetGameListener listener) {
-        Call<Game> call = gameService.getGame(token);
+    public void getGame(String token, int id, GetGameListener listener) {
+        Call<Game> call = gameService.getGame(token, id);
         call.enqueue(new Callback<Game>() {
             @Override
             public void onResponse(Call<Game> call, Response<Game> response) {
                 Game game = response.body();
-
                 switch (response.code()) {
                     case 200:
-                        if (game != null) {
-                            listener.onSuccess(game);
-                        } else {
-                            listener.onError("Não há jogos guardados");
-                        }
+                        listener.onSuccess(game);
                         break;
 
                     default:
-                        listener.onError("Código de resposta não reconhecido " + response.code());
+                        listener.onError("Jogo não adicionado");
                 }
             }
 
             @Override
             public void onFailure(Call<Game> call, Throwable t) {
-
+                listener.onError(t.getMessage());
             }
         });
     }
+
+    @Override
+    public void editGame(String token, Game gameEdit, GameEditListener listener) {
+        Call <Void> call = gameService.updateGameEdit(token, gameEdit);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                switch (response.code()) {
+                    case 200:
+                        listener.onSuccess("Jogo editado");
+                        break;
+
+                    default:
+                        listener.onError("Jogo não editado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
+
 }

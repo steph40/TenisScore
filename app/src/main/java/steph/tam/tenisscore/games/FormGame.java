@@ -134,11 +134,25 @@ public class FormGame extends AppCompatActivity {
                     i.putExtra("mes", aMonth);
                     i.putExtra("dia", aDay);
 
-                    Game auxGame = new Game(40,tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+
+                    Game auxGame = new Game(40, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
                     manager.addGames(token, auxGame, new GameDAO.AddGameListener() {
                         @Override
                         public void onSuccess(String message) {
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            manager.getLastId(token, new GameDAO.GetLastIdListener() {
+                                @Override
+                                public void onSuccess(int id) {
+                                    Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_SHORT).show();
+                                    i.putExtra("id", id);
+                                    startActivityForResult(i, 1);
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
 
                         @Override
@@ -147,10 +161,10 @@ public class FormGame extends AppCompatActivity {
                         }
                     });
                     //gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+                    /**/
 
-                    //i.putExtra("id", gestao.lastId());
-
-                    startActivityForResult(i, 1);
+                    //startActivity(i);
+                    // ;
                 }
             }
         });

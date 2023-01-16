@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import steph.tam.tenisscore.R;
+import steph.tam.tenisscore.controller.GameDAO;
+import steph.tam.tenisscore.controller.GameDAOService;
 
 public class GameScore extends AppCompatActivity {
     Button ponto1;
@@ -39,6 +43,10 @@ public class GameScore extends AppCompatActivity {
     Game game2;
     Gestao gestao;
     int aYear, aMonth, aDay;
+    String token;
+    GameDAO manager;
+    SharedPreferences prefs;
+    int id;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,51 +55,82 @@ public class GameScore extends AppCompatActivity {
         setContentView(layout.activity_game_score);
 
         Intent iIn = getIntent();
-        gestao = new Gestao(this);
+        id= iIn.getExtras().getInt("id");
+        //gestao = new Gestao(this);
+        manager = new GameDAOService();
 
-        game = gestao.getGame(iIn.getExtras().getInt("id"));
-        aYear = iIn.getExtras().getInt("ano");
-        aMonth = iIn.getExtras().getInt("mes");
-        aDay = iIn.getExtras().getInt("dia");
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        token = prefs.getString("token", null);
+        manager.getGame(token, id, new GameDAO.GetGameListener() {
+            @Override
+            public void onSuccess(Game game) {
+                aYear = iIn.getExtras().getInt("ano");
+                aMonth = iIn.getExtras().getInt("mes");
+                aDay = iIn.getExtras().getInt("dia");
 
-        //Buttons
-        ponto1 = (Button) findViewById(id.Ponto1);
-        ponto2 = (Button) findViewById(id.Ponto2);
-        fin = (Button) findViewById(id.buttonFin);
-        edit = (Button) findViewById(id.buttonEdit);
+                //Buttons
+                ponto1 = (Button) findViewById(R.id.Ponto1);
+                ponto2 = (Button) findViewById(R.id.Ponto2);
+                fin = (Button) findViewById(R.id.buttonFin);
+                edit = (Button) findViewById(R.id.buttonEdit);
 
-        //Text View
-        eName1 = (TextView) findViewById(id.tvNameP1);
-        eName2 = (TextView) findViewById(id.tvNameP2);
-        eNametour = (TextView) findViewById(id.tvNameTour);
-        eDatetour = (TextView) findViewById(id.tvDate);
-        eset1_1 = (TextView) findViewById(id.tvSet1_1);
-        eset2_1 = (TextView) findViewById(id.tvSet2_1);
-        eset3_1 = (TextView) findViewById(id.tvSet3_1);
-        eset1_2 = (TextView) findViewById(id.tvSet1_2);
-        eset2_2 = (TextView) findViewById(id.tvSet2_2);
-        eset3_2 = (TextView) findViewById(id.tvSet3_2);
-        set1 = (TextView) findViewById(id.tvSet1);
-        set2 = (TextView) findViewById(id.tvSet2);
-        tv3 = (TextView) findViewById(R.id.textView7);
-        tv2 = (TextView) findViewById(R.id.textView8);
+                //Text View
+                eName1 = (TextView) findViewById(R.id.tvNameP1);
+                eName2 = (TextView) findViewById(R.id.tvNameP2);
+                eNametour = (TextView) findViewById(R.id.tvNameTour);
+                eDatetour = (TextView) findViewById(R.id.tvDate);
+                eset1_1 = (TextView) findViewById(R.id.tvSet1_1);
+                eset2_1 = (TextView) findViewById(R.id.tvSet2_1);
+                eset3_1 = (TextView) findViewById(R.id.tvSet3_1);
+                eset1_2 = (TextView) findViewById(R.id.tvSet1_2);
+                eset2_2 = (TextView) findViewById(R.id.tvSet2_2);
+                eset3_2 = (TextView) findViewById(R.id.tvSet3_2);
+                set1 = (TextView) findViewById(R.id.tvSet1);
+                set2 = (TextView) findViewById(R.id.tvSet2);
+                tv3 = (TextView) findViewById(R.id.textView7);
+                tv2 = (TextView) findViewById(R.id.textView8);
 
-        eNametour.setText(game.getNameTournament());
-        eDatetour.setText(game.getDateTournament());
-        eName1.setText(game.getNamePlayer1());
-        eName2.setText(game.getNamePlayer2());
-        eset1_1.setText(game.getSet1_1() + "");
-        eset1_2.setText(game.getSet1_2() + "");
+                eNametour.setText(game.getNameTournament());
+                eDatetour.setText(game.getDateTournament());
+                eName1.setText(game.getNamePlayer1());
+                eName2.setText(game.getNamePlayer2());
+                eset1_1.setText(game.getSet1_1() + "");
+                eset1_2.setText(game.getSet1_2() + "");
 
-        View.OnClickListener listener = setResultados();
+                View.OnClickListener listener = setResultados();
 
-        ponto1.setOnClickListener(listener);
-        ponto2.setOnClickListener(listener);
+                ponto1.setOnClickListener(listener);
+                ponto2.setOnClickListener(listener);
+
+                edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent in = new Intent(getApplicationContext(), EditActivity.class);
+                        in.putExtra("id", game.getId());
+                        in.putExtra("ano", aYear);
+                        in.putExtra("mes", aMonth);
+                        in.putExtra("dia", aDay);
+                        startActivityForResult(in, 1);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(String message) {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //game = gestao.getGame(iIn.getExtras().getInt("id"));
+
+
+        //Aqui
 
         /**
          * Ao clicar no botão de editar
          */
-        edit.setOnClickListener(new View.OnClickListener() {
+        /*edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(getApplicationContext(), EditActivity.class);
@@ -101,12 +140,12 @@ public class GameScore extends AppCompatActivity {
                 in.putExtra("dia", aDay);
                 startActivityForResult(in, 1);
             }
-        });
+        });*/
 
         /** Ao clicar no botão de finalizar
          *
          */
-        fin.setOnClickListener(new View.OnClickListener() {
+        /*fin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -128,7 +167,7 @@ public class GameScore extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
             }
-        });
+        });*/
 
     }
 
@@ -331,7 +370,7 @@ public class GameScore extends AppCompatActivity {
                                 }
                         }
                         break;
-                    case id.Ponto2:
+                    case R.id.Ponto2:
                         switch (valor2) {
                             case 0:
                                 if (r1_1 == 6 && r1_2 == 6) { //Tie Break of set1
@@ -581,11 +620,12 @@ public class GameScore extends AppCompatActivity {
 
         // // if it is the request that I did
         if (resultCode == RESULT_OK && requestCode == 1) {  // if the result is RESULT_OK
-            game2 = gestao.getGame(game.getId());
-            eNametour.setText(game2.getNameTournament());
-            eDatetour.setText(game2.getDateTournament());
-            eName1.setText(game2.getNamePlayer1());
-            eName2.setText(game2.getNamePlayer2());
+            //game2 = gestao.getGame(game.getId());
+            //Toast.makeText(getApplicationContext(),game.getId()+"",Toast.LENGTH_SHORT).show();
+            //eNametour.setText(game2.getNameTournament());
+            //eDatetour.setText(game2.getDateTournament());
+            //eName1.setText(game2.getNamePlayer1());
+            //eName2.setText(game2.getNamePlayer2());
 
             aYear = data.getExtras().getInt("ano");
             aMonth = data.getExtras().getInt("mes");

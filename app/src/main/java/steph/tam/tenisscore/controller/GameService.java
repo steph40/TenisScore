@@ -10,6 +10,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import steph.tam.tenisscore.games.Game;
 import steph.tam.tenisscore.utilizadores.Token;
 import steph.tam.tenisscore.utilizadores.Utilizador;
@@ -32,10 +34,20 @@ public interface GameService {
     @POST("/add_game")
     Call <Void> addGame(@Header("Authorization") String token, @Body Game game);
 
+    @Headers("Accept: application/json")
+    @GET("/get_last_id")
+    Call <Integer> getLastId(@Header("Authorization") String token);
 
     @Headers("Accept: application/json")
     @GET("/get_game")
-    Call <Game> getGame(@Header("Authorization") String token);
+    Call <Game> getGame(@Header("Authorization") String token , @Query("id") int id);
+
+    @Headers("Accept: application/json")
+    @PUT("/update_game_edit")
+    Call <Void> updateGameEdit(@Header("Authorization") String token , @Body Game gameEdit);
+
+
+
 
 
 

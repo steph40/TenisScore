@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import steph.tam.tenisscore.R;
+import steph.tam.tenisscore.controller.GameDAO;
+import steph.tam.tenisscore.controller.GameDAOService;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -32,118 +36,153 @@ public class EditActivity extends AppCompatActivity {
     boolean dateState;
     int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
     DatePickerDialog datePicker;
+    String token;
+    GameDAO manager;
+    SharedPreferences prefs;
+    int id;
 
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        gestao = new Gestao(this);
+        //gestao = new Gestao(this);
 
         Intent iIn = getIntent();
-        Game game = gestao.getGame(iIn.getExtras().getInt("id"));
-        aYear = iIn.getExtras().getInt("ano");
-        aMonth = iIn.getExtras().getInt("mes");
-        aDay = iIn.getExtras().getInt("dia");
+        id = iIn.getExtras().getInt("id");
+        manager = new GameDAOService();
 
-        fin = (Button) findViewById(R.id.buttonFinEdit);
-        back = (Button) findViewById(R.id.buttonBackEdit);
-        eName1 = (EditText) findViewById(R.id.playerName1Edit);
-        eName2 = (EditText) findViewById(R.id.playerName2Edit);
-        eNameTour = (EditText) findViewById(R.id.tourNameEdit);
-        eDate = (EditText) findViewById(R.id.tourDateEdit);
-
-        //Recebe os dados do objeto que vamos editar para meter no editText
-        eName1.setText(game.getNamePlayer1());
-        eName2.setText(game.getNamePlayer2());
-        eNameTour.setText(game.getNameTournament());
-        eDate.setText(game.getDateTournament());
+        prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
+        token = prefs.getString("token", null);
 
 
-        /**
-         * Carregar na EditText da data
-         */
-        eDate.setOnClickListener(new View.OnClickListener() {
+        manager.getGame(token, id, new GameDAO.GetGameListener() {
             @Override
-            public void onClick(View view) {
-                dateState = true;
-                datePicker = new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay);
-                datePicker.show();
-                Button cancel = datePicker.getButton(DialogInterface.BUTTON_NEGATIVE);
-                cancel.setOnClickListener(new View.OnClickListener() {
+            public void onSuccess(Game game) {
+
+                aYear = iIn.getExtras().getInt("ano");
+                aMonth = iIn.getExtras().getInt("mes");
+                aDay = iIn.getExtras().getInt("dia");
+
+                fin = (Button) findViewById(R.id.buttonFinEdit);
+                back = (Button) findViewById(R.id.buttonBackEdit);
+                eName1 = (EditText) findViewById(R.id.playerName1Edit);
+                eName2 = (EditText) findViewById(R.id.playerName2Edit);
+                eNameTour = (EditText) findViewById(R.id.tourNameEdit);
+                eDate = (EditText) findViewById(R.id.tourDateEdit);
+
+                //Recebe os dados do objeto que vamos editar para meter no editText
+                eName1.setText(game.getNamePlayer1());
+                eName2.setText(game.getNamePlayer2());
+                eNameTour.setText(game.getNameTournament());
+                eDate.setText(game.getDateTournament());
+
+
+                /**
+                 * Carregar na EditText da data
+                 */
+                eDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        dateState = false;
-                        datePicker.dismiss();
+                        dateState = true;
+                        datePicker = new DatePickerDialog(EditActivity.this, date, aYear, aMonth, aDay);
+                        datePicker.show();
+                        Button cancel = datePicker.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dateState = false;
+                                datePicker.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                /**
+                 * Carregar no botão de Guardar
+                 */
+                fin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String name1 = eName1.getText().toString();
+                        String name2 = eName2.getText().toString();
+                        String nameTour = eNameTour.getText().toString();
+                        String date = eDate.getText().toString();
+
+                        //Check if string is empty
+                        if (name1.trim().isEmpty() == true || name2.trim().isEmpty() == true || nameTour.trim().isEmpty() == true || date.trim().isEmpty() == true) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+
+                            // Set the message show for the Alert time
+                            builder.setMessage("Todos os campos são obrigatórios !");
+
+                            // Set Alert Title
+                            builder.setTitle("Atenção");
+
+                            // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+                            builder.setCancelable(false);
+
+                            // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+                            builder.setNeutralButton("OK", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                // When the user click yes button then app will close
+                                dialog.cancel();
+                            });
+
+                            // Create the Alert dialog
+                            AlertDialog alertDialog = builder.create();
+                            // Show the Alert Dialog box
+                            alertDialog.show();
+                        } else {
+                            //if string is not empty, edit the fields of object
+                            game.setNamePlayer1(name1);
+                            game.setNamePlayer2(name2);
+                            game.setNameTournament(nameTour);
+                            game.setDateTournament(date);
+
+                            //Update database with object
+
+                            manager.editGame(token, game, new GameDAO.GameEditListener() {
+                                @Override
+                                public void onSuccess(String message) {
+                                    Intent i = new Intent();
+                                    i.putExtra("ano", aYear);
+                                    i.putExtra("mes", aMonth);
+                                    i.putExtra("dia", aDay);
+                                    setResult(RESULT_OK, i);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                        }
+                    }
+                });
+
+                /**
+                 * Carregar no botão de Voltar
+                 */
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setResult(RESULT_CANCELED);
+                        finish();
                     }
                 });
             }
-        });
 
-        /**
-         * Carregar no botão de Guardar
-         */
-        fin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onError(String message) {
 
-                String name1 = eName1.getText().toString();
-                String name2 = eName2.getText().toString();
-                String nameTour = eNameTour.getText().toString();
-                String date = eDate.getText().toString();
-
-                //Check if string is empty
-                if (name1.trim().isEmpty() == true || name2.trim().isEmpty() == true || nameTour.trim().isEmpty() == true || date.trim().isEmpty() == true) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
-
-                    // Set the message show for the Alert time
-                    builder.setMessage("Todos os campos são obrigatórios !");
-
-                    // Set Alert Title
-                    builder.setTitle("Atenção");
-
-                    // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-                    builder.setCancelable(false);
-
-                    // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-                    builder.setNeutralButton("OK", (DialogInterface.OnClickListener) (dialog, which) -> {
-                        // When the user click yes button then app will close
-                        dialog.cancel();
-                    });
-
-                    // Create the Alert dialog
-                    AlertDialog alertDialog = builder.create();
-                    // Show the Alert Dialog box
-                    alertDialog.show();
-                } else {
-                    //if string is not empty, edit the fields of object
-                    game.setNamePlayer1(name1);
-                    game.setNamePlayer2(name2);
-                    game.setNameTournament(nameTour);
-                    game.setDateTournament(date);
-
-                    //Update database with object
-                    gestao.updateGameForm(game.getId(), game.getNameTournament(), game.getDateTournament(), game.getNamePlayer1(), game.getNamePlayer2());
-                    Intent i = new Intent();
-                    i.putExtra("ano", aYear);
-                    i.putExtra("mes", aMonth);
-                    i.putExtra("dia", aDay);
-                    setResult(RESULT_OK, i);
-                    finish();
-                }
             }
         });
 
-        /**
-         * Carregar no botão de Voltar
-         */
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
+
     }
 
     /**
