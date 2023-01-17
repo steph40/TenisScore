@@ -55,7 +55,7 @@ public class GameScore extends AppCompatActivity {
         setContentView(layout.activity_game_score);
 
         Intent iIn = getIntent();
-        id= iIn.getExtras().getInt("id");
+        id = iIn.getExtras().getInt("id");
         //gestao = new Gestao(this);
         manager = new GameDAOService();
 
@@ -111,6 +111,64 @@ public class GameScore extends AppCompatActivity {
                         in.putExtra("mes", aMonth);
                         in.putExtra("dia", aDay);
                         startActivityForResult(in, 1);
+                    }
+                });
+
+                fin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (vencedor == 0) {
+                            game.setVencedor(vencedor);
+                            game.setSet1_1(r1_1);
+                            game.setSet1_2(r1_2);
+                            game.setSet2_1(r2_1);
+                            game.setSet2_2(r2_2);
+                            game.setSet3_1(r3_1);
+                            game.setSet3_2(r3_2);
+                            game.setEstado(false);
+                            manager.editGameScore(token, game, new GameDAO.GameScoreEditListener() {
+                                @Override
+                                public void onSuccess(String message) {
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    setResult(RESULT_OK);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            //gestao.deleteGame(game.getId());
+                        }
+                        if (vencedor == 1 || vencedor == 2) {
+                            game.setVencedor(vencedor);
+                            game.setSet1_1(r1_1);
+                            game.setSet1_2(r1_2);
+                            game.setSet2_1(r2_1);
+                            game.setSet2_2(r2_2);
+                            game.setSet3_1(r3_1);
+                            game.setSet3_2(r3_2);
+                            game.setEstado(true);
+                            //Update
+                            manager.editGameScore(token, game, new GameDAO.GameScoreEditListener() {
+                                @Override
+                                public void onSuccess(String message) {
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    setResult(RESULT_OK);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            //gestao.updateGameScore(game.getId(), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
+                            //, game.getSet2_2(), game.getSet3_2(), game.getVencedor());
+                        }
+
                     }
                 });
 
@@ -620,6 +678,24 @@ public class GameScore extends AppCompatActivity {
 
         // // if it is the request that I did
         if (resultCode == RESULT_OK && requestCode == 1) {  // if the result is RESULT_OK
+            manager.getGame(token, id, new GameDAO.GetGameListener() {
+                @Override
+                public void onSuccess(Game game) {
+                    eNametour.setText(game.getNameTournament());
+                    eDatetour.setText(game.getDateTournament());
+                    eName1.setText(game.getNamePlayer1());
+                    eName2.setText(game.getNamePlayer2());
+
+                    aYear = data.getExtras().getInt("ano");
+                    aMonth = data.getExtras().getInt("mes");
+                    aDay = data.getExtras().getInt("dia");
+                }
+
+                @Override
+                public void onError(String message) {
+
+                }
+            });
             //game2 = gestao.getGame(game.getId());
             //Toast.makeText(getApplicationContext(),game.getId()+"",Toast.LENGTH_SHORT).show();
             //eNametour.setText(game2.getNameTournament());
@@ -627,9 +703,9 @@ public class GameScore extends AppCompatActivity {
             //eName1.setText(game2.getNamePlayer1());
             //eName2.setText(game2.getNamePlayer2());
 
-            aYear = data.getExtras().getInt("ano");
-            aMonth = data.getExtras().getInt("mes");
-            aDay = data.getExtras().getInt("dia");
+            //aYear = data.getExtras().getInt("ano");
+            //aMonth = data.getExtras().getInt("mes");
+            //aDay = data.getExtras().getInt("dia");
         }
     }
 

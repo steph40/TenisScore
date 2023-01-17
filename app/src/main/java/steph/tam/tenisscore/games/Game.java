@@ -20,10 +20,12 @@ public class Game implements Comparable<Game> {
     private int set2_2;
     private int set3_2;
     private int vencedor; //se for 1 - jogador 1 a verde, se for 2 - jogador 2 a verde
+    private boolean estado;
+    private int alteracao;
 
 
     public Game(int id, String nameTournament, String dateTournament, String namePlayer1, String namePlayer2, int set1_1, int set2_1, int set3_1,
-                int set1_2, int set2_2, int set3_2, int vencedor) {
+                int set1_2, int set2_2, int set3_2, int vencedor, boolean estado, int alteracao) {
         this.id = id;
         this.nameTournament = nameTournament;
         this.dateTournament = dateTournament;
@@ -36,6 +38,8 @@ public class Game implements Comparable<Game> {
         this.set2_2 = set2_2;
         this.set3_2 = set3_2;
         this.vencedor = vencedor;
+        this.estado = estado;
+        this.alteracao = alteracao;
 
 
     }
@@ -73,6 +77,20 @@ public class Game implements Comparable<Game> {
      */
     public String getNamePlayer2() {
         return namePlayer2;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @return
+     */
+    public int getAlteracao() {
+        return alteracao;
     }
 
     /**
@@ -247,5 +265,19 @@ public class Game implements Comparable<Game> {
      */
     public void setSet3_2(int set3_2) {
         this.set3_2 = set3_2;
+    }
+
+    /**
+     * @param estado
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @param alteracao
+     */
+    public void setAlteracao(int alteracao) {
+        this.alteracao = alteracao;
     }
 }

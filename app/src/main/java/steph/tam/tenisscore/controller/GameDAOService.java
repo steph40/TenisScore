@@ -190,7 +190,7 @@ public class GameDAOService implements GameDAO {
 
     @Override
     public void editGame(String token, Game gameEdit, GameEditListener listener) {
-        Call <Void> call = gameService.updateGameEdit(token, gameEdit);
+        Call<Void> call = gameService.updateGameEdit(token, gameEdit);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -201,6 +201,28 @@ public class GameDAOService implements GameDAO {
 
                     default:
                         listener.onError("Jogo não editado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void editGameScore(String token, Game gameScore, GameScoreEditListener listener) {
+        Call<Void> call = gameService.updateGameScore(token, gameScore);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                switch (response.code()) {
+                    case 200:
+                        listener.onSuccess("Jogo Score editado");
+                        break;
+                    default:
+                        listener.onError("Jogo Score nao editado");
                 }
             }
 

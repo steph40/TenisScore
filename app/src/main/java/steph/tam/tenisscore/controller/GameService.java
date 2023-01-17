@@ -46,6 +46,10 @@ public interface GameService {
     @PUT("/update_game_edit")
     Call <Void> updateGameEdit(@Header("Authorization") String token , @Body Game gameEdit);
 
+    @Headers("Accept: application/json")
+    @PUT("/update_game_score")
+    Call <Void> updateGameScore(@Header("Authorization") String token , @Body Game gameScore);
+
 
 
 

@@ -144,4 +144,13 @@
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="75dp"
+        android:layout_height="19dp"
+        android:text="Estado"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/remove"
+        app:layout_constraintTop_toTopOf="@+id/tournament" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

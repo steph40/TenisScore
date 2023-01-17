@@ -56,13 +56,21 @@ public interface GameDAO {
 
     void getGame(String token, int id, GetGameListener listener);
 
-    interface GameEditListener{
+    interface GameEditListener {
         void onSuccess(String message);
 
         void onError(String message);
     }
 
     void editGame(String token, Game gameEdit, GameEditListener listener);
+
+    interface GameScoreEditListener {
+        void onSuccess(String message);
+
+        void onError(String message);
+    }
+
+    void editGameScore(String token, Game gameScore, GameScoreEditListener listener);
 
 
 }

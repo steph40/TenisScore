@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     String token;
     boolean dialogState;
     GameDAO manager;
+    GameAdapter adapter;
 
 
     @SuppressLint("MissingInflatedId")
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(List<Game> games) {
                 games1 = games;
 
-                GameAdapter adapter = new GameAdapter(getApplicationContext(), games1);
+                adapter = new GameAdapter(getApplicationContext(), games1);
                 gamesListView = findViewById(id.lv_game);
                 gamesListView.setAdapter(adapter);
 
@@ -187,10 +188,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*if (resultCode == RESULT_OK && requestCode == 1) {
-            games1 = gestao.getGamesArray();
-            adapter.updateList(games1);
-        }*/
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            manager.getAllGames(token, new GameDAO.GetGamesListener() {
+                @Override
+                public void onSuccess(List<Game> games) {
+                    games1=games;
+                    adapter.updateList(games1);
+                }
+
+                @Override
+                public void onError(String message) {
+
+                }
+            });
+            //games1 = gestao.getGamesArray();
+            //adapter.updateList(games1);
+        }
 
     }
 

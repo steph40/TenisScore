@@ -2,6 +2,7 @@ package steph.tam.tenisscore.controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class GameAdapter extends BaseAdapter {
         TextView tv_2_2 = (TextView) rowView.findViewById(R.id.textView5);
         TextView tv_3_1 = (TextView) rowView.findViewById(R.id.textView11);
         TextView tv_3_2 = (TextView) rowView.findViewById(R.id.textView10);
+        TextView estado = (TextView) rowView.findViewById(R.id.estado);
 
 
         deleteItem(rowView, position);
@@ -75,16 +77,30 @@ public class GameAdapter extends BaseAdapter {
         tv_3_1.setText(g.getSet3_1() + "");
         tv_3_2.setText(g.getSet3_2() + "");
 
-        if (g.getVencedor() == 1) {
-            tv_player1.setText(g.getNamePlayer1() + " * ");
-            tv_player1.setTypeface(Typeface.DEFAULT_BOLD);
-            tv_player1.setTextSize(16);
+
+
+        if(g.isEstado()== true){
+            estado.setText("Terminado");
+            estado.setTypeface(Typeface.DEFAULT_BOLD);
+            if (g.getVencedor() == 1) {
+                tv_player1.setText(g.getNamePlayer1() + " * ");
+                tv_player1.setTypeface(Typeface.DEFAULT_BOLD);
+                tv_player1.setTextSize(16);
+            }
+            if (g.getVencedor() == 2) {
+                tv_player2.setText(g.getNamePlayer2() + " * ");
+                tv_player2.setTypeface(Typeface.DEFAULT_BOLD);
+                tv_player2.setTextSize(16);
+            }
         }
-        if (g.getVencedor() == 2) {
-            tv_player2.setText(g.getNamePlayer2() + " * ");
-            tv_player2.setTypeface(Typeface.DEFAULT_BOLD);
-            tv_player2.setTextSize(16);
+
+        if(g.isEstado()== false){
+            estado.setText("Live");
+            estado.setTypeface(Typeface.DEFAULT_BOLD);
+            estado.setTextColor(Color.RED);
         }
+
+
 
         // returns the view
         return rowView;
@@ -162,7 +178,7 @@ public class GameAdapter extends BaseAdapter {
      * @param games
      */
     public void updateList(List<Game> games) {
-        Collections.sort(games); //Sort games of database
+        //Collections.sort(games); //Sort games of database
         adaptGames.clear(); //Delete all of array
         adaptGames.addAll(games); //Add all games of database in array
         notifyDataSetChanged();

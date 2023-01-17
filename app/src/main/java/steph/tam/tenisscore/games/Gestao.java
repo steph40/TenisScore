@@ -124,11 +124,11 @@ public class Gestao {
             return null;
         }
         if (curRes.getCount() > 0) {
-            Game game = new Game(id, curRes.getString(0), curRes.getString(1), curRes.getString(2), curRes.getString(3)
+            /*Game game = new Game(id, curRes.getString(0), curRes.getString(1), curRes.getString(2), curRes.getString(3)
                     , curRes.getInt(4), curRes.getInt(5), curRes.getInt(6), curRes.getInt(7), curRes.getInt(8), curRes.getInt(9)
-                    , curRes.getInt(10));
+                    , curRes.getInt(10));*/
             db.close();
-            return game;
+            //return game;
         }
         return null;
     }
@@ -146,9 +146,9 @@ public class Gestao {
             curRes.moveToFirst();
             while (!curRes.isAfterLast()) {
                 if (curRes.getInt(11) != 0) {
-                    games.add(new Game(curRes.getInt(0), curRes.getString(1), curRes.getString(2), curRes.getString(3), curRes.getString(4)
+                    /*games.add(new Game(curRes.getInt(0), curRes.getString(1), curRes.getString(2), curRes.getString(3), curRes.getString(4)
                             , curRes.getInt(5), curRes.getInt(6), curRes.getInt(7), curRes.getInt(8), curRes.getInt(9), curRes.getInt(10)
-                            , curRes.getInt(11)));
+                            , curRes.getInt(11)));*/
                 }
                 curRes.moveToNext();
 

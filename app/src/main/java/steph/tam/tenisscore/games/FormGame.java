@@ -135,7 +135,7 @@ public class FormGame extends AppCompatActivity {
                     i.putExtra("dia", aDay);
 
 
-                    Game auxGame = new Game(40, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
+                    Game auxGame = new Game(40, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0,false,0);
                     manager.addGames(token, auxGame, new GameDAO.AddGameListener() {
                         @Override
                         public void onSuccess(String message) {
