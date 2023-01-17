@@ -72,5 +72,13 @@ public interface GameDAO {
 
     void editGameScore(String token, Game gameScore, GameScoreEditListener listener);
 
+    interface DeleteGameListener{
+        void onSuccess(String message);
+
+        void onError(String message);
+    }
+
+    void deleteGame(String token ,int id , DeleteGameListener listener);
+
 
 }

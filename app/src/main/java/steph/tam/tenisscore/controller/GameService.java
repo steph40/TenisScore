@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -49,6 +50,10 @@ public interface GameService {
     @Headers("Accept: application/json")
     @PUT("/update_game_score")
     Call <Void> updateGameScore(@Header("Authorization") String token , @Body Game gameScore);
+
+    @Headers("Accept: application/json")
+    @DELETE("/delete_game")
+    Call <Void> deleteGame(@Header("Authorization") String token , @Query("id") int id);
 
 
 

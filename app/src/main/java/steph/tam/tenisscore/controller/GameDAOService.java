@@ -233,5 +233,27 @@ public class GameDAOService implements GameDAO {
         });
     }
 
+    @Override
+    public void deleteGame(String token, int id, DeleteGameListener listener) {
+        Call<Void> call = gameService.deleteGame(token,id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                switch (response.code()){
+                    case 200:
+                        listener.onSuccess("Jogo apagado");
+                        break;
+                    default:
+                        listener.onError("Jogo nao apagado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
 
 }
