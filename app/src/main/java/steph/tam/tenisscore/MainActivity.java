@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 
 import android.widget.ListView;
@@ -34,6 +36,7 @@ import steph.tam.tenisscore.controller.GameDAOService;
 import steph.tam.tenisscore.games.FormGame;
 import steph.tam.tenisscore.games.Game;
 import steph.tam.tenisscore.controller.GameAdapter;
+import steph.tam.tenisscore.games.GameDetails;
 import steph.tam.tenisscore.games.Gestao;
 import steph.tam.tenisscore.utilizadores.About;
 import steph.tam.tenisscore.utilizadores.InfoUser;
@@ -80,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
                 gamesListView.setAdapter(adapter);
 
                 gamesListView.setTextFilterEnabled(true);
+
+                gamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Toast.makeText(getApplicationContext(), games1.get(i).getId()+"", Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(getApplicationContext(), GameDetails.class);
+                        in.putExtra("id",games1.get(i).getId());
+                        startActivityForResult(in,1);
+                    }
+                });
+
             }
 
             @Override
@@ -94,7 +108,15 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(Game game) {
                 Game aux = game;
 
-
+  <ImageButton
+        android:id="@+id/remove"
+        android:layout_width="56dp"
+        android:layout_height="62dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView13"
+        android:src="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             }
 
@@ -192,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             manager.getAllGames(token, new GameDAO.GetGamesListener() {
                 @Override
                 public void onSuccess(List<Game> games) {
-                    games1=games;
+                    games1 = games;
                     adapter.updateList(games1);
                 }
 

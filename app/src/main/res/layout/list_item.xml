@@ -42,16 +42,6 @@
         app:layout_constraintStart_toStartOf="@+id/tv_p1"
         app:layout_constraintTop_toBottomOf="@+id/tv_p1" />
 
-    <ImageButton
-        android:id="@+id/remove"
-        android:layout_width="56dp"
-        android:layout_height="62dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView13"
-        android:src="@android:drawable/ic_menu_delete"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
     <TextView
         android:id="@+id/tv_data"
         android:layout_width="wrap_content"
@@ -150,7 +140,7 @@
         android:layout_height="19dp"
         android:text="Estado"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/remove"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tournament" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

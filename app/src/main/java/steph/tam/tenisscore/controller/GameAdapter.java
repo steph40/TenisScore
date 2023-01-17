@@ -59,7 +59,8 @@ public class GameAdapter extends BaseAdapter {
         TextView estado = (TextView) rowView.findViewById(R.id.estado);
 
 
-        deleteItem(rowView, position);
+
+        //deleteItem(rowView, position);
 
 
         // obtains the contact for this position
@@ -124,7 +125,7 @@ public class GameAdapter extends BaseAdapter {
         return position;
     }
 
-    private void deleteItem(View rowView, int position) {
+    /*private void deleteItem(View rowView, int position) {
         ImageButton b = (ImageButton) rowView.findViewById(R.id.remove);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +133,7 @@ public class GameAdapter extends BaseAdapter {
                 Toast.makeText(context,"teste",Toast.LENGTH_SHORT).show();
             }
         });
-        /*b.setOnClickListener(new View.OnClickListener() {
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -169,8 +170,8 @@ public class GameAdapter extends BaseAdapter {
                 // Show the Alert Dialog box
                 alertDialog.show();
             }
-        });*/
-    }
+        });
+    }*/
 
     /**
      * Atualizar a lista que é apresentada no main
