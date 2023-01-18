@@ -16,6 +16,14 @@ public interface GameDAO {
 
     void register(Utilizador user, RegisterListener listener);
 
+    interface RenewTokenListener {
+        void onSuccess(Token token);
+
+        void onError(String message);
+    }
+
+    void renewToken(String token, RenewTokenListener listener);
+
     interface LoginListener {
         void onSuccess(Token token);
 
@@ -79,6 +87,20 @@ public interface GameDAO {
     }
 
     void deleteGame(String token ,int id , DeleteGameListener listener);
+    
+    interface GetIDListener{
+        void onSuccess(int id);
+
+        void onError(String message);
+    }
+    void getID(String token, GetIDListener listener);
+
+    interface GetUserIDListener{
+        void onSuccess(int idUser);
+
+        void onError(String message);
+    }
+    void getUserID(String token, int idUser, GetUserIDListener listener);
 
 
 }

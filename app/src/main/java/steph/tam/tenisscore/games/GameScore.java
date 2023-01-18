@@ -97,7 +97,7 @@ public class GameScore extends AppCompatActivity {
                 eset1_1.setText(game.getSet1_1() + "");
                 eset1_2.setText(game.getSet1_2() + "");
 
-                View.OnClickListener listener = setResultados();
+                View.OnClickListener listener = setResultados(game);
 
                 ponto1.setOnClickListener(listener);
                 ponto2.setOnClickListener(listener);
@@ -232,7 +232,7 @@ public class GameScore extends AppCompatActivity {
     /**
      * Função para contagem de pontos jogo
      */
-    public View.OnClickListener setResultados() {
+    public View.OnClickListener setResultados(Game game1) {
         return new View.OnClickListener() {
 
             @Override
@@ -619,7 +619,9 @@ public class GameScore extends AppCompatActivity {
                                 break;
                         }
                 }
+
             }
+
         };
     }
 

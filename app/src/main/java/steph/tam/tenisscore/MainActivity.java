@@ -40,6 +40,7 @@ import steph.tam.tenisscore.games.GameDetails;
 import steph.tam.tenisscore.games.Gestao;
 import steph.tam.tenisscore.utilizadores.About;
 import steph.tam.tenisscore.utilizadores.InfoUser;
+import steph.tam.tenisscore.utilizadores.Token;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 gamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Toast.makeText(getApplicationContext(), games1.get(i).getId()+"", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), games1.get(i).getId()+"", Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), GameDetails.class);
                         in.putExtra("id",games1.get(i).getId());
                         startActivityForResult(in,1);
@@ -159,16 +160,38 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case id.item1:
                 onClickFormGame(this);
+                tokenRenew(token);
                 return true;
             case id.item2:
                 onClickAbout(this);
+                tokenRenew(token);
                 return true;
             case id.item3:
                 onClickUser(this);
+                tokenRenew(token);
+                return true;
+            case id.item4:
+                onclickRefresh(this);
+                tokenRenew(token);
                 return true;
             default:
                 return false;
         }
+    }
+
+    private void onclickRefresh(MainActivity view) {
+        manager.getAllGames(token, new GameDAO.GetGamesListener() {
+            @Override
+            public void onSuccess(List<Game> games) {
+                games1 = games;
+                adapter.updateList(games1);
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     /**
@@ -258,6 +281,25 @@ public class MainActivity extends AppCompatActivity {
                 inputUser.setError("Preencher campo");
             }
         }*/
+    }
+
+    public void tokenRenew(String token){
+        manager.renewToken(token, new GameDAO.RenewTokenListener() {
+            @Override
+            public void onSuccess(Token token) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove("token");
+                editor.commit();
+                SharedPreferences.Editor editor1 = prefs.edit();
+                editor1.putString("token",token.getToken());
+                editor1.commit();
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
 

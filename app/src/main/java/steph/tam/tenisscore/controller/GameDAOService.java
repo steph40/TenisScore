@@ -25,7 +25,7 @@ public class GameDAOService implements GameDAO {
         httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080")
+                .baseUrl("http://10.0.2.2:5000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build());
         Retrofit retrofit = builder.build();
@@ -50,6 +50,40 @@ public class GameDAOService implements GameDAO {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void renewToken(String token, RenewTokenListener listener) {
+        Call<Token> call = gameService.renew_token(token);
+        call.enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                Token token = response.body();
+                switch (response.code()) {
+                    case 200:
+                        if (token == null) {
+                            listener.onError("Token não gerado");
+                        } else {
+                            listener.onSuccess(token);
+                        }
+                        break;
+                    case 500:
+                        listener.onError("sdfjsd");
+                        break;
+                    case 404:
+                        listener.onError("Utilizador ou password invalidos");
+                        break;
+                    default:
+                        listener.onError("Codigo: " + response.code());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+
             }
         });
     }
@@ -255,5 +289,47 @@ public class GameDAOService implements GameDAO {
         });
     }
 
+    @Override
+    public void getID(String token, GetIDListener listener) {
+        Call<Integer> call = gameService.get_ID(token);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                switch (response.code()){
+                    case 200:
+                        listener.onSuccess(response.body());
+                        break;
+                    default:
+                        listener.onError("ID não retornado");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getUserID(String token, int idUser, GetUserIDListener listener) {
+        Call<Integer> call = gameService.get_user_id(token, idUser);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                switch (response.code()){
+                    case 200:
+                        listener.onSuccess(response.body());
+                        break;
+                    default:
+                        listener.onError("ID não retornado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                listener.onError(t.getMessage());
+            }
+        });
+    }
 }

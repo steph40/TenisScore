@@ -25,7 +25,7 @@ public class GameDetails extends AppCompatActivity {
     String token;
     GameDAO manager;
     SharedPreferences prefs;
-    int id;
+    int id, user_id, game_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class GameDetails extends AppCompatActivity {
         voltar= findViewById(R.id.button5);
         apagar = findViewById(R.id.delete);
 
-        Toast.makeText(getApplicationContext(),id+"",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),id+"",Toast.LENGTH_SHORT).show();
 
         manager.getGame(token, id, new GameDAO.GetGameListener() {
             @Override
@@ -77,6 +77,44 @@ public class GameDetails extends AppCompatActivity {
                     tvP2.setText(game.getNamePlayer2()+"*");
                     tvP2.setTypeface(Typeface.DEFAULT_BOLD);
                 }
+
+                manager.getID(token, new GameDAO.GetIDListener() {
+                    @Override
+                    public void onSuccess(int idUser) {
+                        user_id = idUser;
+                        manager.getUserID(token, id, new GameDAO.GetUserIDListener() {
+                            @Override
+                            public void onSuccess(int id) {
+                                game_id = id;
+
+                                if (user_id != game_id){
+                                    apagar.setVisibility(View.INVISIBLE);
+                                }else{
+                                    apagar.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                Toast.makeText(getApplicationContext(),"erro2",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(getApplicationContext(),"erro1",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+
+
+
+
 
                 voltar.setOnClickListener(new View.OnClickListener() {
                     @Override

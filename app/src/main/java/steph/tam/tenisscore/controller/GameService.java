@@ -24,6 +24,10 @@ public interface GameService {
     Call<Void> registerUser(@Body Utilizador user);
 
     @Headers("Accept: application/json")
+    @GET("/renew_token")
+    Call <Token> renew_token(@Header("Authorization") String token);
+
+    @Headers("Accept: application/json")
     @POST("/login")
     Call <Token> loginUser(@Body Utilizador user);
 
@@ -55,8 +59,13 @@ public interface GameService {
     @DELETE("/delete_game")
     Call <Void> deleteGame(@Header("Authorization") String token , @Query("id") int id);
 
+    @Headers("Accept: application/json")
+    @GET("/get_ID")
+    Call <Integer> get_ID(@Header("Authorization") String token);
 
-
+    @Headers("Accept: application/json")
+    @GET("/get_user_id")
+    Call <Integer> get_user_id(@Header("Authorization") String token, @Query("id") int idUser);
 
 
 
