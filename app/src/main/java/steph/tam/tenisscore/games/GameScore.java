@@ -165,13 +165,9 @@ public class GameScore extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            //gestao.updateGameScore(game.getId(), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
-                            //, game.getSet2_2(), game.getSet3_2(), game.getVencedor());
                         }
-
                     }
                 });
-
             }
 
             @Override
@@ -180,52 +176,6 @@ public class GameScore extends AppCompatActivity {
             }
         });
 
-        //game = gestao.getGame(iIn.getExtras().getInt("id"));
-
-
-        //Aqui
-
-        /**
-         * Ao clicar no botão de editar
-         */
-        /*edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), EditActivity.class);
-                in.putExtra("id", game.getId());
-                in.putExtra("ano", aYear);
-                in.putExtra("mes", aMonth);
-                in.putExtra("dia", aDay);
-                startActivityForResult(in, 1);
-            }
-        });*/
-
-        /** Ao clicar no botão de finalizar
-         *
-         */
-        /*fin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (vencedor == 0) {
-                    gestao.deleteGame(game.getId());
-                }
-                if (vencedor == 1 || vencedor == 2) {
-                    game.setVencedor(vencedor);
-                    game.setSet1_1(r1_1);
-                    game.setSet1_2(r1_2);
-                    game.setSet2_1(r2_1);
-                    game.setSet2_2(r2_2);
-                    game.setSet3_1(r3_1);
-                    game.setSet3_2(r3_2);
-                    //Update
-                    gestao.updateGameScore(game.getId(), game.getSet1_1(), game.getSet2_1(), game.getSet3_1(), game.getSet1_2()
-                            , game.getSet2_2(), game.getSet3_2(), game.getVencedor());
-                }
-                setResult(RESULT_OK);
-                finish();
-            }
-        });*/
 
     }
 
@@ -358,6 +308,8 @@ public class GameScore extends AppCompatActivity {
                                 if (vencedor1 == 0) { //ir para o set1
                                     r1_1++;
                                     eset1_1.setText(r1_1 + "");
+                                    game1.setSet1_1(r1_1);
+                                    Toast.makeText(GameScore.this,game1.getSet1_1()+"",Toast.LENGTH_SHORT).show();
                                     valor1 = 0;
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
@@ -427,6 +379,17 @@ public class GameScore extends AppCompatActivity {
                                     }
                                 }
                         }
+                        manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
+                            @Override
+                            public void onSuccess(String message) {
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
                         break;
                     case R.id.Ponto2:
                         switch (valor2) {
