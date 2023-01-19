@@ -50,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Password"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textSize="14sp"

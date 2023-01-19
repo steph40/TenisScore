@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //Toast.makeText(getApplicationContext(), games1.get(i).getId()+"", Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), GameDetails.class);
-                        in.putExtra("id",games1.get(i).getId());
-                        startActivityForResult(in,1);
+                        in.putExtra("id", games1.get(i).getId());
+                        startActivityForResult(in, 1);
                     }
                 });
 
@@ -103,43 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-
-       /* manager.getGame(token, new GameDAO.GetGameListener() {
-            @Override
-            public void onSuccess(Game game) {
-                Game aux = game;
-
-  <ImageButton
-        android:id="@+id/remove"
-        android:layout_width="56dp"
-        android:layout_height="62dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView13"
-        android:src="@android:drawable/ic_menu_delete"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            }
-
-            @Override
-            public void onError(String message) {
-
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
-        //SharedPreferences
-        //prefs = getSharedPreferences("username", MODE_PRIVATE);
-        //user = prefs.getString("nomeUser", null);
-
-
-
-        /*if (user != null) {
-            titulo.setText("Jogos do " + user);
-        }*/
-
-
     }
 
     /**
@@ -283,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-    public void tokenRenew(String token){
+    public void tokenRenew(String token) {
         manager.renewToken(token, new GameDAO.RenewTokenListener() {
             @Override
             public void onSuccess(Token token) {
@@ -291,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.remove("token");
                 editor.commit();
                 SharedPreferences.Editor editor1 = prefs.edit();
-                editor1.putString("token",token.getToken());
+                editor1.putString("token", token.getToken());
                 editor1.commit();
             }
 

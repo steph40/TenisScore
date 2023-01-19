@@ -51,6 +51,7 @@
         android:background="@drawable/custom_edit_text"
         android:hint="Password"
         android:minHeight="48dp"
+        android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

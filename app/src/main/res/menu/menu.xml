@@ -11,22 +11,26 @@
 
     <item
         android:id="@+id/item4"
-        android:icon="@drawable/squash_rackets"
+        android:icon="@drawable/refresh"
         android:title="About"
         app:showAsAction="ifRoom" />
 
+    <item android:title="" app:showAsAction="always" android:id="@+id/action_more" android:icon="@drawable/more">
+       <menu>
+           <item
+               android:id="@+id/item3"
+               android:icon="@drawable/user"
+               android:title="User"
+               app:showAsAction="ifRoom" />
+           <item
+               android:id="@+id/item2"
+               android:icon="@drawable/information"
+               android:title="About"
+               app:showAsAction="ifRoom" />
+       </menu>
 
-    <item
-        android:id="@+id/item3"
-        android:icon="@drawable/user"
-        android:title="User"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/item2"
-        android:icon="@drawable/information"
-        android:title="About"
-        app:showAsAction="ifRoom" />
 
+    </item>
 
 
 </menu>
