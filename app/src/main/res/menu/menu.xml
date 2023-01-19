@@ -15,7 +15,11 @@
         android:title="About"
         app:showAsAction="ifRoom" />
 
-    <item android:title="" app:showAsAction="always" android:id="@+id/action_more" android:icon="@drawable/more">
+    <item
+        android:title=""
+        app:showAsAction="always"
+        android:id="@+id/action_more"
+        android:icon="@drawable/more">
        <menu>
            <item
                android:id="@+id/item3"

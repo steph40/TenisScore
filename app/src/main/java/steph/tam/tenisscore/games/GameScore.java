@@ -74,6 +74,8 @@ public class GameScore extends AppCompatActivity {
                 fin = (Button) findViewById(R.id.buttonFin);
                 edit = (Button) findViewById(R.id.buttonEdit);
 
+                fin.setVisibility(View.INVISIBLE);
+
                 //Text View
                 eName1 = (TextView) findViewById(R.id.tvNameP1);
                 eName2 = (TextView) findViewById(R.id.tvNameP2);
@@ -117,55 +119,8 @@ public class GameScore extends AppCompatActivity {
                 fin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        if (vencedor == 0) {
-                            game.setVencedor(vencedor);
-                            game.setSet1_1(r1_1);
-                            game.setSet1_2(r1_2);
-                            game.setSet2_1(r2_1);
-                            game.setSet2_2(r2_2);
-                            game.setSet3_1(r3_1);
-                            game.setSet3_2(r3_2);
-                            game.setEstado(false);
-                            manager.editGameScore(token, game, new GameDAO.GameScoreEditListener() {
-                                @Override
-                                public void onSuccess(String message) {
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    setResult(RESULT_OK);
-                                    finish();
-                                }
-
-                                @Override
-                                public void onError(String message) {
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            //gestao.deleteGame(game.getId());
-                        }
-                        if (vencedor == 1 || vencedor == 2) {
-                            game.setVencedor(vencedor);
-                            game.setSet1_1(r1_1);
-                            game.setSet1_2(r1_2);
-                            game.setSet2_1(r2_1);
-                            game.setSet2_2(r2_2);
-                            game.setSet3_1(r3_1);
-                            game.setSet3_2(r3_2);
-                            game.setEstado(true);
-                            //Update
-                            manager.editGameScore(token, game, new GameDAO.GameScoreEditListener() {
-                                @Override
-                                public void onSuccess(String message) {
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    setResult(RESULT_OK);
-                                    finish();
-                                }
-
-                                @Override
-                                public void onError(String message) {
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+                        setResult(RESULT_OK);
+                        finish();
                     }
                 });
             }
@@ -308,8 +263,6 @@ public class GameScore extends AppCompatActivity {
                                 if (vencedor1 == 0) { //ir para o set1
                                     r1_1++;
                                     eset1_1.setText(r1_1 + "");
-                                    game1.setSet1_1(r1_1);
-                                    Toast.makeText(GameScore.this,game1.getSet1_1()+"",Toast.LENGTH_SHORT).show();
                                     valor1 = 0;
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
@@ -379,6 +332,13 @@ public class GameScore extends AppCompatActivity {
                                     }
                                 }
                         }
+                        if (vencedor == 1 || vencedor == 2) {
+                            game1.setVencedor(vencedor);
+                            game1.setEstado(true);
+                        }
+                        game1.setSet1_1(r1_1);
+                        game1.setSet2_1(r2_1);
+                        game1.setSet3_1(r3_1);
                         manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
                             @Override
                             public void onSuccess(String message) {
@@ -581,6 +541,25 @@ public class GameScore extends AppCompatActivity {
                                 }
                                 break;
                         }
+                        if (vencedor == 1 || vencedor == 2) {
+                            game1.setVencedor(vencedor);
+                            game1.setEstado(true);
+                        }
+                        game1.setSet1_2(r1_2);
+                        game1.setSet2_2(r2_2);
+                        game1.setSet3_2(r3_2);
+                        manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
+                            @Override
+                            public void onSuccess(String message) {
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+                        break;
                 }
 
             }
@@ -594,6 +573,7 @@ public class GameScore extends AppCompatActivity {
     public void gameFinished() {
         ponto1.setVisibility(View.INVISIBLE);
         ponto2.setVisibility(View.INVISIBLE);
+        fin.setVisibility(View.VISIBLE);
     }
 
     /**
