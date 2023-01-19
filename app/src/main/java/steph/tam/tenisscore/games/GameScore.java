@@ -46,7 +46,7 @@ public class GameScore extends AppCompatActivity {
     String token;
     GameDAO manager;
     SharedPreferences prefs;
-    int id;
+    int id , alteracao;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,7 +58,7 @@ public class GameScore extends AppCompatActivity {
         id = iIn.getExtras().getInt("id");
         //gestao = new Gestao(this);
         manager = new GameDAOService();
-
+        alteracao=0;
         prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
         token = prefs.getString("token", null);
         manager.getGame(token, id, new GameDAO.GetGameListener() {
@@ -339,6 +339,7 @@ public class GameScore extends AppCompatActivity {
                         game1.setSet1_1(r1_1);
                         game1.setSet2_1(r2_1);
                         game1.setSet3_1(r3_1);
+
                         manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
                             @Override
                             public void onSuccess(String message) {
