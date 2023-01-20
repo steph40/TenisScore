@@ -138,8 +138,9 @@ public class GameScore extends AppCompatActivity {
      * Função para contagem de pontos jogo
      */
     public View.OnClickListener setResultados(Game game1) {
+        alteracao = game1.getAlteracao();
+        Toast.makeText(getApplicationContext(), alteracao+"", Toast.LENGTH_SHORT).show();
         return new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
@@ -160,6 +161,9 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 1;
                                         winSet1();
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
+                                        Toast.makeText(GameScore.this, alteracao+"1", Toast.LENGTH_SHORT).show();
                                     }
                                     break;
                                 }
@@ -175,6 +179,9 @@ public class GameScore extends AppCompatActivity {
                                         value2 = 0;
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
+                                        Toast.makeText(GameScore.this, alteracao+"2", Toast.LENGTH_SHORT).show();
                                         if (vencedor1 == 1) { //Check if this player won set1
                                             vencedor = 1;
                                             vencedor(vencedor);
@@ -199,6 +206,9 @@ public class GameScore extends AppCompatActivity {
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
                                         vencedor = 1;
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
+                                        Toast.makeText(GameScore.this, alteracao+"3", Toast.LENGTH_SHORT).show();
                                         vencedor(vencedor);
                                         gameFinished();
                                     }
@@ -234,6 +244,9 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"4", Toast.LENGTH_SHORT).show();
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -248,6 +261,9 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"5", Toast.LENGTH_SHORT).show();
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -275,8 +291,10 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 1;
                                         winSet1();
-                                        break;
                                     }
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"6", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             case 41:
@@ -287,6 +305,10 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"7", Toast.LENGTH_SHORT).show();
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -301,6 +323,9 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"8", Toast.LENGTH_SHORT).show();
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -328,8 +353,10 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 1;
                                         winSet1();
-                                        break;
                                     }
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
+                                    Toast.makeText(GameScore.this, alteracao+"9", Toast.LENGTH_SHORT).show();
                                 }
                         }
                         if (vencedor == 1 || vencedor == 2) {
@@ -340,6 +367,26 @@ public class GameScore extends AppCompatActivity {
                         game1.setSet2_1(r2_1);
                         game1.setSet3_1(r3_1);
 
+                        manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
+                            @Override
+                            public void onSuccess(String message) {
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+                        if (vencedor == 1 || vencedor == 2) {
+                            game1.setVencedor(vencedor);
+                            game1.setEstado(true);
+                        }
+                        Toast.makeText(getApplicationContext(), "update"+alteracao, Toast.LENGTH_SHORT).show();
+                        game1.setSet1_2(r1_2);
+                        game1.setSet2_2(r2_2);
+                        game1.setSet3_2(r3_2);
+                        game1.setAlteracao(alteracao);
                         manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
                             @Override
                             public void onSuccess(String message) {
@@ -369,6 +416,8 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 2;
                                         winSet1();
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
                                     }
                                     break;
                                 }
@@ -384,6 +433,8 @@ public class GameScore extends AppCompatActivity {
                                         value2 = 0;
                                         set1.setText(valor1 + "");
                                         set2.setText(valor2 + "");
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
                                         if (vencedor1 == 2) { //Check if this player won set1
                                             vencedor = 2;
                                             vencedor(vencedor);
@@ -410,6 +461,8 @@ public class GameScore extends AppCompatActivity {
                                         vencedor = 2;
                                         vencedor(vencedor);
                                         gameFinished();
+                                        alteracao++;
+                                        game1.setAlteracao(alteracao);
                                     }
                                     break;
                                 }
@@ -442,6 +495,8 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                     if (r3_2 == 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
@@ -456,6 +511,8 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
@@ -483,8 +540,9 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 2;
                                         winSet1();
-                                        break;
                                     }
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                 }
                                 break;
                             case 41:
@@ -495,6 +553,8 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                     if (r3_2 >= 6 && r3_1 <= r3_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
@@ -509,6 +569,8 @@ public class GameScore extends AppCompatActivity {
                                     valor2 = 0;
                                     set1.setText(valor1 + "");
                                     set2.setText(valor2 + "");
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                     if (vencedor1 == 2 && r2_2 >= 6 && r2_1 <= r2_2 - 2) {
                                         vencedor = 2;
                                         vencedor(vencedor);
@@ -537,8 +599,9 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         vencedor1 = 2;
                                         winSet1();
-                                        break;
                                     }
+                                    alteracao++;
+                                    game1.setAlteracao(alteracao);
                                 }
                                 break;
                         }
@@ -546,9 +609,11 @@ public class GameScore extends AppCompatActivity {
                             game1.setVencedor(vencedor);
                             game1.setEstado(true);
                         }
+                        Toast.makeText(getApplicationContext(), "update"+alteracao, Toast.LENGTH_SHORT).show();
                         game1.setSet1_2(r1_2);
                         game1.setSet2_2(r2_2);
                         game1.setSet3_2(r3_2);
+                        game1.setAlteracao(alteracao);
                         manager.editGameScore(token, game1, new GameDAO.GameScoreEditListener() {
                             @Override
                             public void onSuccess(String message) {
