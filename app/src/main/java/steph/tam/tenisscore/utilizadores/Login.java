@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     GameDAO manager;
     EditText editNome;
     EditText editPassword;
-    SharedPreferences prefs;
+    public static SharedPreferences prefs;
 
     //GameInterface gameService;
     @Override

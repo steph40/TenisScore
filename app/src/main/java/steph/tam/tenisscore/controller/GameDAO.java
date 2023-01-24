@@ -16,14 +16,6 @@ public interface GameDAO {
 
     void register(Utilizador user, RegisterListener listener);
 
-    interface RenewTokenListener {
-        void onSuccess(Token token);
-
-        void onError(String message);
-    }
-
-    void renewToken(String token, RenewTokenListener listener);
-
     interface LoginListener {
         void onSuccess(Token token);
 

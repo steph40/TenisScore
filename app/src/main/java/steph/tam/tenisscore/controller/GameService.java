@@ -23,9 +23,6 @@ public interface GameService {
     @POST("/register_user")
     Call<Void> registerUser(@Body Utilizador user);
 
-    @Headers("Accept: application/json")
-    @GET("/renew_token")
-    Call <Token> renew_token(@Header("Authorization") String token);
 
     @Headers("Accept: application/json")
     @POST("/login")

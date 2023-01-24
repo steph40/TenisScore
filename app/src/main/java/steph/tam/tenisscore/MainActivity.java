@@ -123,19 +123,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case id.item1:
                 onClickFormGame(this);
-                tokenRenew(token);
                 return true;
             case id.item2:
                 onClickAbout(this);
-                tokenRenew(token);
                 return true;
             case id.item3:
                 onClickUser(this);
-                tokenRenew(token);
                 return true;
             case id.item4:
                 onclickRefresh(this);
-                tokenRenew(token);
                 return true;
             default:
                 return false;
@@ -246,24 +242,6 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-    public void tokenRenew(String token) {
-        manager.renewToken(token, new GameDAO.RenewTokenListener() {
-            @Override
-            public void onSuccess(Token token) {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.remove("token");
-                editor.commit();
-                SharedPreferences.Editor editor1 = prefs.edit();
-                editor1.putString("token", token.getToken());
-                editor1.commit();
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
-    }
 
 
 }
