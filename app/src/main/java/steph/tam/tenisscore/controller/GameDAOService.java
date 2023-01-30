@@ -28,7 +28,7 @@ public class GameDAOService implements GameDAO {
         httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000")
+                .baseUrl("https://api-5ss6wcudt-hugo8fernandes.vercel.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build());
         Retrofit retrofit = builder.build();
