@@ -32,7 +32,6 @@ public class FormGame extends AppCompatActivity {
     Button add;
     Button voltar;
     final Calendar myCalendar = Calendar.getInstance();
-    Gestao gestao;
     boolean dateState;
     int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
     DatePickerDialog datePicker;
@@ -52,7 +51,6 @@ public class FormGame extends AppCompatActivity {
         eDate = (EditText) findViewById(R.id.tourDate);
         eNameP1 = (EditText) findViewById(R.id.playerName1);
         eNameP2 = (EditText) findViewById(R.id.playerName2);
-        gestao = new Gestao(this);
         manager = new GameDAOService();
 
         prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
@@ -135,7 +133,7 @@ public class FormGame extends AppCompatActivity {
                     i.putExtra("dia", aDay);
 
 
-                    Game auxGame = new Game(40, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0,false,0);
+                    Game auxGame = new Game(40, tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0, false, 0);
                     manager.addGames(token, auxGame, new GameDAO.AddGameListener() {
                         @Override
                         public void onSuccess(String message) {
@@ -160,11 +158,6 @@ public class FormGame extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                         }
                     });
-                    //gestao.insertGame(tournamentName, date, nameP1, nameP2, 0, 0, 0, 0, 0, 0, 0);
-                    /**/
-
-                    //startActivity(i);
-                    // ;
                 }
             }
         });

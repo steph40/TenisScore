@@ -32,7 +32,6 @@ public class EditActivity extends AppCompatActivity {
     EditText eNameTour;
     EditText eDate;
     final Calendar myCalendar = Calendar.getInstance();
-    Gestao gestao;
     boolean dateState;
     int aYear = myCalendar.get(Calendar.YEAR), aMonth = myCalendar.get(Calendar.MONTH), aDay = myCalendar.get(Calendar.DAY_OF_MONTH);
     DatePickerDialog datePicker;
@@ -46,7 +45,6 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        //gestao = new Gestao(this);
 
         Intent iIn = getIntent();
         id = iIn.getExtras().getInt("id");

@@ -44,7 +44,6 @@ public class GameDetails extends AppCompatActivity {
 
         Intent i = getIntent();
         id = i.getExtras().getInt("id");
-        auxAlt = 0;
 
         tvP1 = findViewById(R.id.tvNameP1);
         tvP2 = findViewById(R.id.tvNameP2);
@@ -84,156 +83,48 @@ public class GameDetails extends AppCompatActivity {
                     tvP2.setTypeface(Typeface.DEFAULT_BOLD);
                 }
 
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "dentre", Toast.LENGTH_SHORT).show();
+                        manager.getGame(token, id, new GameDAO.GetGameListener() {
+                            @Override
+                            public void onSuccess(Game game1) {
+                                tvNameTour.setText(game1.getNameTournament());
+                                tvDate.setText(game1.getDateTournament());
+                                tvP1.setText(game1.getNamePlayer1());
+                                tvP2.setText(game1.getNamePlayer2());
+                                tvSet1_1.setText(game1.getSet1_1() + "");
+                                tvSet2_1.setText(game1.getSet2_1() + "");
+                                tvSet3_1.setText(game1.getSet3_1() + "");
+                                tvSet1_2.setText(game1.getSet1_2() + "");
+                                tvSet2_2.setText(game1.getSet2_2() + "");
+                                tvSet3_2.setText(game1.getSet3_2() + "");
+
+                                if (game1.getVencedor() == 1) {
+                                    tvP1.setText(game1.getNamePlayer1() + "*");
+                                    tvP1.setTypeface(Typeface.DEFAULT_BOLD);
+                                }
+                                if (game1.getVencedor() == 2) {
+                                    tvP2.setText(game1.getNamePlayer2() + "*");
+                                    tvP2.setTypeface(Typeface.DEFAULT_BOLD);
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+                        handler.postDelayed(this, delay);
+
+                    }
+                };
+                //Se tiver em live
                 if (game.isEstado() == false) {
-                    //Toast.makeText(GameDetails.this,game.getAlteracao()+"",Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(GameDetails.this,auxAlt+"",Toast.LENGTH_SHORT).show();
-                    //auxAlt++;
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(GameDetails.this, alt + "", Toast.LENGTH_SHORT).show();
-
-                            manager.getGame(token, id, new GameDAO.GetGameListener() {
-                                @Override
-                                public void onSuccess(Game game1) {
-                                    alt = game1.getAlteracao();
-                                    //Toast.makeText(GameDetails.this, alt+"alt", Toast.LENGTH_SHORT).show();
-                                    tvNameTour.setText(game1.getNameTournament());
-                                    tvDate.setText(game1.getDateTournament());
-                                    tvP1.setText(game1.getNamePlayer1());
-                                    tvP2.setText(game1.getNamePlayer2());
-                                    tvSet1_1.setText(game1.getSet1_1() + "");
-                                    tvSet2_1.setText(game1.getSet2_1() + "");
-                                    tvSet3_1.setText(game1.getSet3_1() + "");
-                                    tvSet1_2.setText(game1.getSet1_2() + "");
-                                    tvSet2_2.setText(game1.getSet2_2() + "");
-                                    tvSet3_2.setText(game1.getSet3_2() + "");
-
-                                    if (game1.getVencedor() == 1) {
-                                        tvP1.setText(game1.getNamePlayer1() + "*");
-                                        tvP1.setTypeface(Typeface.DEFAULT_BOLD);
-                                    }
-                                    if (game1.getVencedor() == 2) {
-                                        tvP2.setText(game1.getNamePlayer2() + "*");
-                                        tvP2.setTypeface(Typeface.DEFAULT_BOLD);
-                                    }
-
-                                    manager.getID(token, new GameDAO.GetIDListener() {
-                                        @Override
-                                        public void onSuccess(int idUser) {
-                                            user_id = idUser;
-                                            manager.getUserID(token, id, new GameDAO.GetUserIDListener() {
-                                                @Override
-                                                public void onSuccess(int id) {
-                                                    game_id = id;
-
-                                                    if (user_id != game_id) {
-                                                        apagar.setVisibility(View.INVISIBLE);
-                                                    } else {
-                                                        apagar.setVisibility(View.VISIBLE);
-                                                    }
-
-                                                }
-
-                                                @Override
-                                                public void onError(String message) {
-                                                    Toast.makeText(getApplicationContext(), "erro2", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onError(String message) {
-                                            Toast.makeText(getApplicationContext(), "erro1", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
-
-                                    voltar.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            setResult(RESULT_CANCELED);
-                                            finish();
-                                        }
-                                    });
-
-                                    apagar.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(GameDetails.this);
-
-                                            // Set the message show for the Alert time
-                                            builder.setMessage("Deseja remover ?");
-
-                                            // Set Alert Title
-                                            builder.setTitle("Alerta");
-
-                                            // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-                                            builder.setCancelable(false);
-
-                                            // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-                                            builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
-                                                Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_SHORT).show();
-                                                manager.deleteGame(token, id, new GameDAO.DeleteGameListener() {
-                                                    @Override
-                                                    public void onSuccess(String message) {
-                                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                                        setResult(RESULT_OK);
-                                                        finish();
-                                                    }
-
-                                                    @Override
-                                                    public void onError(String message) {
-
-                                                    }
-                                                });
-                                                // When the user click yes button then app will close
-                                                //Gestao gestao = new Gestao(context.getApplicationContext());
-                                                //Game game = MainActivity.games1.get(position); //Get ID of game
-
-                                                //gestao.deleteGame(game.getId()); //Delete game of database
-                                                //List<Game> games = gestao.getGamesArray(); //get array of database
-                                                //updateList(games); //udpate list of Main
-
-                                            });
-
-                                            // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-                                            builder.setNegativeButton("Não", (DialogInterface.OnClickListener) (dialog, which) -> {
-                                                // If user click no then dialog box is canceled.
-                                                dialog.cancel();
-                                            });
-
-                                            // Create the Alert dialog
-                                            AlertDialog alertDialog = builder.create();
-                                            // Show the Alert Dialog box
-                                            alertDialog.show();
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onError(String message) {
-
-                                }
-                            });
-
-                            //auxAlt++;
-                            //Toast.makeText(GameDetails.this, auxAlt + "auxif", Toast.LENGTH_SHORT).show();
-
-
-                            // Toast.makeText(GameDetails.this, auxAlt + "", Toast.LENGTH_SHORT).show();
-
-
-                            //auxAlt = game.getAlteracao();
-                            handler.postDelayed(this, delay);
-
-                        }
-                    }, delay);
-
-
+                    handler.post(runnable);
                 }
-
 
                 manager.getID(token, new GameDAO.GetIDListener() {
                     @Override
@@ -265,10 +156,10 @@ public class GameDetails extends AppCompatActivity {
                     }
                 });
 
-
                 voltar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        handler.removeCallbacks(runnable);
                         setResult(RESULT_CANCELED);
                         finish();
                     }
@@ -295,6 +186,7 @@ public class GameDetails extends AppCompatActivity {
                             manager.deleteGame(token, id, new GameDAO.DeleteGameListener() {
                                 @Override
                                 public void onSuccess(String message) {
+                                    handler.removeCallbacks(runnable);
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                     setResult(RESULT_OK);
                                     finish();
@@ -305,14 +197,6 @@ public class GameDetails extends AppCompatActivity {
 
                                 }
                             });
-                            // When the user click yes button then app will close
-                            //Gestao gestao = new Gestao(context.getApplicationContext());
-                            //Game game = MainActivity.games1.get(position); //Get ID of game
-
-                            //gestao.deleteGame(game.getId()); //Delete game of database
-                            //List<Game> games = gestao.getGamesArray(); //get array of database
-                            //updateList(games); //udpate list of Main
-
                         });
 
                         // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
@@ -334,136 +218,6 @@ public class GameDetails extends AppCompatActivity {
 
             }
         });
-        //Toast.makeText(getApplicationContext(),id+"",Toast.LENGTH_SHORT).show();
-
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                manager.getGame(token, id, new GameDAO.GetGameListener() {
-                    @Override
-                    public void onSuccess(Game game) {
-                        tvNameTour.setText(game.getNameTournament());
-                        tvDate.setText(game.getDateTournament());
-                        tvP1.setText(game.getNamePlayer1());
-                        tvP2.setText(game.getNamePlayer2());
-                        tvSet1_1.setText(game.getSet1_1() + "");
-                        tvSet2_1.setText(game.getSet2_1() + "");
-                        tvSet3_1.setText(game.getSet3_1() + "");
-                        tvSet1_2.setText(game.getSet1_2() + "");
-                        tvSet2_2.setText(game.getSet2_2() + "");
-                        tvSet3_2.setText(game.getSet3_2() + "");
-
-                        if (game.getVencedor() == 1) {
-                            tvP1.setText(game.getNamePlayer1() + "*");
-                            tvP1.setTypeface(Typeface.DEFAULT_BOLD);
-                        }
-                        if (game.getVencedor() == 2) {
-                            tvP2.setText(game.getNamePlayer2() + "*");
-                            tvP2.setTypeface(Typeface.DEFAULT_BOLD);
-                        }
-
-                        manager.getID(token, new GameDAO.GetIDListener() {
-                            @Override
-                            public void onSuccess(int idUser) {
-                                user_id = idUser;
-                                manager.getUserID(token, id, new GameDAO.GetUserIDListener() {
-                                    @Override
-                                    public void onSuccess(int id) {
-                                        game_id = id;
-
-                                        if (user_id != game_id) {
-                                            apagar.setVisibility(View.INVISIBLE);
-                                        } else {
-                                            apagar.setVisibility(View.VISIBLE);
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onError(String message) {
-                                        Toast.makeText(getApplicationContext(), "erro2", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onError(String message) {
-                                Toast.makeText(getApplicationContext(), "erro1", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-
-                        voltar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                setResult(RESULT_CANCELED);
-                                finish();
-                            }
-                        });
-
-                        apagar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(GameDetails.this);
-
-                                // Set the message show for the Alert time
-                                builder.setMessage("Deseja remover ?");
-
-                                // Set Alert Title
-                                builder.setTitle("Alerta");
-
-                                // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-                                builder.setCancelable(false);
-
-                                // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-                                builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
-                                    Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_SHORT).show();
-                                    manager.deleteGame(token, id, new GameDAO.DeleteGameListener() {
-                                        @Override
-                                        public void onSuccess(String message) {
-                                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                            setResult(RESULT_OK);
-                                            finish();
-                                        }
-
-                                        @Override
-                                        public void onError(String message) {
-
-                                        }
-                                    });
-                                    // When the user click yes button then app will close
-                                    //Gestao gestao = new Gestao(context.getApplicationContext());
-                                    //Game game = MainActivity.games1.get(position); //Get ID of game
-
-                                    //gestao.deleteGame(game.getId()); //Delete game of database
-                                    //List<Game> games = gestao.getGamesArray(); //get array of database
-                                    //updateList(games); //udpate list of Main
-
-                                });
-
-                                // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-                                builder.setNegativeButton("Não", (DialogInterface.OnClickListener) (dialog, which) -> {
-                                    // If user click no then dialog box is canceled.
-                                    dialog.cancel();
-                                });
-
-                                // Create the Alert dialog
-                                AlertDialog alertDialog = builder.create();
-                                // Show the Alert Dialog box
-                                alertDialog.show();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(String message) {
-
-                    }
-                });
-                handler.postDelayed(this,delay);
-            }
-        },delay);*/
 
 
     }

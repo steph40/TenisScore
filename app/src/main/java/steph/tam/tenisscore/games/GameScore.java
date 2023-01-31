@@ -41,7 +41,7 @@ public class GameScore extends AppCompatActivity {
     int valor1 = 0, valor2 = 0, value1 = 0, value2 = 0, r1_1 = 0, r1_2 = 0, r2_1 = 0, r2_2 = 0, r3_1 = 0, r3_2 = 0, vencedor1 = 0, vencedor2 = 0, vencedor = 0;
     Game game;
     Game game2;
-    Gestao gestao;
+
     int aYear, aMonth, aDay;
     String token;
     GameDAO manager;
@@ -56,7 +56,7 @@ public class GameScore extends AppCompatActivity {
 
         Intent iIn = getIntent();
         id = iIn.getExtras().getInt("id");
-        //gestao = new Gestao(this);
+
         manager = new GameDAOService();
         alteracao=0;
         prefs = getSharedPreferences("infoUser", MODE_PRIVATE);
@@ -163,7 +163,6 @@ public class GameScore extends AppCompatActivity {
                                         winSet1();
                                         alteracao++;
                                         game1.setAlteracao(alteracao);
-                                        Toast.makeText(GameScore.this, alteracao+"1", Toast.LENGTH_SHORT).show();
                                     }
                                     break;
                                 }
@@ -181,7 +180,6 @@ public class GameScore extends AppCompatActivity {
                                         set2.setText(valor2 + "");
                                         alteracao++;
                                         game1.setAlteracao(alteracao);
-                                        Toast.makeText(GameScore.this, alteracao+"2", Toast.LENGTH_SHORT).show();
                                         if (vencedor1 == 1) { //Check if this player won set1
                                             vencedor = 1;
                                             vencedor(vencedor);
@@ -208,7 +206,6 @@ public class GameScore extends AppCompatActivity {
                                         vencedor = 1;
                                         alteracao++;
                                         game1.setAlteracao(alteracao);
-                                        Toast.makeText(GameScore.this, alteracao+"3", Toast.LENGTH_SHORT).show();
                                         vencedor(vencedor);
                                         gameFinished();
                                     }
@@ -246,7 +243,6 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"4", Toast.LENGTH_SHORT).show();
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -263,7 +259,6 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"5", Toast.LENGTH_SHORT).show();
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -294,7 +289,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"6", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             case 41:
@@ -308,7 +302,6 @@ public class GameScore extends AppCompatActivity {
                                     alteracao++;
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"7", Toast.LENGTH_SHORT).show();
                                     if (r3_1 >= 6 && r3_2 <= r3_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -325,7 +318,6 @@ public class GameScore extends AppCompatActivity {
                                     set2.setText(valor2 + "");
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"8", Toast.LENGTH_SHORT).show();
                                     if (vencedor1 == 1 && r2_1 >= 6 && r2_2 <= r2_1 - 2) {
                                         vencedor = 1;
                                         vencedor(vencedor);
@@ -356,7 +348,6 @@ public class GameScore extends AppCompatActivity {
                                     }
                                     alteracao++;
                                     game1.setAlteracao(alteracao);
-                                    Toast.makeText(GameScore.this, alteracao+"9", Toast.LENGTH_SHORT).show();
                                 }
                         }
                         if (vencedor == 1 || vencedor == 2) {
@@ -609,7 +600,6 @@ public class GameScore extends AppCompatActivity {
                             game1.setVencedor(vencedor);
                             game1.setEstado(true);
                         }
-                        Toast.makeText(getApplicationContext(), "update"+alteracao, Toast.LENGTH_SHORT).show();
                         game1.setSet1_2(r1_2);
                         game1.setSet2_2(r2_2);
                         game1.setSet3_2(r3_2);
@@ -707,16 +697,6 @@ public class GameScore extends AppCompatActivity {
 
                 }
             });
-            //game2 = gestao.getGame(game.getId());
-            //Toast.makeText(getApplicationContext(),game.getId()+"",Toast.LENGTH_SHORT).show();
-            //eNametour.setText(game2.getNameTournament());
-            //eDatetour.setText(game2.getDateTournament());
-            //eName1.setText(game2.getNamePlayer1());
-            //eName2.setText(game2.getNamePlayer2());
-
-            //aYear = data.getExtras().getInt("ano");
-            //aMonth = data.getExtras().getInt("mes");
-            //aDay = data.getExtras().getInt("dia");
         }
     }
 

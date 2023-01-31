@@ -8,13 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,7 +26,6 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import steph.tam.tenisscore.controller.GameDAO;
@@ -37,10 +34,8 @@ import steph.tam.tenisscore.games.FormGame;
 import steph.tam.tenisscore.games.Game;
 import steph.tam.tenisscore.controller.GameAdapter;
 import steph.tam.tenisscore.games.GameDetails;
-import steph.tam.tenisscore.games.Gestao;
 import steph.tam.tenisscore.utilizadores.About;
 import steph.tam.tenisscore.utilizadores.InfoUser;
-import steph.tam.tenisscore.utilizadores.Token;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     //private GameAdapter adapter;
     private TextView titulo;
     SharedPreferences prefs;
-    Gestao gestao;
     EditText inputUser;
     String token;
     boolean dialogState;
@@ -71,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
         games1 = new ArrayList<>();
         titulo = findViewById(id.tv_title_main);
 
-
-        //Toast.makeText(getApplicationContext(),"sdco",Toast.LENGTH_SHORT).show();
-        //gestao = new Gestao(this);
         manager.getAllGames(token, new GameDAO.GetGamesListener() {
             @Override
             public void onSuccess(List<Game> games) {
@@ -88,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 gamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        //Toast.makeText(getApplicationContext(), games1.get(i).getId()+"", Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), GameDetails.class);
                         in.putExtra("id", games1.get(i).getId());
                         startActivityForResult(in, 1);
@@ -205,44 +195,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-            //games1 = gestao.getGamesArray();
-            //adapter.updateList(games1);
         }
 
     }
-
-    /**
-     * Guardar o estado da Activity
-     *
-     * @param outState
-     */
-    public void onSaveInstanceState(Bundle outState) {
-       /* outState.putBoolean("dialogState", dialogState);
-        if (dialogState == true)
-            outState.putString("inputUser", inputUser.getText().toString());*/
-
-        super.onSaveInstanceState(outState);
-    }
-
-    /**
-     * Restaurar o estado da Activity
-     *
-     * @param outState
-     */
-    public void onRestoreInstanceState(Bundle outState) {
-        super.onRestoreInstanceState(outState);
-        // dialogState = outState.getBoolean("dialogState");
-
-        /*if (dialogState == true) {
-            onClickUser(this);
-            inputUser.setText(outState.getString("inputUser"));
-            if (inputUser.getText().toString().trim().isEmpty()) {
-                inputUser.setError("Preencher campo");
-            }
-        }*/
-    }
-
-
-
 }
 
