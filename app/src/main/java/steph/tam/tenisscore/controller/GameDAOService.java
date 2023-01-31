@@ -2,6 +2,7 @@ package steph.tam.tenisscore.controller;
 
 import android.content.SharedPreferences;
 
+
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -58,7 +59,6 @@ public class GameDAOService implements GameDAO {
     }
 
 
-
     @Override
     public void login(Utilizador user, LoginListener listener) {
         Call<Token> call = gameService.loginUser(user);
@@ -75,7 +75,7 @@ public class GameDAOService implements GameDAO {
                         }
                         break;
                     case 500:
-                        listener.onError("sdfjsd");
+                        listener.onError("Erro");
                         break;
                     case 404:
                         listener.onError("Utilizador ou password invalidos");
@@ -123,7 +123,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -166,7 +166,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -210,7 +210,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -254,7 +254,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -297,7 +297,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -340,7 +340,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -359,11 +359,11 @@ public class GameDAOService implements GameDAO {
 
     @Override
     public void deleteGame(String token, int id, DeleteGameListener listener) {
-        Call<Void> call = gameService.deleteGame(token,id);
+        Call<Void> call = gameService.deleteGame(token, id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                switch (response.code()){
+                switch (response.code()) {
                     case 200:
                         listener.onSuccess("Jogo apagado");
                         break;
@@ -383,7 +383,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 
@@ -406,7 +406,7 @@ public class GameDAOService implements GameDAO {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                switch (response.code()){
+                switch (response.code()) {
                     case 200:
                         listener.onSuccess(response.body());
                         break;
@@ -426,10 +426,9 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
-
                         break;
                     default:
                         listener.onError("ID não retornado");
@@ -449,7 +448,7 @@ public class GameDAOService implements GameDAO {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                switch (response.code()){
+                switch (response.code()) {
                     case 200:
                         listener.onSuccess(response.body());
                         break;
@@ -469,7 +468,7 @@ public class GameDAOService implements GameDAO {
 
                             @Override
                             public void onError(String message) {
-
+                                listener.onError(message);
                             }
                         });
 

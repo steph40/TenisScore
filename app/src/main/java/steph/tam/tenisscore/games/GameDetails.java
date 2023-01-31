@@ -86,7 +86,6 @@ public class GameDetails extends AppCompatActivity {
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "dentre", Toast.LENGTH_SHORT).show();
                         manager.getGame(token, id, new GameDAO.GetGameListener() {
                             @Override
                             public void onSuccess(Game game1) {
@@ -114,7 +113,7 @@ public class GameDetails extends AppCompatActivity {
 
                             @Override
                             public void onError(String message) {
-
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             }
                         });
                         handler.postDelayed(this, delay);
@@ -145,14 +144,14 @@ public class GameDetails extends AppCompatActivity {
 
                             @Override
                             public void onError(String message) {
-                                Toast.makeText(getApplicationContext(), "erro2", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(getApplicationContext(), "erro1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -182,7 +181,6 @@ public class GameDetails extends AppCompatActivity {
 
                         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
                         builder.setPositiveButton("Sim", (DialogInterface.OnClickListener) (dialog, which) -> {
-                            Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_SHORT).show();
                             manager.deleteGame(token, id, new GameDAO.DeleteGameListener() {
                                 @Override
                                 public void onSuccess(String message) {
@@ -194,7 +192,7 @@ public class GameDetails extends AppCompatActivity {
 
                                 @Override
                                 public void onError(String message) {
-
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 }
                             });
                         });
@@ -215,7 +213,7 @@ public class GameDetails extends AppCompatActivity {
 
             @Override
             public void onError(String message) {
-
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
 

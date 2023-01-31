@@ -139,7 +139,6 @@ public class GameScore extends AppCompatActivity {
      */
     public View.OnClickListener setResultados(Game game1) {
         alteracao = game1.getAlteracao();
-        Toast.makeText(getApplicationContext(), alteracao+"", Toast.LENGTH_SHORT).show();
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -366,14 +365,14 @@ public class GameScore extends AppCompatActivity {
 
                             @Override
                             public void onError(String message) {
-
+                                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                             }
                         });
                         if (vencedor == 1 || vencedor == 2) {
                             game1.setVencedor(vencedor);
                             game1.setEstado(true);
                         }
-                        Toast.makeText(getApplicationContext(), "update"+alteracao, Toast.LENGTH_SHORT).show();
+
                         game1.setSet1_2(r1_2);
                         game1.setSet2_2(r2_2);
                         game1.setSet3_2(r3_2);
@@ -386,7 +385,7 @@ public class GameScore extends AppCompatActivity {
 
                             @Override
                             public void onError(String message) {
-
+                                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -612,7 +611,7 @@ public class GameScore extends AppCompatActivity {
 
                             @Override
                             public void onError(String message) {
-
+                                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -694,7 +693,7 @@ public class GameScore extends AppCompatActivity {
 
                 @Override
                 public void onError(String message) {
-
+                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                 }
             });
         }

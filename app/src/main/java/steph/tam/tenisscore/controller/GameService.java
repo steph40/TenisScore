@@ -23,7 +23,6 @@ public interface GameService {
     @POST("/register_user")
     Call<Void> registerUser(@Body Utilizador user);
 
-
     @Headers("Accept: application/json")
     @POST("/login")
     Call <Token> loginUser(@Body Utilizador user);
